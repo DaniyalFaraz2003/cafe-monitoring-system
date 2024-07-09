@@ -29,6 +29,8 @@
 }
 .item {
   margin: 5px 10px;
+  text-decoration: none;
+  color:#6c584c;
 }
 .container{
   width: 700px;

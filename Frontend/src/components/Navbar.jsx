@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <Link to="/Login" style={{ textDecoration: "none",color:"#6c584c" }} className="item">
+      <Link to="/Login"  className="item">
         Login
       </Link>
-      <Link to="/SignUp" style={{ textDecoration: "none" ,color:"#6c584c"}} className="item">
+      <Link to="/SignUp" className="item">
         Signup
       </Link>
-      <Link to="/Dashboard" style={{ textDecoration: "none" ,color:"#6c584c"}} className="item">
+      <Link to="/Dashboard" className="item">
         Dashboard
       </Link>
     </div>
