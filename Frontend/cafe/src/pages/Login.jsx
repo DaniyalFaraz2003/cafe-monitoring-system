@@ -1,9 +1,9 @@
 import React from 'react'
-import {Login as LoginComponent} from '../components/login'
+// import {Signup as LoginComponent } from '../components/Signup'
 function Login() {
   return (
     <div className='model'>
-      <LoginComponent/>
+      {/* <LoginComponent/> */}
     </div>
   )
 }
