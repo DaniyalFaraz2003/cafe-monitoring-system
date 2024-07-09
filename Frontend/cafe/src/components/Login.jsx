@@ -48,7 +48,7 @@ function Login() {
           //  {...register("password", { required: true })} 
            />
         </div>
-        <button >Sign in</button>
+        <button className="submit-btn" type='submit'>Sign in</button>
       </form>
     </div>
     </div>
