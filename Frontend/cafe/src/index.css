@@ -6,12 +6,13 @@
 }
 
 .landingpage {
-  background-color: black;
-  border: 4px solid black;
+  background-color: #faedcd;
+  border: 4px solid #faedcd;
   height: 1000px;
+  color: #6c584c;
 }
 .navbar {
-  background-color: black;
+  background-color: #d4a373;
   border-bottom: 1px solid #e9ecef;
   padding: 0.5rem 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -22,7 +23,7 @@
   display: flex;
   justify-content: center;
   padding: 25px;
-  color: white;
+  color: #6c584c;
   border-radius: 40px;
   box-shadow: 5px 5px rgba(112, 109, 109, 0.04);
 }
