@@ -3,9 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Playwrite BE VLG", cursive;
-
-
-
 }
 
 .landingpage {
@@ -40,7 +37,6 @@
   text-align: center;
 }
 .landing-title {
-  /* color: #8b2626d8; */
   margin-bottom: 20px;
   color: white;
   font-size: 40px;
