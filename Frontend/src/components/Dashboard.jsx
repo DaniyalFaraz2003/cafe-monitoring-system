@@ -14,6 +14,14 @@ const Dashboard = () => {
           <img src={logout} alt="" className='h-6 w-6' />
         </div>
       </nav>
+      <div className='w-full flex p-10 flex-row h-52 gap-10 bg-white'>
+        <div className='basis-1/3 h-full bg-black'>
+          hello
+        </div>
+        <div className='basis-2/3 h-full bg-black'>
+
+        </div>
+      </div>
     </div>
   );
 };
