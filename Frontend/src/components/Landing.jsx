@@ -2,6 +2,8 @@ import React from "react";
 import img from "../images/foodpic.png";
 function Landing() {
   return (
+    <div className="bluecontainer">
+
     <div className="landing-container">
       <h1 className="landing-title">Welcome to Cafe Monitoring System</h1>
       <p className="landing-description">
@@ -11,6 +13,7 @@ function Landing() {
       <div className="pic">
         <img src={img} alt="" />
       </div>
+    </div>
     </div>
   );
 }
