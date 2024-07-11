@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import logout from "../assets/logout.png";
 import axios from "axios";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo.png";
 import PieChart from "./DashboardElements/PieChart";
 import BarChart from "./DashboardElements/BarChart";
 import LogoutIcon from "@mui/icons-material/Logout";
