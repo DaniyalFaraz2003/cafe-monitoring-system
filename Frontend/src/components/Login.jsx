@@ -24,7 +24,7 @@ function Login() {
           <span className="button__text">Log In</span>
           <i className="button__icon fas fa-chevron-right"></i>
         </button>
-        <p className='alert'>Already have an account </p><Link to="/SignUp" className="login__forgot">Signup</Link>
+        <p className='alert'>Create account </p><Link to="/SignUp" className="login__forgot">Signup</Link>
         <br /><br />
         <input type="checkbox" id="remember" name="remember" /> Remember Me
       </form>
