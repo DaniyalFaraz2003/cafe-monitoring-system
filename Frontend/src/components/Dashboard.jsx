@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import logout from '../assets/logout.png'
 import axios from 'axios';
 import logo from '../assets/logo.jpg'
+import PieChart from './DashboardElements/PieChart';
+import BarChart from './DashboardElements/BarChart';
 
 const Dashboard = () => {
 
@@ -22,12 +24,12 @@ const Dashboard = () => {
         </div>
       </nav>
 
-      <div className='w-full flex p-5 flex-row h-52 gap-5 bg-[#0a5282] rounded-lg mt-10'>
-        <div className='basis-1/3 h-full rounded-xl bg-white justify-center items-center text-center'>
-          hello
+      <div className='w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10'>
+        <div className='basis-1/3 h-full rounded-xl p-5 bg-white justify-center items-center'>
+          <PieChart />
         </div>
-        <div className='basis-2/3 h-full rounded-xl bg-white justify-center items-center '>
-
+        <div className='basis-2/3 p-5 rounded-xl bg-white justify-center items-center '>
+          <BarChart />
         </div>
       </div>
     </div>
