@@ -16,10 +16,11 @@ const Dashboard = () => {
     <div className="w-full h-full p-10">
       <nav className="w-full flex flex-row items-center justify-center">
         <img src={logo} alt="" className="h-[15%] w-[15%] basis-1/5" />
-        <div className="w-full basis-3/5">
+        <div className="w-full basis-3/5 flex flex-col">
           <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
             Cafe Admin Dashboard
           </h2>
+          <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
         <div className="logout">
             <p className="text-xl mr-0 text-black">
