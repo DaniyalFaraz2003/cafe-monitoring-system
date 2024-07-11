@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   margin: 0;
   padding: 0;
@@ -174,7 +178,7 @@ margin-right: auto;
 
 
 /* Add your styles here */
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
 
 
 

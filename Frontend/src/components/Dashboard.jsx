@@ -1,45 +1,27 @@
 // src/components/Dashboard.jsx
 import React, { useEffect, useState } from 'react';
+import logout from '../assets/logout.png'
 import axios from 'axios';
 
 const Dashboard = () => {
-  const [employees, setEmployees] = useState([]);
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('/api/employees');
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Failed to fetch employees', error);
-      }
-    };
-
-    fetchEmployees();
-  }, []);
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Employee ID</th>
-            <th>Food Preference</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map(employee => (
-            <tr key={employee.id}>
-              <td>{employee.name}</td>
-              <td>{employee.employeeId}</td>
-              <td>{employee.foodPreference}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button onClick={() => {/* Implement report generation */}}>Generate Report</button>
+    <div className='w-full h-full p-10'>
+      <nav className='w-full flex flex-row'>
+        <h2 className='text-3xl font-bold text-center text-white'>Admin Dashboard</h2>
+        <div className='ml-auto flex flex-row gap-2 items-center justify-center p-2 bg-red-200 rounded-lg'>
+          <p className='text-xl mr-0'>LogOut</p>
+          <img src={logout} alt="" className='h-6 w-6' />
+        </div>
+      </nav>
+      <div className='w-full flex p-10 flex-row h-52 gap-10 bg-white'>
+        <div className='basis-1/3 h-full bg-black'>
+          hello
+        </div>
+        <div className='basis-2/3 h-full bg-black'>
+
+        </div>
+      </div>
     </div>
   );
 };
