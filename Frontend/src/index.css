@@ -404,3 +404,17 @@ body {
  height: 600px;
 
 }
+
+.logout{
+  border-radius: 10px;
+  background-color: #293a72;
+  color: white;
+  margin-top: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  padding: 5px 10px;
+
+}
+.logout p{
+  color:white
+}
