@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -210,6 +211,18 @@ margin-right: auto;
 body {
     background: linear-gradient(90deg, #1b1c21, #57585f);        
 } */
+/* Add your styles here */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;    
+    font-family: Raleway, sans-serif;
+}
+
+body {
+    background: linear-gradient(90deg, #eeeef8, #eeeef8);        
+}
 
 .container {
     display: flex;
@@ -219,11 +232,11 @@ body {
 }
 
 .screen {        
-    background: linear-gradient(90deg, #1f1d2b, #252836);        
+    background: linear-gradient(90deg, #293a72, #5c6465);        
     position: relative;    
     height: 600px;
     width: 360px;    
-    box-shadow: 0px 0px 24px #4d505e;
+    box-shadow: 0px 0px 24px #293a72;
 }
 
 .screen__content {
@@ -260,7 +273,7 @@ body {
 .screen__background__shape2 {
     height: 220px;
     width: 220px;
-    background: #393a3e;    
+    background: #293a72;    
     top: -172px;
     right: 0;    
     border-radius: 32px;
@@ -269,7 +282,7 @@ body {
 .screen__background__shape3 {
     height: 540px;
     width: 190px;
-    background: linear-gradient(270deg, #1f1d2b, #3b3a46);
+    background: linear-gradient(270deg, #293a72, #293a72);
     top: -24px;
     right: 0;    
     border-radius: 32px;
@@ -278,30 +291,31 @@ body {
 .screen__background__shape4 {
     height: 400px;
     width: 200px;
-    background: #353948;    
+    background: #293a72;    
     top: 420px;
     right: 50px;    
     border-radius: 60px;
 }
 
-.login ,.signup {
+.login {
     width: 320px;
     padding: 30px;
     padding-top: 156px;
+    margin-top: -45px;
 }
 
-.login__field, .signup__field {
+.login__field {
     padding: 20px 0px;    
     position: relative;    
 }
 
-.login__icon , .signup__icon {
+.login__icon {
     position: absolute;
     top: 30px;
-    color: #7875B5;
+    color: #293a72;
 }
 
-.login__input, .signup__input{
+.login__input {
     border: none;
     border-bottom: 2px solid #D1D1D4;
     background: none;
@@ -314,16 +328,13 @@ body {
 
 .login__input:active,
 .login__input:focus,
-.login__input:hover ,
-.signup__input:active,
-.signup__input:focus,
-.signup__input:hover{
+.login__input:hover {
     outline: none;
-    border-bottom-color: #6A679E;
+    border-bottom-color: #293a72;
 }
 
-.login__submit , .signup__submit{
-    background: #ea7c69;
+.login__submit {
+    background: #fff;
     font-size: 14px;
     margin-top: 30px;
     padding: 16px 20px;
@@ -334,30 +345,26 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    color: white;
-    box-shadow: 0px 2px 2px #5C5696;
+    color: #0058a0;
+    box-shadow: 0px 2px 2px #293a72;
     cursor: pointer;
     transition: .2s;
 }
 
 .login__submit:active,
 .login__submit:focus,
-.login__submit:hover,
-.signup__submit:active,
-.signup__submit:focus,
-.signup__submit:hover
- {
-    border-color: #6A679E;
+.login__submit:hover {
+    border-color: #293a72;
     outline: none;
 }
 
 .button__icon {
     font-size: 24px;
     margin-left: auto;
-    color: #7875B5;
+    color: #293a72;
 }
 
-.social-login , .social-signup{    
+.social-login {    
     position: absolute;
     height: 140px;
     width: 160px;
@@ -373,27 +380,16 @@ body {
     justify-content: center;
 }
 
-.social-login__icon, .social-signup__icon {
+.social-login__icon {
     padding: 20px 10px;
     color: #fff;
     text-decoration: none;    
-    text-shadow: 0px 0px 8px #7875B5;
+    text-shadow: 0px 0px 8px #293a72;
 }
 
-.social-login__icon:hover,
-.social-signup__icon:hover {
+.social-login__icon:hover {
     transform: scale(1.5);    
 }
-
-
-.alert {
-  color:rgb(218, 86, 25);
-}
-#remember{
-  color:rgb(218, 86, 25);
-
-}
-
 
 
 
