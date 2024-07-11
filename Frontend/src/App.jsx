@@ -7,7 +7,6 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div>
       <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -17,7 +16,6 @@ function App() {
         <Route path="*" element={<div>404 Not Found!</div>} />
       </Routes>
     </Router>
-    </div>
   )
 }
 
