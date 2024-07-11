@@ -44,7 +44,7 @@ const Data = [
 
 function Graph({ chartData }) {
     return (
-        <div className="chart-container h-72 w-72">
+        <div className="chart-container h-full w-72">
             <Pie
                 data={chartData}
                 options={{
