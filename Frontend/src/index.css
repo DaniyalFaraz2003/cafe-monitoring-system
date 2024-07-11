@@ -402,6 +402,8 @@ body {
   background-color: #293a72;
   border: 4px solid #293a72;
  height: 600px;
+ width: 100%;
+ min-height: 100vh;
 
 }
 
