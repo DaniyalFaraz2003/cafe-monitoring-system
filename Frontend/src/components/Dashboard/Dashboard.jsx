@@ -29,14 +29,12 @@ const Dashboard = () => {
           </h2>
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
-        <div className="logout bg-[#0a5282] text-white py-1 px-2 rounded-xl">
-          <p className="text-xl mr-0 ">
-            LogOut{" "}
-            <IconButton aria-label="logout">
-              <LogoutIcon />
-            </IconButton>
-          </p>
-        </div>
+        <Button className="flex items-center gap-2 bg-[#0a5282]" size="sm">
+          LogOut
+          <IconButton aria-label="logout">
+            <LogoutIcon />
+          </IconButton>
+        </Button>
       </nav>
       <div className="w-full flex flex-col p-5 gap-5 bg-[#0a5282] rounded-lg mt-10">
         <div className="flex flex-col items-center justify-between">
@@ -105,7 +103,15 @@ const Dashboard = () => {
       </div>
       {/* //a beautifull contextual tailwind css included button  */}
       <Link to="/report" className="item">
+<<<<<<< HEAD
         <button type="button" className="reportbtn btn btn-primary">
+=======
+
+        <button
+          type="button"
+          className="reportbtn btn btn-primary"
+        >
+>>>>>>> e9c878355a382b42d6b1edf25b3ec5a65f3a3c8a
           Generate Report
         </button>
       </Link>
