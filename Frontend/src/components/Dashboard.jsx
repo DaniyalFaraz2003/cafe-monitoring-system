@@ -8,8 +8,9 @@ import BarChart from "./DashboardElements/BarChart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import { Input } from "@material-tailwind/react";
-import { Select, Option } from '@material-tailwind/react';
+import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -41,28 +42,50 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className='w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10 justify-center'>
-        <div className='flex flex-row items-center justify-center w-fit gap-5'>
-          <label htmlFor="idInput" className='text-white font-bold w-full text-xl'>Enter Employee Id: </label>
+      <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10 justify-center">
+        <div className="flex flex-row items-center justify-center w-fit gap-5">
+          <label
+            htmlFor="idInput"
+            className="text-white font-bold w-full text-xl"
+          >
+            Enter Employee Id:{" "}
+          </label>
           <Input
-            color='gray'
-            name='idInput'
+            color="gray"
+            name="idInput"
             label="Emp ID"
             style={{ fontWeight: 800 }}
-            className='bg-white'
+            className="bg-white"
           />
         </div>
-        <div className='flex flex-row items-center justify-center w-fit gap-5'>
-          <label htmlFor="mealTypeInput" className='text-white font-bold w-full text-xl'>Select Meal Type: </label>
-          <Select name='mealTypeInput' defaultValue='Normal' label='Select Meal Type' className='bg-white font-bold'>
+        <div className="flex flex-row items-center justify-center w-fit gap-5">
+          <label
+            htmlFor="mealTypeInput"
+            className="text-white font-bold w-full text-xl"
+          >
+            Select Meal Type:{" "}
+          </label>
+          <Select
+            name="mealTypeInput"
+            defaultValue="Normal"
+            label="Select Meal Type"
+            className="bg-white font-bold"
+          >
             <Option>Normal</Option>
             <Option>Diet</Option>
           </Select>
         </div>
         <div>
-          <Button color='blue'>Enter</Button>
+          <Button color="blue">Enter</Button>
         </div>
       </div>
+      {/* //a beautifull contextual tailwind css included button  */}
+      <Link to="/report"  className="item">
+
+      <button className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Click me
+      </button>
+      </Link>
     </div>
   );
 };
