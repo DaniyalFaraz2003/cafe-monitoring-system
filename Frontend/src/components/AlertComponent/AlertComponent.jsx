@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Alert } from "@material-tailwind/react";
+import React from 'react';
+import { Alert, Button } from "@material-tailwind/react";
 
 function ValidIcon() {
   return (
@@ -45,29 +45,39 @@ function useAutoDismissAlert(duration = 5000) {
   return [show, setShow];
 }
 export function ValidAlert() {
-  const [show] = useAutoDismissAlert(); // Default duration is 5000ms
-
-  if (!show) return null;
+  const [open, setOpen] = React.useState(true);
   return (
-    <Alert
-      icon={<ValidIcon />}
-      className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946] transition-all duration-700"
-    >
-      Employee ID is valid.
-    </Alert>
+
+    <>
+      <Alert
+        open={open}
+        onClose={() => setOpen(false)}
+        animate={{
+          mount: { y: 0 },
+          unmount: { y: 100 },
+        }}
+        icon={<ValidIcon />} className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946] transition-all duration-700">
+        Employee ID is valid.
+      </Alert>
+    </>
   );
 }
 
 export function InvalidAlert() {
-  const [show] = useAutoDismissAlert(); // Default duration is 5000ms
-
-  if (!show) return null;
+  const [open, setOpen] = React.useState(true);
   return (
-    <Alert
-      icon={<InvalidIcon />}
-      className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c] transition-all duration-700"
-    >
-      Employee ID is invalid.
-    </Alert>
+
+    <>
+      <Alert
+        open={open}
+        onClose={() => setOpen(false)}
+        animate={{
+          mount: { y: 0 },
+          unmount: { y: 100 },
+        }}
+        icon={<InvalidIcon />} className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c] transition-all duration-700">
+        Employee ID is invalid.
+      </Alert>
+    </>
   );
 }

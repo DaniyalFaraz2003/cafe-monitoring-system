@@ -10,6 +10,7 @@ import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { ValidAlert,InvalidAlert } from "../AlertComponent/AlertComponent";
+import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");
   const [empId, setEmpId] = useState("");
@@ -43,15 +44,7 @@ const Dashboard = () => {
         <div className="flex flex-col items-center justify-between">
           {/* Button group */}
           <div className="flex flex-row gap-3 mb-5">
-            <button className="px-4 py-2 bg-white text-[#0a5282] rounded-lg hover:bg-[#106aa5] transition-colors duration-150">
-              Daily
-            </button>
-            <button className="px-4 py-2 bg-white text-[#0a5282] rounded-lg hover:bg-[#106aa5] transition-colors duration-150">
-              Weekly
-            </button>
-            <button className="px-4 py-2 bg-white text-[#0a5282] rounded-lg hover:bg-[#106aa5] transition-colors duration-150">
-              Monthly
-            </button>
+          <TimeFrameSelector/>
           </div>
           {/* Charts */}
           <div className="flex flex-row gap-5 w-full">
