@@ -42,7 +42,7 @@ const Data = [
 
 const Graph = ({ chartData }) => {
     return (
-        <div className="chart-container w-[90%] h-full">
+        <div className="chart-container w-[70%] h-full">
             <Bar
                 data={chartData}
                 options={{
@@ -82,7 +82,7 @@ export default function BarChart() {
     });
 
     return (
-        <div className="w-full h-full flex flex-row items-center justify-center">
+        <div className="App w-full h-full flex flex-row items-center justify-center">
             <Graph chartData={chartData} />
         </div>
     );

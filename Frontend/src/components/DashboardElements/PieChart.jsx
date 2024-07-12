@@ -85,7 +85,7 @@ export default function PieChart() {
     });
 
     return (
-        <div className="flex flex-row items-center justify-center">
+        <div className="App flex flex-row items-center justify-center">
             <Graph chartData={chartData} />
         </div>
     );

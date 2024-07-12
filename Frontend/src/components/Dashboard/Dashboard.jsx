@@ -9,49 +9,39 @@ import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");
   return (
-    <div className="w-full h-full p-5">
+    <div className="w-full h-full p-10">
       <nav className="w-full flex flex-row items-center justify-center">
-        <img src={logo} alt="" className="h-[10%] w-[10%] basis-1/5" />
+        <img src={logo} alt="" className="h-[15%] w-[15%] basis-1/5" />
         <div className="w-full basis-3/5 flex flex-col">
-          <h2 className="text-3xl font-bold text-center text-gray-500 my-2">
+          <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
             Cafe Admin Dashboard
           </h2>
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
-        <div className="logout rounded-lg bg-[#293a72] text-white p-2">
+        <div className="logout bg-[#0a5282] text-white py-1 px-2 rounded-xl">
           <p className="text-xl mr-0 ">
             LogOut{" "}
             <IconButton aria-label="logout">
-              <LogoutIcon />
+              <LogoutIcon/>
             </IconButton>
           </p>
         </div>
       </nav>
 
-
-      <div className="w-full flex p-4 flex-col gap-4 bg-[#0a5282] rounded-lg mt-10">
-        <div className="w-full flex flex-row justify-center">
-          <TimeFrameSelector setTimeFrame={setTimeFrame} />
+      <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10">
+        <div className="basis-1/3 h-full rounded-xl p-5 bg-white justify-center items-center">
+          <PieChart />
         </div>
-        <div className="w-full flex flex-row gap-4 h-full">
-          <div className="basis-1/3 h-full rounded-xl p-4 bg-white justify-center items-center">
-            <PieChart />
-          </div>
-          <div className="basis-2/3 p-4 rounded-xl bg-white justify-center items-center h-full">
-            <BarChart />
-          </div>
-        </div>
-        <div className="w-full p-4 bg-white rounded-xl">
-
+        <div className="basis-2/3 p-5 rounded-xl bg-white justify-center items-center ">
+          <BarChart />
         </div>
       </div>
 
-      <div className="w-full flex p-4 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10 justify-center">
-        <div className="flex flex-row items-center justify-center w-fit gap-4">
+      <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10 justify-center">
+        <div className="flex flex-row items-center justify-center w-fit gap-5">
           <label
             htmlFor="idInput"
             className="text-white font-bold w-full text-xl"
@@ -59,10 +49,11 @@ const Dashboard = () => {
             Enter Employee Id:{" "}
           </label>
           <Input
-            color="white"
+            color="gray"
             name="idInput"
             label="Emp ID"
-            style={{ fontWeight: 800, fill: "white" }}
+            style={{ fontWeight: 800 }}
+            className="bg-white"
           />
         </div>
         <div className="flex flex-row items-center justify-center w-fit gap-5">
@@ -86,7 +77,16 @@ const Dashboard = () => {
           <Button color="blue">Enter</Button>
         </div>
       </div>
+      {/* //a beautifull contextual tailwind css included button  */}
+      <Link to="/report"  className="item">
 
+      <button
+          type="button"
+          className="reportbtn btn btn-primary"
+        >
+          Generate Report
+        </button>
+      </Link>
     </div>
   );
 };
