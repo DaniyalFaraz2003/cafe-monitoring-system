@@ -9,6 +9,14 @@ import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");
   return (
@@ -21,22 +29,38 @@ const Dashboard = () => {
           </h2>
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
-        <div className="logout bg-[#0a5282] text-white py-1 px-2 rounded-xl">
-          <p className="text-xl mr-0 ">
-            LogOut{" "}
-            <IconButton aria-label="logout">
-              <LogoutIcon/>
-            </IconButton>
-          </p>
-        </div>
+        <Button className="flex items-center gap-2 bg-[#0a5282]" size="sm">
+          LogOut
+          <IconButton aria-label="logout">
+            <LogoutIcon />
+          </IconButton>
+        </Button>
       </nav>
-
-      <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10">
-        <div className="basis-1/3 h-full rounded-xl p-5 bg-white justify-center items-center">
-          <PieChart />
-        </div>
-        <div className="basis-2/3 p-5 rounded-xl bg-white justify-center items-center ">
-          <BarChart />
+      <div className="w-full flex flex-col p-5 gap-5 bg-[#0a5282] rounded-lg mt-10">
+        <div className="flex flex-col items-center justify-between">
+          {/* Button group */}
+          <div className="flex flex-row gap-3 mb-5">
+            <button className="px-4 py-2 bg-white text-[#0a5282] rounded-lg hover:bg-[#106aa5] transition-colors duration-150">
+              Daily
+            </button>
+            <button className="px-4 py-2 bg-white text-[#0a5282] rounded-lg hover:bg-[#106aa5] transition-colors duration-150">
+              Weekly
+            </button>
+            <button className="px-4 py-2 bg-white text-[#0a5282] rounded-lg hover:bg-[#106aa5] transition-colors duration-150">
+              Monthly
+            </button>
+          </div>
+          {/* Charts */}
+          <div className="flex flex-row gap-5 w-full">
+            <div className="basis-1/3 h-full rounded-xl p-5 bg-white flex justify-center items-center">
+              <PieChart />
+            </div>
+            <div className="flex-grow min-w-0 basis-2/3 p-5 rounded-xl bg-white">
+              <div className="w-full h-full flex justify-center items-center">
+                <BarChart />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -53,7 +77,7 @@ const Dashboard = () => {
             name="idInput"
             label="Emp ID"
             style={{ fontWeight: 800 }}
-            className="bg-white"
+            className="empinp bg-white"
           />
         </div>
         <div className="flex flex-row items-center justify-center w-fit gap-5">
@@ -78,12 +102,16 @@ const Dashboard = () => {
         </div>
       </div>
       {/* //a beautifull contextual tailwind css included button  */}
-      <Link to="/report"  className="item">
+      <Link to="/report" className="item">
+<<<<<<< HEAD
+        <button type="button" className="reportbtn btn btn-primary">
+=======
 
-      <button
+        <button
           type="button"
           className="reportbtn btn btn-primary"
         >
+>>>>>>> e9c878355a382b42d6b1edf25b3ec5a65f3a3c8a
           Generate Report
         </button>
       </Link>

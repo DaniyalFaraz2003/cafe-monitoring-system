@@ -1,0 +1,13 @@
+.logout {
+  border-radius: 10px;
+  background-color: #293a72;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+.logout p {
+  color: white;
+}
+.empinp{
+  background-color: #106aa5;
+}
