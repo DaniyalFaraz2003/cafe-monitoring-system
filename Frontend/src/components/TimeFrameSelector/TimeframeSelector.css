@@ -1,0 +1,7 @@
+.btndiv{
+  display: flex;
+  justify-content: center;
+ }
+ .timebtn{
+   background-color: #1f3b5d;
+ }

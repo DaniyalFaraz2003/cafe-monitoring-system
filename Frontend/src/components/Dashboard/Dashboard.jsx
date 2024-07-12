@@ -10,7 +10,7 @@ import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
-
+import "./Dashboard.css";
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");
   return (

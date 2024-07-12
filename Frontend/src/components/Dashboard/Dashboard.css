@@ -1,0 +1,22 @@
+.logout {
+  border-radius: 10px;
+  background-color: #293a72;
+  color: white;
+  margin-top: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+.logout p {
+  color: white;
+}
+
+.reportbtn {
+  background-color: #1f3b5d;
+}
+.reportbtn {
+  margin-top: 20px;
+  position: relative;
+  right: 20px;
+  left: 900px;
+}

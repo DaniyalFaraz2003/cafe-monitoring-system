@@ -1,0 +1,14 @@
+.navbar {
+    padding: 10px 15px;
+    width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+  
+  }
+  .item {
+    margin: 5px 10px;
+    text-decoration: none;
+    color:#293a72;
+    font-weight: 500;
+  }

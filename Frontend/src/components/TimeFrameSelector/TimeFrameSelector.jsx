@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./TimeframeSelector.css";
 function TimeFrameSelector({ setTimeFrame }) {
   return (
     <div className="btndiv">

@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../../assets/foofpic.png";
+import "./Landing.css";
 function Landing() {
   return (
     <>

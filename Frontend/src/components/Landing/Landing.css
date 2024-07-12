@@ -1,0 +1,39 @@
+.inner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.text {
+  color: #293a72;
+  width: 60%;
+  text-align: center;
+  margin-top: 20px;
+}
+    
+.landing-title {
+  font-family: "Bona Nova SC", serif;
+  font-size: 45px;
+  letter-spacing: 1px;
+  color: #293a72;
+  font-weight: 500;
+}
+
+.landing-description {
+  font-family: "Bona Nova SC", serif;
+  color: #666666;
+  line-height: 2;
+}
+
+.pic {
+  width: 370px;
+  /* height: 100%; */
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 40px;
+  box-shadow: 5px 5px rgba(112, 109, 109, 0.04);
+}
+.pic img {
+  width: 370px;
+}
