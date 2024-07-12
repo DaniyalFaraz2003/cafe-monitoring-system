@@ -32,14 +32,31 @@ const Dashboard = () => {
         </div>
       </nav>
 
-      <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10">
+      {/* <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10">
         <div className="basis-1/3 h-full rounded-xl p-5 bg-white justify-center items-center">
           <PieChart />
         </div>
         <div className="basis-2/3 p-5 rounded-xl bg-white justify-center items-center ">
           <BarChart />
         </div>
+      </div> */}
+      <div className="w-full flex p-4 flex-col gap-4 bg-[#0a5282] rounded-lg mt-10">
+        <div className="w-full flex flex-row justify-center">
+          <TimeFrameSelector setTimeFrame={setTimeFrame} />
+        </div>
+        <div className="w-full flex flex-row gap-4 h-full">
+          <div className="basis-1/3 h-full rounded-xl p-4 bg-white justify-center items-center">
+            <PieChart />
+          </div>
+          <div className="basis-2/3 p-4 rounded-xl bg-white justify-center items-center h-full">
+            <BarChart />
+          </div>
+        </div>
+        <div className="w-full p-4 bg-white rounded-xl">
+
+        </div>
       </div>
+
 
       <div className='w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10 justify-center'>
         <div className='flex flex-row items-center justify-center w-fit gap-5'>
