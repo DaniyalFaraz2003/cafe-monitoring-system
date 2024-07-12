@@ -220,12 +220,6 @@ body {
     font-family: Raleway, sans-serif;
 }
 
-body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 .container {
   background: linear-gradient(90deg, #eeeef8, #eeeef8);
   width: 100vw;
@@ -305,7 +299,7 @@ body {
     width: 320px;
     padding: 30px;
     padding-top: 156px;
-    margin-top: -45px;
+    margin-top: -80px;
 }
 
 .login__field {
