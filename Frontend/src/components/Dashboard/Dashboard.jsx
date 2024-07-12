@@ -43,7 +43,7 @@ const Dashboard = () => {
       <div className="w-full flex flex-col p-5 gap-5 bg-[#0a5282] rounded-lg mt-10">
         <div className="flex flex-col items-center justify-between">
           {/* Button group */}
-          <div className="flex flex-row gap-3 mb-5">
+          <div className="flex flex-row gap-3 mb-5 bg-transparent">
           <TimeFrameSelector/>
           </div>
           {/* Charts */}
