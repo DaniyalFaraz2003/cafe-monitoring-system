@@ -31,7 +31,7 @@ function Login() {
                   required
                 />
               </div>
-              <button id="submit" className="button login__submit" onClick={() => Navigate('/Dashboard')}>
+              <button id="submit" className="button login__submit" onClick={() => Navigate('/UserEntryForm')}>
                 <span className="button__text">Log In</span>
                 <i className="button__icon fas fa-chevron-right"></i>
               </button>
