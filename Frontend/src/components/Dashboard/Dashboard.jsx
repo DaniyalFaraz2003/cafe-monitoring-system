@@ -9,16 +9,19 @@ import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import {
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
-} from "@material-tailwind/react";
-
+import { ValidAlert,InvalidAlert } from "../AlertComponent/AlertComponent";
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");
+  const [empId, setEmpId] = useState("");
+  const [isValidId, setIsValidId] = useState(null);
+  const handleValidation = () => {
+    // Hardcode the valid empId for now
+    if (empId === "1234") {
+      setIsValidId(true);
+    } else {
+      setIsValidId(false);
+    }
+  };
   return (
     <div className="w-full h-full p-10">
       <nav className="w-full flex flex-row items-center justify-center">
@@ -78,6 +81,8 @@ const Dashboard = () => {
             label="Emp ID"
             style={{ fontWeight: 800 }}
             className="empinp bg-white"
+            value={empId}
+            onChange={(e) => setEmpId(e.target.value)}
           />
         </div>
         <div className="flex flex-row items-center justify-center w-fit gap-5">
@@ -98,17 +103,15 @@ const Dashboard = () => {
           </Select>
         </div>
         <div>
-          <Button color="blue">Enter</Button>
+          <Button color="blue" onClick={handleValidation}>Enter</Button>
         </div>
       </div>
+      {isValidId === true && <ValidAlert />}
+      {isValidId === false && <InvalidAlert />}
       {/* //a beautifull contextual tailwind css included button  */}
       <Link to="/report" className="item">
-
-        <button
-          type="button"
-          className="reportbtn btn btn-primary"
-        >
-          Generate Report
+        <button className="mt-5 px-4 py-2 bg-[#0a5282] text-white rounded-lg hover:bg-blue-600 transition-colors duration-150">
+          Generate Button
         </button>
       </Link>
     </div>
