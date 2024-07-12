@@ -3,7 +3,6 @@ import { Select, Option } from "@material-tailwind/react";
 
 function MealcatagSelectForm() {
   return (
-    <div>
       <div className="flex flex-row items-center justify-center w-fit gap-5">
           <label
             htmlFor="mealTypeInput"
@@ -22,7 +21,6 @@ function MealcatagSelectForm() {
             <Option>Diet</Option>
           </Select>
       </div>
-    </div>
   );
 }
 export default MealcatagSelectForm
