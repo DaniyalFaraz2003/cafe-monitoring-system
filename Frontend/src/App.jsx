@@ -1,7 +1,6 @@
 import React from 'react'
 import LandingPage from './components/LandingPage/LandingPage'
 import Login from './components/Login/Login'
-import Signup from './components/SignUP/Signup'
 import Dashboard from './components/Dashboard/Dashboard'
 import ReportGneneration from './components/ReportGeneration/ReportGneneration'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
@@ -13,7 +12,6 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/SignUp" element={<Signup/>} />
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/report" element={<ReportGneneration/>} />
         <Route path="*" element={<div>404 Not Found!</div>} />

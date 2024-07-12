@@ -82,7 +82,7 @@ export default function BarChart() {
     });
 
     return (
-        <div className="App w-full h-full flex flex-row items-center justify-center">
+        <div className="w-full h-full flex flex-row items-center justify-center">
             <Graph chartData={chartData} />
         </div>
     );
