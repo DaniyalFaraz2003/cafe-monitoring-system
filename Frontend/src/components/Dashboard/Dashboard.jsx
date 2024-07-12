@@ -103,15 +103,11 @@ const Dashboard = () => {
       </div>
       {/* //a beautifull contextual tailwind css included button  */}
       <Link to="/report" className="item">
-<<<<<<< HEAD
-        <button type="button" className="reportbtn btn btn-primary">
-=======
 
         <button
           type="button"
           className="reportbtn btn btn-primary"
         >
->>>>>>> e9c878355a382b42d6b1edf25b3ec5a65f3a3c8a
           Generate Report
         </button>
       </Link>
