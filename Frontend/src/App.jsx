@@ -15,8 +15,6 @@ function App() {
         <Route path="/SignUp" element={<Signup/>} />
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/report" element={<ReportGneneration/>} />
-
-
         <Route path="*" element={<div>404 Not Found!</div>} />
       </Routes>
     </Router>
