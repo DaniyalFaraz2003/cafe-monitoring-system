@@ -5,11 +5,10 @@
 }
 
 .landing-container {
-  position: relative;
   background-color: #eeeef8;
   width: 93%;
   height: 73%;
-  margin: 110px auto;
+  margin: 170px auto;
   font-family: "Bona Nova SC", serif;
   align-items: right;
 }
@@ -17,14 +16,15 @@
 .logoname {
   position: absolute;
   font-size: 40px;
-  top: 50px;
+  top: 10px;
   left: 10px;
-  bottom: -10px;
   color: #394b7d;
   font-family: "Bona Nova SC", serif;
   font-weight: 600;
   font-size: 60px;
 }
+
+
 @media (max-width:600px) {
   .bluecontainer {
     background-color: #293a72;
