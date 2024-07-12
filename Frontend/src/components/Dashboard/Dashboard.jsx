@@ -1,15 +1,15 @@
 // src/components/Dashboard.jsx
 import React, { useEffect, useState } from "react";
-import logo from "../assets/logo.png";
-import PieChart from "./DashboardElements/PieChart";
-import BarChart from "./DashboardElements/BarChart";
+import logo from "../../assets/logo.png";
+import PieChart from "../DashboardElements/PieChart";
+import BarChart from "../DashboardElements/BarChart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import TimeFrameSelector from "./TimeFrameSelector";
+import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");

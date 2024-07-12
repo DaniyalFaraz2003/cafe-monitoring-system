@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../assets/foofpic.png";
+import img from "../../assets/foofpic.png";
 function Landing() {
   return (
     <>

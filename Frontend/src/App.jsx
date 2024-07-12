@@ -1,9 +1,9 @@
 import React from 'react'
-import LandingPage from './components/LandingPage'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import Dashboard from './components/Dashboard'
-import ReportGneneration from './components/ReportGneneration'
+import LandingPage from './components/LandingPage/LandingPage'
+import Login from './components/Login/Login'
+import Signup from './components/SignUP/Signup'
+import Dashboard from './components/Dashboard/Dashboard'
+import ReportGneneration from './components/ReportGeneration/ReportGneneration'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
