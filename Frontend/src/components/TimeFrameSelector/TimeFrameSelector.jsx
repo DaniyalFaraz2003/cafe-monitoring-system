@@ -6,24 +6,24 @@ function TimeFrameSelector({ setTimeFrame }) {
       <div className="btn-group " role="group" aria-label="Basic example">
         <button
           type="button"
-          className="timebtn btn btn-primary"
+          className="timebtn btn btn-primary focus:bg-white focus:text-blue-600"
           onClick={() => setTimeFrame("daily")}
         >
-          Left
+          Daily
         </button>
         <button
           type="button"
-          className=" timebtn btn btn-primary"
+          className=" timebtn btn btn-primary focus:bg-white focus:text-blue-600"
           onClick={() => setTimeFrame("weekly")}
         >
-          Middle
+          Weekly
         </button>
         <button
           type="button"
-          className="timebtn btn btn-primary"
+          className="timebtn btn btn-primary focus:bg-white focus:text-blue-600"
           onClick={() => setTimeFrame("monthly")}
         >
-          Right
+          Monthly
         </button>
       </div>
     </div>
