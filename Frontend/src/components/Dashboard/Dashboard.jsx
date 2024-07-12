@@ -111,7 +111,7 @@ const Dashboard = () => {
       {/* //a beautifull contextual tailwind css included button  */}
       <Link to="/report" className="item">
         <button className="mt-5 px-4 py-2 bg-[#0a5282] text-white rounded-lg hover:bg-blue-600 transition-colors duration-150">
-          Generate Button
+          Generate Report
         </button>
       </Link>
     </div>
