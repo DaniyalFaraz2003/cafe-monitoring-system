@@ -9,6 +9,7 @@ import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import label from "@mui/material/InputLabel";
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 import "./Dashboard.css";
 const Dashboard = () => {
@@ -61,7 +62,7 @@ const Dashboard = () => {
             name="idInput"
             label="Emp ID"
             style={{ fontWeight: 800 }}
-            className="bg-white"
+            className="empinp bg-white"
           />
         </div>
         <div className="flex flex-row items-center justify-center w-fit gap-5">
