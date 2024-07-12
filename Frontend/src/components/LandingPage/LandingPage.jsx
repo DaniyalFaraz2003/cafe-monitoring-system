@@ -1,13 +1,14 @@
 // src/components/LandingPage.jsx
 import React from "react";
-import Navbar from "./Navbar";
-import Landing from "./Landing";
-
+import Navbar from "../Navbar/Navbar";
+import Landing from "../Landing/Landing";
+import img1 from '../../assets/logo.png';
+import "./LandingPage.css";
 const LandingPage = () => {
   return (
     <div className="bluecontainer">
       <div className="logoname">
-     <h1>Contour Software</h1>
+        <img src={img1} alt="Contour Software Logo" className="logo" />
       </div>
       <div className="landing-container">
         <Navbar />
