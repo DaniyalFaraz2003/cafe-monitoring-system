@@ -414,7 +414,7 @@ body {
 
 }
 .logout p{
-  color:white
+  color:white;
 }
 
 
@@ -463,4 +463,20 @@ body {
     width: 100%;
   }
   
+}
+
+
+
+.btndiv{
+ display: flex;
+ justify-content: center;
+}
+.timebtn,.reportbtn{
+  background-color: #1f3b5d;
+}
+.reportbtn{
+  margin-top: 20px;
+  position: relative;
+  right: 20px;
+  left: 900px;
 }

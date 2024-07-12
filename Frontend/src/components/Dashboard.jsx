@@ -1,7 +1,5 @@
 // src/components/Dashboard.jsx
 import React, { useEffect, useState } from "react";
-import logout from "../assets/logout.png";
-import axios from "axios";
 import logo from "../assets/logo.png";
 import PieChart from "./DashboardElements/PieChart";
 import BarChart from "./DashboardElements/BarChart";
@@ -11,8 +9,10 @@ import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import TimeFrameSelector from "./TimeFrameSelector";
 
 const Dashboard = () => {
+  const [timeFrame, setTimeFrame] = useState("daily");
   return (
     <div className="w-full h-full p-10">
       <nav className="w-full flex flex-row items-center justify-center">
@@ -24,7 +24,7 @@ const Dashboard = () => {
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
         <div className="logout">
-          <p className="text-xl mr-0 text-black">
+          <p className="text-xl mr-0 ">
             LogOut{" "}
             <IconButton aria-label="logout">
               <LogoutIcon />
@@ -32,6 +32,7 @@ const Dashboard = () => {
           </p>
         </div>
       </nav>
+      <TimeFrameSelector setTimeFrame={setTimeFrame}/>
 
       <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10">
         <div className="basis-1/3 h-full rounded-xl p-5 bg-white justify-center items-center">
@@ -82,9 +83,12 @@ const Dashboard = () => {
       {/* //a beautifull contextual tailwind css included button  */}
       <Link to="/report"  className="item">
 
-      <button className="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-       Generate Report 
-      </button>
+      <button
+          type="button"
+          className="reportbtn btn btn-primary"
+        >
+          Generate Report
+        </button>
       </Link>
     </div>
   );
