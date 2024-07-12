@@ -21,14 +21,12 @@ const Dashboard = () => {
           </h2>
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
-        <div className="logout bg-[#0a5282] text-white py-1 px-2 rounded-xl">
-          <p className="text-xl mr-0 ">
-            LogOut{" "}
-            <IconButton aria-label="logout">
-              <LogoutIcon/>
-            </IconButton>
-          </p>
-        </div>
+        <Button className="flex items-center gap-2 bg-[#0a5282]" size="sm">
+          LogOut
+          <IconButton aria-label="logout">
+            <LogoutIcon />
+          </IconButton>
+        </Button>
       </nav>
 
       <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-10">
@@ -78,9 +76,9 @@ const Dashboard = () => {
         </div>
       </div>
       {/* //a beautifull contextual tailwind css included button  */}
-      <Link to="/report"  className="item">
+      <Link to="/report" className="item">
 
-      <button
+        <button
           type="button"
           className="reportbtn btn btn-primary"
         >
