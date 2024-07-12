@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import "./Login.css";
 function Login() {
+  let Navigate = useNavigate();
   return (
     <div className="container">
       <div className="screen">
@@ -29,7 +30,7 @@ function Login() {
                 required
               />
             </div>
-            <button id="submit" className="button login__submit">
+            <button id="submit" className="button login__submit" onClick={() => Navigate('/Dashboard')}>
               <span className="button__text">Log In</span>
               <i className="button__icon fas fa-chevron-right"></i>
             </button>

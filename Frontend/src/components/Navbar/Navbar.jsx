@@ -8,9 +8,6 @@ const Navbar = () => {
       <Link to="/Login"  className="item">
         Login
       </Link>
-      <Link to="/Dashboard" className="item">
-        Dashboard
-      </Link>
     </div>
   );
 };
