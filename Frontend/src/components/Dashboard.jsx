@@ -48,12 +48,13 @@ const Dashboard = () => {
             color='gray'
             name='idInput'
             label="Emp ID"
-            className='bg-white font-extrabold'
+            style={{ fontWeight: 800 }}
+            className='bg-white'
           />
         </div>
         <div className='flex flex-row items-center justify-center w-fit gap-5'>
           <label htmlFor="mealTypeInput" className='text-white font-bold w-full text-xl'>Select Meal Type: </label>
-          <Select color='black' name='mealTypeInput' defaultValue='Normal' label='Select Meal Type' className='bg-white font-bold'>
+          <Select name='mealTypeInput' defaultValue='Normal' label='Select Meal Type' className='bg-white font-bold'>
             <Option>Normal</Option>
             <Option>Diet</Option>
           </Select>
