@@ -8,7 +8,7 @@ import BarChart from "./DashboardElements/BarChart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import { Input } from "@material-tailwind/react";
-import {Select, Option} from '@material-tailwind/react'
+import { Select, Option } from '@material-tailwind/react';
 import { Button } from "@material-tailwind/react";
 
 const Dashboard = () => {
@@ -23,12 +23,12 @@ const Dashboard = () => {
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
         <div className="logout">
-            <p className="text-xl mr-0 text-black">
-              LogOut{" "}
-              <IconButton aria-label="logout">
-                <LogoutIcon />
-              </IconButton>
-            </p>
+          <p className="text-xl mr-0 text-black">
+            LogOut{" "}
+            <IconButton aria-label="logout">
+              <LogoutIcon />
+            </IconButton>
+          </p>
         </div>
       </nav>
 
