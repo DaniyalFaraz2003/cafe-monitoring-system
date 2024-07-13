@@ -1,0 +1,15 @@
+.navbar {
+    display: flex;
+    justify-content: flex-end; /* Aligns items to the right */
+    padding: 10px 25px;
+    width: 100%; 
+    margin-bottom: 30px;
+  }
+  
+  .item {
+    margin-left: auto;
+    margin-right: 30px; /* Adjusted */
+    text-decoration: none;
+    color: #293a72;
+    font-weight: 800;
+  }
