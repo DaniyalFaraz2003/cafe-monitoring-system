@@ -22,20 +22,20 @@ import {
 
 const TABS = [
     {
-        label: "All",
-        value: "all",
+        label: "Daily",
+        value: "daily",
     },
     {
-        label: "Monitored",
-        value: "monitored",
+        label: "Weekly",
+        value: "weekly",
     },
     {
-        label: "Unmonitored",
-        value: "unmonitored",
+        label: "Monthly",
+        value: "monthly",
     },
 ];
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
+const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
 
 const TABLE_ROWS = [
     {
@@ -97,14 +97,14 @@ export function Table() {
                 <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
                     <div>
                         <Typography variant="h5" color="blue-gray">
-                            Recent Transactions
+                            Cafe Report:
                         </Typography>
                         <Typography color="gray" className="mt-1 font-normal">
-                            These are details about the last transactions
+                            These are details about employees' meals
                         </Typography>
                     </div>
                     <div className="flex w-full shrink-0 gap-2 md:w-max">
-                        <Tabs value="all" className="w-full md:w-max">
+                        <Tabs value="daily" className="w-full md:w-max">
                             <TabsHeader>
                                 {TABS.map(({ label, value }) => (
                                     <Tab key={value} value={value}>

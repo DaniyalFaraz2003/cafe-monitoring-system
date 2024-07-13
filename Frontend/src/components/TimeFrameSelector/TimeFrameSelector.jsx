@@ -17,7 +17,7 @@ function TimeFrameSelector({ setTimeFrame }) {
     },
   ];
   return (
-    <Tabs value="all" className="w-full md:w-max">
+    <Tabs value="daily" className="w-full md:w-max">
       <TabsHeader>
         {TABS.map(({ label, value }) => (
           <Tab key={value} value={value}>
