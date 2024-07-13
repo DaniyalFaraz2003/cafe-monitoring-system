@@ -19,6 +19,7 @@ function UserEntryForm() {
   };
   const handleValidation = () => {
     // Hardcode the valid empId for now
+    setIsSubmitted(false);
     if (empId === "1234") {
       setIsValidId(true);
       return true;
