@@ -1,32 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { Input, Button } from "@material-tailwind/react";
 import img1 from "../../assets/logo.png";
-import { Input } from "@material-tailwind/react";
-import { Select, Option } from "@material-tailwind/react";
-import { Button } from "@material-tailwind/react";
+import userImg from "../../assets/avatar.png";
 import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
 import MealcatagSelectForm from "../MealCatagorySelectionForm/MealcatagSelectForm";
-import { useState } from "react";
-import userImg from "../../assets/avatar.png";
+import Navbar from "../Navbar/Navbar";
+
 function UserEntryForm() {
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
   const handleSubmit = () => {
-    // Here you would typically handle the submission logic
     setIsSubmitted(true);
   };
+
   const handleValidation = () => {
-    // Hardcode the valid empId for now
     if (empId === "1234") {
       setIsValidId(true);
     } else {
       setIsValidId(false);
     }
   };
+
   return (
     <div className="whitecontainer">
+      <Navbar />
       <div className="logoname">
-        <img src={img1} alt="Contour Software Logo" className="logo" />
+          <img src={img1} alt="Contour Software Logo" className="logo" style={{ marginTop: '-35px' }} />
+
       </div>
       <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-40 justify-center">
         <div className="flex flex-row items-center justify-center w-fit gap-5">
