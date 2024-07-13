@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Button } from "@material-tailwind/react";
 
 function ValidIcon() {
@@ -34,7 +34,7 @@ function InvalidIcon() {
     </svg>
   );
 }
-function useAutoDismissAlert(duration = 5000) {
+function useAutoDismissAlert(duration = 3000) {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function useAutoDismissAlert(duration = 5000) {
   return [show, setShow];
 }
 export function ValidAlert() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useAutoDismissAlert();
   return (
 
     <>
@@ -64,7 +64,7 @@ export function ValidAlert() {
 }
 
 export function InvalidAlert() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useAutoDismissAlert();
   return (
 
     <>

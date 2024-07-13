@@ -1,17 +1,12 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
-import img1 from "../../assets/contour_whitebg.jpg";
+import img1 from "../../assets/logo.png";
 
 const Navbar = () => {
   return (
-    <div
-      className="flex items-center justify-between p-4 shadow-md"
-      style={{
-        background: "linear-gradient(90deg, #0a5282, #5c6465)",
-      }}
-    >
+    <div className="flex items-center justify-between p-4 bg-[#0a5282] shadow-md">
       <div className="flex items-center">
-        <img src={img1} alt="Contour Logo" className="h-10 w-60" />
+        <img src={img1} alt="Contour Logo" className="h-10 w-10" />
       </div>
       <div className="flex items-center space-x-4">
         <Button color="light-blue" variant="text">

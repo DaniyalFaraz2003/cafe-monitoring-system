@@ -1,0 +1,12 @@
+.header{
+    display: flex;
+    align-items: center;
+}
+.logoimg{
+    width: 140px;
+}
+.navbarreport{
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: 25px;
+}
