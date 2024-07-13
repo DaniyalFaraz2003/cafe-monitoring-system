@@ -33,12 +33,18 @@ function UserEntryForm() {
     // <div className="logoname">
     //   <img src={img1} alt="Contour Software Logo" className="logo" />
     // </div>
-    <div>
+    <div className="w-full h-full p-10">
       <DashboardNavbar />
+      <div className="w-full basis-3/5 flex flex-col">
+          <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
+            Daily Users Entry
+          </h2>
+          <p className="text-xl font-bold text-center">City: Islamabad</p>
+        </div>
       <div className="form-container">
         {/* <InnerNavbar /> */}
         <div className="inner-container">
-          <div class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border">
+          <div class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 h-64 rounded-xl bg-clip-border">
             <div class="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-[#293a72] from-gray-900 to-gray-800 bg-clip-border shadow-gray-900/20">
               <h3 class="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-white">
                 Insert Employee Id
