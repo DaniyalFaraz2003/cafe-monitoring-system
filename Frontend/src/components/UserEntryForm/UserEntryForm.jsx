@@ -3,7 +3,6 @@ import { Input, Button } from "@material-tailwind/react";
 import img1 from "../../assets/logo.png";
 import userImg from "../../assets/avatar.png";
 import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
-import { useState } from "react";
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import InnerNavbar from "../InnerNavbar/InnerNavbar";
