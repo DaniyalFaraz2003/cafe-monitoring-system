@@ -16,23 +16,7 @@ function DashboardNavbar() {
           <img src={logo} alt="contour software logo" className="w-20" />
         </a>
         <div class="hidden lg:block">
-          <ul class="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-            <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-              <Link
-                to="/"
-                class="flex items-center transition-colors hover:text-blue-500"
-              >
-                Home
-              </Link>
-            </li>
-            <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-              <Link
-                to="/Login"
-                class="flex items-center transition-colors hover:text-blue-500"
-              >
-                Login
-              </Link>
-            </li>
+          <ul class="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row items-center lg:gap-6">
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
               <Link
                 to="/UserEntryForm"
