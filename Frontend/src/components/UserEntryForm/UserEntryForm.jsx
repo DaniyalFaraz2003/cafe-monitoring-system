@@ -6,6 +6,8 @@ import { Button } from "@material-tailwind/react";
 import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
 import MealcatagSelectForm from "../MealCatagorySelectionForm/MealcatagSelectForm";
 import { useState } from "react";
+import { DialogComponent } from "./FormComponents/Dialog";
+
 import userImg from "../../assets/avatar.png";
 function UserEntryForm() {
   const [empId, setEmpId] = useState("");
@@ -19,8 +21,10 @@ function UserEntryForm() {
     // Hardcode the valid empId for now
     if (empId === "1234") {
       setIsValidId(true);
+      return true;
     } else {
       setIsValidId(false);
+      return false;
     }
   };
   return (
@@ -48,48 +52,10 @@ function UserEntryForm() {
         </div>
 
         <div>
-          <Button color="blue" onClick={handleValidation}>
-            Enter
-          </Button>
+          <DialogComponent validation={handleValidation} submit={handleSubmit} />
         </div>
       </div>
-      {isValidId === true && (
-        <div className="flex justify-center items-center mt-5">
-          <div className="border-2 border-gray-300 p-5 bg-white rounded-lg shadow-md">
-            <div className="flex items-center mb-5">
-              <img
-                src={userImg}
-                alt="User"
-                className="w-16 h-16 rounded-full mr-5"
-              />
-              <div>
-                <h2 className="text-2xl font-bold text-green-600">Success!</h2>
-                <p className="text-gray-600">Employee ID is valid.</p>
-              </div>
-            </div>
-            <div className="mb-5">
-              <p>
-                <strong>Name:</strong> John Doe
-              </p>
-              <p>
-                <strong>Position:</strong> Software Developer
-              </p>
-              <p>
-                <strong>Department:</strong> IT
-              </p>
-            </div>
-            <MealcatagSelectForm />
-            <button
-              onClick={handleSubmit}
-              className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition-colors"
-            >
-              Submit Preferences
-            </button>
-          </div>
-
-          {isSubmitted && <ValidAlert />}
-        </div>
-      )}
+      {isValidId && isSubmitted && <ValidAlert />}
       {isValidId === false && <InvalidAlert />}
     </div>
   );
