@@ -5,11 +5,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import { Table } from "./ReportElements/Table";
 import { Button } from "@material-tailwind/react";
-import ReportDashboardNavbar from "../ReportDashboardNavbar/ReportDashboardNavbar";
+import ReportNavbar from "../ReportNavbar copy/ReportNavbar";
 const ReportGeneration = () => {
   return (
     <div className="w-full h-full p-10">
-<ReportDashboardNavbar/>
+      <ReportNavbar />
       <nav className="w-full flex flex-row items-center justify-center">
         {/* <img src={logo} alt="" className="h-[15%] w-[15%] basis-1/5" /> */}
         <div className="w-full basis-3/5 flex flex-col">

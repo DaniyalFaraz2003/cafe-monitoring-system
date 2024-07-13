@@ -10,14 +10,14 @@ import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import ReportDashboardNavbar from "../ReportDashboardNavbar/ReportDashboardNavbar";
+import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 const Dashboard = () => {
   const [timeFrame, setTimeFrame] = useState("daily");
 
   return (
     <div className="w-full h-full p-10">
-      <ReportDashboardNavbar/>
+      <DashboardNavbar/>
       <nav className="w-full flex flex-row items-center justify-center">
         {/* <img src={logo} alt="" className="h-[15%] w-[15%] basis-1/5" /> */}
         <div className="w-full basis-3/5 flex flex-col">
