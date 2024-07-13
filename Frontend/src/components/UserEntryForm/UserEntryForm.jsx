@@ -8,6 +8,7 @@ import { useState } from "react";
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import InnerNavbar from "../InnerNavbar/InnerNavbar";
+import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 function UserEntryForm() {
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
@@ -28,12 +29,14 @@ function UserEntryForm() {
     }
   };
   return (
-    <div className="bluecontainer">
-      <div className="logoname">
-        <img src={img1} alt="Contour Software Logo" className="logo" />
-      </div>
+    // <div className="bluecontainer">
+    // <div className="logoname">
+    //   <img src={img1} alt="Contour Software Logo" className="logo" />
+    // </div>
+    <div>
+      <DashboardNavbar />
       <div className="form-container">
-        <InnerNavbar />
+        {/* <InnerNavbar /> */}
         <div className="inner-container">
           <div class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border">
             <div class="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-[#293a72] from-gray-900 to-gray-800 bg-clip-border shadow-gray-900/20">
@@ -54,24 +57,19 @@ function UserEntryForm() {
                 </label>
               </div>
             </div>
-            <div class="p-6 pt-0">
-              {/* <button
-                class="block w-full select-none rounded-lg bg-[#293a72] from-gray-900 to-gray-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button"
+
+            <div>
+              <DialogComponent
                 validation={handleValidation}
                 submit={handleSubmit}
-              >
-                Enter
-              </button> */}
-              <div>
-          <DialogComponent validation={handleValidation} submit={handleSubmit} />
-        </div>
+              />
             </div>
           </div>
         </div>
+        {/* </div> */}
+        {isValidId && isSubmitted && <ValidAlert />}
+        {isValidId === false && <InvalidAlert />}
       </div>
-      {isValidId && isSubmitted && <ValidAlert />}
-      {isValidId === false && <InvalidAlert />}
     </div>
 
     // <div className="whitecontainer">
@@ -97,9 +95,9 @@ function UserEntryForm() {
     //       />
     //     </div>
 
-        // <div>
-        //   <DialogComponent validation={handleValidation} submit={handleSubmit} />
-        // </div>
+    // <div>
+    //   <DialogComponent validation={handleValidation} submit={handleSubmit} />
+    // </div>
     //   </div>
     //   {isValidId && isSubmitted && <ValidAlert />}
     //   {isValidId === false && <InvalidAlert />}

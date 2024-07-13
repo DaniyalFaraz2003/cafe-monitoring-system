@@ -2,6 +2,9 @@ import React from "react";
 import "./DashboardNavbar.css";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
+import { IconButton } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 function DashboardNavbar() {
   return (
     <nav class="block w-full max-w-screen-xl px-6 py-3 mx-auto text-white bg-white border shadow-md rounded-xl border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200">
@@ -16,7 +19,7 @@ function DashboardNavbar() {
           <ul class="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
               <Link
-                to='/'
+                to="/"
                 class="flex items-center transition-colors hover:text-blue-500"
               >
                 Home
@@ -24,7 +27,7 @@ function DashboardNavbar() {
             </li>
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
               <Link
-                to='/Login'
+                to="/Login"
                 class="flex items-center transition-colors hover:text-blue-500"
               >
                 Login
@@ -32,7 +35,7 @@ function DashboardNavbar() {
             </li>
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
               <Link
-                to='/UserEntryForm'
+                to="/UserEntryForm"
                 class="flex items-center transition-colors hover:text-blue-500"
               >
                 User Entry
@@ -40,11 +43,30 @@ function DashboardNavbar() {
             </li>
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
               <Link
-                to='/Report'
+                to="/Dashboard"
+                class="flex items-center transition-colors hover:text-blue-500"
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+              <Link
+                to="/Report"
                 class="flex items-center transition-colors hover:text-blue-500"
               >
                 Report
               </Link>
+            </li>
+            <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+              <Button
+                className="flex items-center gap-2 bg-[#0a5282]"
+                size="sm"
+              >
+                LOGOUT
+                <IconButton aria-label="logout">
+                  <LogoutIcon />
+                </IconButton>
+              </Button>
             </li>
           </ul>
         </div>

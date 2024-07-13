@@ -26,12 +26,7 @@ const Dashboard = () => {
           </h2>
           <p className="text-xl font-bold text-center">City: Islamabad</p>
         </div>
-        <Button className="flex items-center gap-2 bg-[#0a5282]" size="sm">
-          LogOut
-          <IconButton aria-label="logout">
-            <LogoutIcon />
-          </IconButton>
-        </Button>
+        
       </nav>
       <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-10">
         <div className="flex flex-col items-center justify-between">

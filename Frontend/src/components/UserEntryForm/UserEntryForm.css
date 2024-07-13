@@ -2,9 +2,10 @@
   background-color: #eeeef8;
   width: 93%;
   height: 73%;
-  margin: 170px auto;
+  margin: 20px auto;
   font-family: "Bona Nova SC", serif;
   align-items: right;
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
+  height: 400px;
   
 }
