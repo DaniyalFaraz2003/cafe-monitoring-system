@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { ValidAlert, InvalidAlert} from "../AlertComponent/AlertComponent";
 import { useState } from "react";
+=======
+import React, { useState } from "react";
+import { Input, Button } from "@material-tailwind/react";
+import img1 from "../../assets/logo.png";
+import userImg from "../../assets/avatar.png";
+import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
+>>>>>>> 438a4b526e0c936725a1c0097012b6a3327f94fc
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +21,7 @@ function UserEntryForm() {
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+<<<<<<< HEAD
   const searchResult = useSelector((state) => state);
   console.log(searchResult);
   const dispatch = useDispatch();
@@ -30,6 +39,19 @@ function UserEntryForm() {
     if (isValid) {
       // Dispatch searchEmployee action with empId if valid
       dispatch(searchEmployee(empId));
+=======
+
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+  };
+
+  const handleValidation = () => {
+    // Hardcode the valid empId for now
+    setIsSubmitted(false);
+    if (empId === "1234") {
+      setIsValidId(true);
+      return true;
+>>>>>>> 438a4b526e0c936725a1c0097012b6a3327f94fc
     } else {
       // Dispatch an action to update the store with invalid input state
       // This requires you to have an action and reducer logic to handle invalid input
@@ -50,6 +72,7 @@ function UserEntryForm() {
     }
   };
 
+<<<<<<< HEAD
 
 
 
@@ -67,10 +90,24 @@ function UserEntryForm() {
   // };
   return (
     <div>
+=======
+  return (
+    // <div className="bluecontainer">
+    // <div className="logoname">
+    //   <img src={img1} alt="Contour Software Logo" className="logo" />
+    // </div>
+    <div className="w-full h-full p-10">
+>>>>>>> 438a4b526e0c936725a1c0097012b6a3327f94fc
       <DashboardNavbar />
+      <div className="w-full basis-3/5 flex flex-col">
+          <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
+            Daily Users Entry
+          </h2>
+          <p className="text-xl font-bold text-center">City: Islamabad</p>
+        </div>
       <div className="form-container">
         <div className="inner-container">
-          <div class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border">
+          <div class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 h-64 rounded-xl bg-clip-border">
             <div class="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-[#293a72] from-gray-900 to-gray-800 bg-clip-border shadow-gray-900/20">
               <h3 class="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-white">
                 Insert Employee Id
