@@ -40,7 +40,7 @@ function UserEntryForm() {
         <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
           Daily Users Entry
         </h2>
-        <p className="text-xl font-bold text-center">City: Islamabad</p>
+        <p className="text-xl font-bold text-center">City: Karachi</p>
       </div>
       <div className="form-container">
         <div className="inner-container">
