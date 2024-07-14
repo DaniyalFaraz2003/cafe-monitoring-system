@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import bstReducer from './bstReducer'
+import bstReducer from './avltreeReducer'
 
 export default configureStore({
   reducer: {

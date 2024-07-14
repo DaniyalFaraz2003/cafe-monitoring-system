@@ -1,3 +1,5 @@
+import { circularProgressClasses } from "@mui/material";
+
 const data = [
   {
     id: 1,
@@ -5,6 +7,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "12:30:00",
     meal_date: "2024-01-01",
+    city: "Islamabad",
   },
   {
     id: 2,
@@ -12,6 +15,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "13:00:00",
     meal_date: "2024-01-02",
+    city: "Islamabad",
   },
   {
     id: 3,
@@ -19,6 +23,7 @@ const data = [
     meal_pref: "Diet",
     meal_time: "12:45:00",
     meal_date: "2024-01-03",
+    city: "Islamabad",
   },
   {
     id: 4,
@@ -26,6 +31,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "13:15:00",
     meal_date: "2024-01-04",
+    city: "Islamabad",
   },
   {
     id: 5,
@@ -33,6 +39,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "12:50:00",
     meal_date: "2024-01-05",
+    city: "Islamabad",
   },
   {
     id: 6,
@@ -40,6 +47,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "13:10:00",
     meal_date: "2024-02-01",
+    city: "Islamabad",
   },
   {
     id: 7,
@@ -47,6 +55,7 @@ const data = [
     meal_pref: "Diet",
     meal_time: "12:35:00",
     meal_date: "2024-02-02",
+    city: "Islamabad",
   },
   {
     id: 8,
@@ -54,6 +63,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "13:25:00",
     meal_date: "2024-02-03",
+    city: "Islamabad",
   },
   {
     id: 24,
@@ -61,6 +71,7 @@ const data = [
     meal_pref: "Diet",
     meal_time: "13:25:00",
     meal_date: "2024-05-04",
+    city: "Islamabad",
   },
   {
     id: 25,
@@ -68,6 +79,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "12:40:00",
     meal_date: "2024-05-05",
+    city: "Islamabad",
   },
   {
     id: 26,
@@ -75,6 +87,7 @@ const data = [
     meal_pref: "Normal",
     meal_time: "13:20:00",
     meal_date: "2024-06-01",
+    city: "Islamabad",
   },
   {
     id: 27,
@@ -82,6 +95,7 @@ const data = [
     meal_pref: "Diet",
     meal_time: "12:50:00",
     meal_date: "2024-06-02",
+    city: "Islamabad",
   }
 ];
 

@@ -4,7 +4,7 @@ import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import { search } from '../../redux/bstReducer'
+import { search } from '../../redux/avltreeReducer'
 
 
 function UserEntryForm() {
@@ -16,8 +16,8 @@ function UserEntryForm() {
   const dispatch = useDispatch();
 
   const handleValidation = () => {
-    // Hardcode the valid empId for now
     setIsSubmitted(false);
+    // dispatching the search action search takes the employee id as a parameter
     const result = dispatch(search(empId)).payload;
     if (result !== null) {
       setData(result);

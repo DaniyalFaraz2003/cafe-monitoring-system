@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import BST from '../DataStructures/BST'
+import AVLTree from '../DataStructures/AVLTree'
 
 export const counterSlice = createSlice({
-  name: 'bst',
+  name: 'avltree',
   initialState: {
-    value: new BST(),
+    value: new AVLTree(),
   },
   reducers: {
     insert: (state, action) => { // insert reducer is working perfectly fine

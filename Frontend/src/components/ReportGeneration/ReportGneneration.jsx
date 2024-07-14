@@ -8,11 +8,6 @@ import { useSelector } from "react-redux";
 const ReportGeneration = () => {
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(setData(data));
-  // }, [dispatch]);
-  // const bstData = useSelector((state) => state.bstslice);
-  // console.log(bstData);
   return (
     <div className="w-full h-full p-10">
       <DashboardNavbar />
