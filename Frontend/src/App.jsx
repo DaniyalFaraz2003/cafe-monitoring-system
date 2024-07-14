@@ -7,16 +7,17 @@ import UserEntryForm from './components/UserEntryForm/UserEntryForm'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { insert, search } from './redux/bstReducer'
-import { insertEmployee } from './redux/actions.js'
 import data from './Data'
 function App() {
-  const dispatch = useDispatch();
+  // this is basically to build the bst at app startup. do not remove these lines. they are working perfectly ok.
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    data.forEach((item) => {
-      dispatch(insert(item))
-    })
-  }, [])
+  // useEffect(() => {
+  //   data.forEach((item) => {
+  //     dispatch(insert(item))
+  //   })
+  // }, [])
+
 
   return (
     <Router>

@@ -8,11 +8,10 @@ export const counterSlice = createSlice({
     value: new BST(),
   },
   reducers: {
-    insert: (state, action) => {
-      console.log("here");
+    insert: (state, action) => { // insert reducer is working perfectly fine
       state.value.insert(action.payload)
     },
-    search: (state, action) => {
+    search: (state, action) => { // currently under development
       const result = state.value.search(action.payload);
       return {...state, result: result};
     },
