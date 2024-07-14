@@ -11,10 +11,8 @@ export const counterSlice = createSlice({
       state.value.insert(action.payload)
     },
     search: (state, action) => { // currently under development
-      console.log(parseInt(action.payload));
       const result = state.value.search(parseInt(action.payload));
-      console.log(result);
-      return { ...state, result: result };
+      action.payload = result;
     },
   },
 })

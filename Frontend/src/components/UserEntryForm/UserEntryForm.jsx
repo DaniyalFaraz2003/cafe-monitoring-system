@@ -20,8 +20,8 @@ function UserEntryForm() {
   const handleValidation = () => {
     // Hardcode the valid empId for now
     setIsSubmitted(false);
-    const result = dispatch(search(empId));
-    if (empId === "1234") {
+    const result = dispatch(search(empId)).payload;
+    if (result !== null) {
       setIsValidId(true);
       return true;
     } else {
