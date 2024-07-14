@@ -5,7 +5,7 @@ import userImg from "../../assets/avatar.png";
 import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import { search } from '../../redux/bstReducer'
 
