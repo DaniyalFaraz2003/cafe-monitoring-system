@@ -5,7 +5,10 @@ const employees = [
         designation: "Software Engineer",
         department: "Development",
         city: "Islamabad",
-        age: 23
+        age: 23,
+        mealtype:"Normal",
+        mealtime:"12:30:00 pm",
+        mealdate:"2022-10-10"
     },
     {
         id: 2,
@@ -13,7 +16,11 @@ const employees = [
         designation: "Project Manager",
         department: "Management",
         city: "Karachi",
-        age: 24
+        age: 24,
+        mealtype:"Normal",
+        mealtime:"12:30:00 pm",
+        mealdate:"2022-08-10"
+
     },
     {
         id: 3,
@@ -21,7 +28,11 @@ const employees = [
         designation: "UX Designer",
         department: "Design",
         city: "Islamabad",
-        age: 42
+        age: 42,
+        mealtype:"Normal",
+        mealtime:"02:30:00 pm",
+        mealdate:"2022-10-10"
+
     },
     {
         id: 4,
@@ -29,7 +40,11 @@ const employees = [
         designation: "Quality Assurance",
         department: "Testing",
         city: "Karachi",
-        age: 24
+        age: 24,
+        mealtype:"Diet",
+        mealtime:"12:40:00 pm",
+        mealdate:"2022-10-20"
+
     },
     {
         id: 5,
@@ -37,7 +52,11 @@ const employees = [
         designation: "Data Analyst",
         department: "Analytics",
         city: "Lahore",
-        age: 48
+        age: 48,
+        mealtype:"Diet",
+        mealtime:"01:30:00 pm",
+        mealdate:"2022-11-10"
+
     }
 ];
 
