@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Profile = () => {
+const Profile = ({ data }) => {
     return (
         <div className="p-5">
             <div className="p-8 bg-white shadow mt-5 flex items-center border-b-2">
@@ -13,11 +13,11 @@ const Profile = () => {
                 </div>
                 <div className="ml-8">
                     <h1 className="text-3xl font-medium text-gray-700">
-                        Jessica Jones, <span className="font-light text-gray-500">27</span>
+                        {data.name}, <span className="font-light text-gray-500">{data.age}</span>
                     </h1>
-                    <p className="font-light text-gray-600 mb-5">Bucharest, Romania</p>
-                    <p className="text-gray-500">Solution Manager - Creative Tim Officer</p>
-                    <p className="text-gray-500">University of Computer Science</p>
+                    <p className="font-light text-gray-600 mb-5">Pakistan, {data.city}</p>
+                    <p className="text-gray-500">{data.designation} - {data.department}</p>
+                    <p className="text-gray-500">Contour Software</p>
                 </div>
             </div>
         </div>

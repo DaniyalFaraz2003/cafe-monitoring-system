@@ -11,6 +11,7 @@ function UserEntryForm() {
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [data, setData] = useState(null)
 
   const dispatch = useDispatch();
 
@@ -19,6 +20,7 @@ function UserEntryForm() {
     setIsSubmitted(false);
     const result = dispatch(search(empId)).payload;
     if (result !== null) {
+      setData(result);
       setIsValidId(true);
       return true;
     } else {
@@ -64,6 +66,7 @@ function UserEntryForm() {
 
             <div>
               <DialogComponent
+                data={data}
                 validation={handleValidation}
                 submit={handleSubmit}
               />

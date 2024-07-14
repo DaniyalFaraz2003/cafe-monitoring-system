@@ -11,6 +11,7 @@ export const counterSlice = createSlice({
       state.value.insert(action.payload)
     },
     search: (state, action) => { // currently under development
+      //state.value.search means that we are calling the search method of the BST class
       const result = state.value.search(parseInt(action.payload));
       action.payload = result;
     },
