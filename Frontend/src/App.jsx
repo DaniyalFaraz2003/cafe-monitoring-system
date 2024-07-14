@@ -10,13 +10,13 @@ import { insert, search } from './redux/bstReducer'
 import data from './Data'
 function App() {
   // this is basically to build the bst at app startup. do not remove these lines. they are working perfectly ok.
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   data.forEach((item) => {
-  //     dispatch(insert(item))
-  //   })
-  // }, [])
+  useEffect(() => {
+    data.forEach((item) => {
+      dispatch(insert(item))
+    })
+  }, [])
 
 
   return (
