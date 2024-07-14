@@ -14,6 +14,7 @@ function UserEntryForm() {
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [data, setData] = useState(null)
 
   const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ function UserEntryForm() {
     setIsSubmitted(false);
     const result = dispatch(search(empId)).payload;
     if (result !== null) {
+      setData(result);
       setIsValidId(true);
       return true;
     } else {
@@ -35,10 +37,6 @@ function UserEntryForm() {
   };
 
   return (
-    // <div className="bluecontainer">
-    // <div className="logoname">
-    //   <img src={img1} alt="Contour Software Logo" className="logo" />
-    // </div>
     <div className="w-full h-full p-10">
       <DashboardNavbar />
       <div className="w-full basis-3/5 flex flex-col">
@@ -71,6 +69,7 @@ function UserEntryForm() {
 
             <div>
               <DialogComponent
+                data={data}
                 validation={handleValidation}
                 submit={handleSubmit}
               />

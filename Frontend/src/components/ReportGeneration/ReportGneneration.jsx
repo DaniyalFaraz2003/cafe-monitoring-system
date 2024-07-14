@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Table } from "./ReportElements/Table";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import data from "../../Data";
+import data from "../../data/mealData";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 const ReportGeneration = () => {

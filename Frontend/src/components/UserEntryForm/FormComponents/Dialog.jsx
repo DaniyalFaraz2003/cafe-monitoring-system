@@ -11,7 +11,7 @@ import {
 import Profile from "./Profile";
 import CounterInput from "./Counter";
 
-export function DialogComponent({ validation, submit }) {
+export function DialogComponent({ validation, submit, data }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
 
@@ -30,7 +30,7 @@ export function DialogComponent({ validation, submit }) {
             >
                 <Card className="mx-auto flex max-w-[50rem] justify-center bg-gray-50 rounded-lg">
                     <CardBody className="flex flex-col gap-4">
-                        <Profile />
+                        <Profile data={data} />
                         <div className="flex w-full items-center gap-5 mt-0 px-32 justify-between">
                             <CounterInput />
                             <div className="flex flex-col">
