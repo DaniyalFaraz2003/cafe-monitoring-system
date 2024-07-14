@@ -18,7 +18,6 @@ function UserEntryForm() {
     // Hardcode the valid empId for now
     setIsSubmitted(false);
     const result = dispatch(search(empId));
-    console.log(result);
     if (empId === "1234") {
       setIsValidId(true);
       return true;
