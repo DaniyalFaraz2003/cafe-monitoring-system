@@ -1,42 +1,74 @@
-import React from "react";
-import img1 from "../../assets/logo.png";
-import { Input } from "@material-tailwind/react";
-import { Select, Option } from "@material-tailwind/react";
-import { Button } from "@material-tailwind/react";
-import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
+import React, { useEffect } from "react";
+import { ValidAlert, InvalidAlert} from "../AlertComponent/AlertComponent";
 import { useState } from "react";
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
-import InnerNavbar from "../InnerNavbar/InnerNavbar";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
+import { searchEmployee } from "../../redux/actions";
+
+
+
 function UserEntryForm() {
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const handleSubmit = () => {
-    // Here you would typically handle the submission logic
-    setIsSubmitted(true);
-  };
-  const handleValidation = () => {
-    // Hardcode the valid empId for now
-    setIsSubmitted(false);
-    if (empId === "1234") {
-      setIsValidId(true);
-      return true;
+  const searchResult = useSelector((state) => state);
+  console.log(searchResult);
+  const dispatch = useDispatch();
+
+
+  function isValidEmpId(empId) {
+    // Example validation: empId should not be empty and must be a certain length
+    return empId.trim() !== "" && empId.length === 10;
+  }
+  function handleValidation() {
+    const isValid = isValidEmpId(empId);
+    setIsValidId(isValid);
+    setIsSubmitted(true); // Assuming you want to mark the form as submitted here
+  
+    if (isValid) {
+      // Dispatch searchEmployee action with empId if valid
+      dispatch(searchEmployee(empId));
     } else {
-      setIsValidId(false);
-      return false;
+      // Dispatch an action to update the store with invalid input state
+      // This requires you to have an action and reducer logic to handle invalid input
+      dispatch(updateSearchResultInvalid(empId));
+    }
+  }
+
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+    const valid = searchResult !== null;
+    setIsValidId(valid);
+
+    if (valid) {
+      console.log("valid")
+    } else {
+      console.log("invalid")
+
     }
   };
+
+
+
+
+ 
+  // const handleValidation = () => {
+  //   // Hardcode the valid empId for now
+  //   setIsSubmitted(false);
+  //   if (empId === "1234") {
+  //     setIsValidId(true);
+  //     return true;
+  //   } else {
+  //     setIsValidId(false);
+  //     return false;
+  //   }
+  // };
   return (
-    // <div className="bluecontainer">
-    // <div className="logoname">
-    //   <img src={img1} alt="Contour Software Logo" className="logo" />
-    // </div>
     <div>
       <DashboardNavbar />
       <div className="form-container">
-        {/* <InnerNavbar /> */}
         <div className="inner-container">
           <div class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border">
             <div class="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-[#293a72] from-gray-900 to-gray-800 bg-clip-border shadow-gray-900/20">
@@ -66,42 +98,10 @@ function UserEntryForm() {
             </div>
           </div>
         </div>
-        {/* </div> */}
         {isValidId && isSubmitted && <ValidAlert />}
         {isValidId === false && <InvalidAlert />}
       </div>
     </div>
-
-    // <div className="whitecontainer">
-    //   <div className="logoname">
-    //     <img src={img1} alt="Contour Software Logo" className="logo" />
-    //   </div>
-    //   <div className="w-full flex p-5 flex-row gap-5 bg-[#0a5282] rounded-lg mt-40 justify-center">
-    //     <div className="flex flex-row items-center justify-center w-fit gap-5">
-    //       <label
-    //         htmlFor="idInput"
-    //         className="text-white font-bold w-full text-xl"
-    //       >
-    //         Enter Employee Id:{" "}
-    //       </label>
-    //       <Input
-    //         color="gray"
-    //         name="idInput"
-    //         label="Emp ID"
-    //         style={{ fontWeight: 800 }}
-    //         className="empinp bg-white"
-    // value={empId}
-    // onChange={(e) => setEmpId(e.target.value)}
-    //       />
-    //     </div>
-
-    // <div>
-    //   <DialogComponent validation={handleValidation} submit={handleSubmit} />
-    // </div>
-    //   </div>
-    //   {isValidId && isSubmitted && <ValidAlert />}
-    //   {isValidId === false && <InvalidAlert />}
-    // </div>
   );
 }
 

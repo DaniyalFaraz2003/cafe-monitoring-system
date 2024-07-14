@@ -1,12 +1,23 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import LandingPage from './components/LandingPage/LandingPage'
 import Login from './components/Login/Login'
 import Dashboard from './components/Dashboard/Dashboard'
 import ReportGneneration from './components/ReportGeneration/ReportGneneration'
 import UserEntryForm from './components/UserEntryForm/UserEntryForm'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
+import {insertEmployee} from './redux/actions.js'
+import data from './Data'
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    data.forEach(employee => {
+      dispatch(insertEmployee(employee));
+    });
+  }, [dispatch]);
+
+
   return (
       <Router>
       <Routes>
