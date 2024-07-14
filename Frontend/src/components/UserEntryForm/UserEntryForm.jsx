@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import { search } from '../../redux/bstReducer'
 
@@ -17,8 +17,8 @@ function UserEntryForm() {
   const handleValidation = () => {
     // Hardcode the valid empId for now
     setIsSubmitted(false);
-    const result = dispatch(search(empId));
-    if (empId === "1234") {
+    const result = dispatch(search(empId)).payload;
+    if (result !== null) {
       setIsValidId(true);
       return true;
     } else {
