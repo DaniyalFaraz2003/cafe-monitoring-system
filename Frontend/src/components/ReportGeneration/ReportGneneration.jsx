@@ -25,7 +25,7 @@ const ReportGeneration = () => {
         </div>
       </nav>
       <div className="mt-10">
-        <Table data={bstData} />
+        <Table data={data} />
       </div>
     </div>
   );
