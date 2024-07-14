@@ -122,7 +122,7 @@ const TABLE_ROWS = [
         id: 26,
         EmpName: "Umm e Kulsoom",
         meal_pref: "Normal",
-        meal_time: "13:20:00",
+        meal_time: "00:20:00",
         meal_date: "2024-06-01",
         city: "Islamabad",
     },
@@ -130,11 +130,48 @@ const TABLE_ROWS = [
         id: 27,
         EmpName: "Daniyal",
         meal_pref: "Diet",
-        meal_time: "12:50:00",
+        meal_time: "1:50:00",
         meal_date: "2024-06-02",
         city: "Islamabad",
     }
 ];
+
+function formatDate(dateString) {
+    const months = [
+        "January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${day} ${month} ${year}`;
+}
+
+function convertTime(time) {
+    let newTime = null;
+    let [hour, minute, second] = time.split(":")
+    hour = parseInt(hour);
+    if (hour === 0) {
+        hour = 12;
+        newTime = "" + hour + ":" + minute + " AM";
+    }
+    else if (hour > 12) {
+        hour -= 12;
+        newTime = "" + hour + ":" + minute + " PM"
+    }
+    else if (hour === 12) {
+        newTime = "" + hour + ":" + minute + " PM"
+    }
+    else {
+        newTime = "" + hour + ":" + minute + " AM"
+    }
+    return newTime;
+}
+
+
 
 export function Table() {
     return (
@@ -253,7 +290,7 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {meal_time}
+                                                {convertTime(meal_time)}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
@@ -262,7 +299,7 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {meal_date}
+                                                {formatDate(meal_date)}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
