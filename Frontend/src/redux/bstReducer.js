@@ -1,23 +1,24 @@
-import BST from '../DataStructures/BST'; // Adjust this path
-import { insertEmployee, searchEmployee ,updateSearchResultInvalid} from './actions';
+import { createSlice } from '@reduxjs/toolkit'
+import BST from '../DataStructures/BST'
 
 
-const initialState = {
-  bst: new BST(),
-  searchResult: null
-};
+export const counterSlice = createSlice({
+  name: 'bst',
+  initialState: {
+    value: new BST(),
+  },
+  reducers: {
+    insert: (state, action) => {
+      console.log("here");
+      state.value.insert(action.payload)
+    },
+    search: (state, action) => {
+      const result = state.value.search(action.payload);
+      return {...state, result: result};
+    },
+  },
+})
 
-const bstReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case insertEmployee:
-      state.bst.insert(action.payload);
-      return { ...state };
-    case searchEmployee:
-      const result = state.bst.search(action.payload);
-      return { ...state, searchResult: result };
-    default:
-      return state;
-  }
-};
+export const { insert, search } = counterSlice.actions
 
-export default bstReducer;
+export default counterSlice.reducer

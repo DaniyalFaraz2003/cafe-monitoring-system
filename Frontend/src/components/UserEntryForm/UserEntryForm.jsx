@@ -5,10 +5,9 @@ import userImg from "../../assets/avatar.png";
 import { ValidAlert, InvalidAlert } from "../AlertComponent/AlertComponent";
 import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import { searchEmployee } from "../../redux/actions";
-
+import { updateSearchResultInvalid } from "../../redux/actions";
 
 
 function UserEntryForm() {
@@ -16,7 +15,7 @@ function UserEntryForm() {
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-
+  const dispatch = useDispatch();
 
   const handleValidation = () => {
     // Hardcode the valid empId for now
