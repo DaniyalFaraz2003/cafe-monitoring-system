@@ -1,11 +1,8 @@
-import { createStore, combineReducers } from 'redux';
-import bstReducer from './bstReducer';
+import {configureStore} from '@reduxjs/toolkit'
+import bstReducer from './bstReducer'
 
-
-const rootReducer = combineReducers({
-  bst: bstReducer
-});
-
-const store = createStore(rootReducer);
-
-export default store;
+export default configureStore({
+  reducer: {
+    bst: bstReducer,
+  }
+})
