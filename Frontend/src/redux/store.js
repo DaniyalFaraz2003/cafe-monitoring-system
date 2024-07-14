@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import bstReducer from './bstReducer';
 
+
 const rootReducer = combineReducers({
   bst: bstReducer
 });
