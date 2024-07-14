@@ -39,55 +39,101 @@ const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
 
 const TABLE_ROWS = [
     {
-        img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-        name: "Spotify",
-        amount: "$2,500",
-        date: "Wed 3:00pm",
-        status: "paid",
-        account: "visa",
-        accountNumber: "1234",
-        expiry: "06/2026",
+        id: 1,
+        EmpName: "Ali",
+        meal_pref: "Normal",
+        meal_time: "12:30:00",
+        meal_date: "2024-01-01",
+        city: "Islamabad",
     },
     {
-        img: "https://docs.material-tailwind.com/img/logos/logo-amazon.svg",
-        name: "Amazon",
-        amount: "$5,000",
-        date: "Wed 1:00pm",
-        status: "paid",
-        account: "master-card",
-        accountNumber: "1234",
-        expiry: "06/2026",
+        id: 2,
+        EmpName: "Ali",
+        meal_pref: "Normal",
+        meal_time: "13:00:00",
+        meal_date: "2024-01-02",
+        city: "Islamabad",
     },
     {
-        img: "https://docs.material-tailwind.com/img/logos/logo-pinterest.svg",
-        name: "Pinterest",
-        amount: "$3,400",
-        date: "Mon 7:40pm",
-        status: "pending",
-        account: "master-card",
-        accountNumber: "1234",
-        expiry: "06/2026",
+        id: 3,
+        EmpName: "Umm e Kulsoom",
+        meal_pref: "Diet",
+        meal_time: "12:45:00",
+        meal_date: "2024-01-03",
+        city: "Islamabad",
     },
     {
-        img: "https://docs.material-tailwind.com/img/logos/logo-google.svg",
-        name: "Google",
-        amount: "$1,000",
-        date: "Wed 5:00pm",
-        status: "paid",
-        account: "visa",
-        accountNumber: "1234",
-        expiry: "06/2026",
+        id: 4,
+        EmpName: "Daniyal",
+        meal_pref: "Normal",
+        meal_time: "13:15:00",
+        meal_date: "2024-01-04",
+        city: "Islamabad",
     },
     {
-        img: "https://docs.material-tailwind.com/img/logos/logo-netflix.svg",
-        name: "netflix",
-        amount: "$14,000",
-        date: "Wed 3:30am",
-        status: "cancelled",
-        account: "visa",
-        accountNumber: "1234",
-        expiry: "06/2026",
+        id: 5,
+        EmpName: "Ali",
+        meal_pref: "Normal",
+        meal_time: "12:50:00",
+        meal_date: "2024-01-05",
+        city: "Islamabad",
     },
+    {
+        id: 6,
+        EmpName: "Daniyal",
+        meal_pref: "Normal",
+        meal_time: "13:10:00",
+        meal_date: "2024-02-01",
+        city: "Islamabad",
+    },
+    {
+        id: 7,
+        EmpName: "Daniyal",
+        meal_pref: "Diet",
+        meal_time: "12:35:00",
+        meal_date: "2024-02-02",
+        city: "Islamabad",
+    },
+    {
+        id: 8,
+        EmpName: "Umm e Kulsoom",
+        meal_pref: "Normal",
+        meal_time: "13:25:00",
+        meal_date: "2024-02-03",
+        city: "Islamabad",
+    },
+    {
+        id: 24,
+        EmpName: "Daniyal",
+        meal_pref: "Diet",
+        meal_time: "13:25:00",
+        meal_date: "2024-05-04",
+        city: "Islamabad",
+    },
+    {
+        id: 25,
+        EmpName: "Ali",
+        meal_pref: "Normal",
+        meal_time: "12:40:00",
+        meal_date: "2024-05-05",
+        city: "Islamabad",
+    },
+    {
+        id: 26,
+        EmpName: "Umm e Kulsoom",
+        meal_pref: "Normal",
+        meal_time: "13:20:00",
+        meal_date: "2024-06-01",
+        city: "Islamabad",
+    },
+    {
+        id: 27,
+        EmpName: "Daniyal",
+        meal_pref: "Diet",
+        meal_time: "12:50:00",
+        meal_date: "2024-06-02",
+        city: "Islamabad",
+    }
 ];
 
 export function Table() {
@@ -149,14 +195,12 @@ export function Table() {
                         {TABLE_ROWS.map(
                             (
                                 {
-                                    img,
-                                    name,
-                                    amount,
-                                    date,
-                                    status,
-                                    account,
-                                    accountNumber,
-                                    expiry,
+                                    id,
+                                    EmpName,
+                                    meal_pref,
+                                    meal_time,
+                                    meal_date,
+                                    city
                                 },
                                 index,
                             ) => {
@@ -166,21 +210,15 @@ export function Table() {
                                     : "p-4 border-b border-blue-gray-50";
 
                                 return (
-                                    <tr key={name}>
+                                    <tr key={id}>
                                         <td className={classes}>
-                                            <div className="flex items-center gap-3">
-                                                <Avatar
-                                                    src={img}
-                                                    alt={name}
-                                                    size="md"
-                                                    className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-                                                />
+                                            <div className="flex items-center">
                                                 <Typography
                                                     variant="small"
                                                     color="blue-gray"
                                                     className="font-bold"
                                                 >
-                                                    {name}
+                                                    {id}
                                                 </Typography>
                                             </div>
                                         </td>
@@ -190,7 +228,32 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {amount}
+                                                {EmpName}
+                                            </Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <div className="w-max">
+                                                <Chip
+                                                    size="sm"
+                                                    variant="ghost"
+                                                    value={meal_pref}
+                                                    color={
+                                                        meal_pref === "Diet"
+                                                            ? "green"
+                                                            : meal_pref === "Normal"
+                                                                ? "blue"
+                                                                : "red"
+                                                    }
+                                                />
+                                            </div>
+                                        </td>
+                                        <td className={classes}>
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal"
+                                            >
+                                                {meal_time}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
@@ -199,64 +262,17 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {date}
+                                                {meal_date}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
-                                            <div className="w-max">
-                                                <Chip
-                                                    size="sm"
-                                                    variant="ghost"
-                                                    value={status}
-                                                    color={
-                                                        status === "paid"
-                                                            ? "green"
-                                                            : status === "pending"
-                                                                ? "amber"
-                                                                : "red"
-                                                    }
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="flex items-center gap-3">
-                                                <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
-                                                    <Avatar
-                                                        src={
-                                                            account === "visa"
-                                                                ? "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
-                                                                : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
-                                                        }
-                                                        size="sm"
-                                                        alt={account}
-                                                        variant="square"
-                                                        className="h-full w-full object-contain p-1"
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal capitalize"
-                                                    >
-                                                        {account.split("-").join(" ")} {accountNumber}
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal opacity-70"
-                                                    >
-                                                        {expiry}
-                                                    </Typography>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <Tooltip content="Edit User">
-                                                <IconButton variant="text">
-                                                    <PencilIcon className="h-4 w-4" />
-                                                </IconButton>
-                                            </Tooltip>
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal"
+                                            >
+                                                {city}
+                                            </Typography>
                                         </td>
                                     </tr>
                                 );

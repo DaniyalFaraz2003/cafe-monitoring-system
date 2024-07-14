@@ -1,4 +1,3 @@
-import { circularProgressClasses } from "@mui/material";
 
 const data = [
   {
