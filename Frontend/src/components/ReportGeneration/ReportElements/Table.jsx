@@ -79,6 +79,7 @@ function convertTime(time) {
 
 export function Table() {
     const dataTree = useSelector((state) => state.avltree.value)
+    console.log("dataTree", dataTree);
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
     const dispatch = useDispatch();
