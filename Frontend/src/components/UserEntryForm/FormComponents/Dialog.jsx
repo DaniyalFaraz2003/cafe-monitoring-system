@@ -12,6 +12,7 @@ import Profile from "./Profile";
 import CounterInput from "./Counter";
 
 export function DialogComponent({ validation, submit, data }) {
+    console.log(data)
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
 
