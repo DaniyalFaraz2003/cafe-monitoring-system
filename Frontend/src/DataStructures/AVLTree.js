@@ -74,8 +74,10 @@ class AVLTree {
     this.preorderHelper(this.root, result);
     return result;
   }
-
+// the preorder function is used to traverse the tree in the following order: root, left, right
+//its purpose is to return the data of the nodes in the tree in the order of root, left, right
   preorderHelper(node, result) {
+    // if the node is not null, push the data of the node to the result array
     if (node !== null) {
       result.push(node.data);
       this.preorderHelper(node.left, result);
@@ -119,7 +121,7 @@ class AVLTree {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
-
+//
     return node;
   }
 

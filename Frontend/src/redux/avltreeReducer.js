@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
-import AVLTree from '../DataStructures/AVLTree'
+import { createSlice } from "@reduxjs/toolkit";
+import AVLTree from "../DataStructures/AVLTree";
 
 export const counterSlice = createSlice({
-  name: 'avltree',
+  name: "avltree",
   initialState: {
     value: new AVLTree(),
     result: []
   },
   reducers: {
-    insert: (state, action) => { // insert reducer is working perfectly fine
-      state.value.insert(action.payload)
+    insert: (state, action) => {
+      state.value.insert(action.payload);
     },
-    search: (state, action) => { // currently under development
-      //state.value.search means that we are calling the search method of the BST class
+    search: (state, action) => {
       const result = state.value.search(parseInt(action.payload));
+      console.log('Search result:', result);
       action.payload = result;
     },
     traverse: (state, action) => {
@@ -25,7 +25,7 @@ export const counterSlice = createSlice({
       state.result = result;
     }
   },
-})
+});
 
 export const { insert, search, traverse, filterByPrefix } = counterSlice.actions
 

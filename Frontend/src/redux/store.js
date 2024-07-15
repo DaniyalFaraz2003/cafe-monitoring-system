@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit'
-import bstReducer from './avltreeReducer'
+import counterSlice from './avltreeReducer'
 
 export default configureStore({
   reducer: {
-    bst: bstReducer,
+    avltree: counterSlice,
   }
 })
