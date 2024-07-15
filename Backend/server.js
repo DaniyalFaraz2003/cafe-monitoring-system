@@ -9,28 +9,16 @@ const router = require("./routes/root");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(logger);
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     credentials: true,
     origin: "http://localhost:5173"
 }));
+app.use(logger);
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }))
 
 app.use("/api/v1/", router);
-
-
-app.use("/", async (req, res) => {
-    try {
-        const [records] = await db.query("SELECT * FROM employee");
-        res.json(records)
-    }
-    catch (err) {
-        console.log(err);
-    }
-})
-
 
 app.use("*", (req, res) => {
     res.status(404).send("Sorry the resource you want is not on the server");
