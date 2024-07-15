@@ -1,10 +1,12 @@
 const express = require("express")
+const { login } = require("../controllers/login")
+const { getTreeData } = require("../controllers/treeData")
 
 const router = express.Router()
 
 
-router.route("/").get((req, res) => {
-    res.send("This is cool api v1")
-})
+router.route('/login').post(login);
+router.route('/treeData/:city').get(getTreeData);
+
 
 module.exports = router

@@ -5,18 +5,8 @@ import Dashboard from './components/Dashboard/Dashboard'
 import ReportGneneration from './components/ReportGeneration/ReportGneneration'
 import UserEntryForm from './components/UserEntryForm/UserEntryForm'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { insert, search } from './redux/avltreeReducer'
-import data from './data/empData'
 function App() {
   // this is basically to build the bst at app startup. do not remove these lines. they are working perfectly ok.
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    data.forEach((item) => {
-      dispatch(insert(item))
-    })
-  }, [dispatch])
 
 
   return (
