@@ -16,7 +16,6 @@ export const avlTreeSlice = createSlice({
       const result = state.value.search(parseInt(action.payload));
       console.log('Search result:', result);
       action.payload = result;
-      // state.searchResult = result ? [result] : [];
     },
     searchRange: (state, action) => {
       const { start, end } = action.payload;

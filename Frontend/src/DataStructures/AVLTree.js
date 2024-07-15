@@ -61,12 +61,10 @@ class AVLTree {
   insertNode(node, data) {
     if (node === null) return new AVLTreeNode(data);
 
-    if (data.id < node.data.id) {
+    if (data.id <= node.data.id) {
       node.left = this.insertNode(node.left, data);
     } else if (data.id > node.data.id) {
       node.right = this.insertNode(node.right, data);
-    } else {
-      return node; // Duplicate IDs are not allowed
     }
 
     node.height = 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
@@ -86,7 +84,7 @@ class AVLTree {
     }
 
     // Right Left Case
-    if (balance < -1 && data.id < node.right.data.id) {
+    if (balance < -1 && data.id <= node.right.data.id) {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
