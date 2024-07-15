@@ -11,13 +11,11 @@ function UserEntryForm() {
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState(null);
-  console.log("data", data);
   const dispatch = useDispatch();
   const handleValidation = () => {
     setIsSubmitted(false);
     // dispatching the search action search takes the employee id as a parameter
     const result = dispatch(search(empId)).payload;
-    console.log("result:", result);
     if (result !== null) {
       setData(result);
       setIsValidId(true);

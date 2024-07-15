@@ -5,8 +5,7 @@ export const counterSlice = createSlice({
   name: "avltree",
   initialState: {
     value: new AVLTree(),
-    searchResult: [],
-    error: null,
+    result: []
   },
   reducers: {
     insert: (state, action) => {
@@ -19,15 +18,15 @@ export const counterSlice = createSlice({
     },
     traverse: (state, action) => {
       const result = state.value.preorderTraversal();
-      action.payload = result;
+      state.result = result;
     },
     filterByPrefix: (state, action) => {
       const result = state.value.prefixTraversal(action.payload);
-      action.payload = result;
+      state.result = result;
     }
   },
 });
 
-export const { insert, search, traverse, filterByPrefix} = counterSlice.actions
+export const { insert, search, traverse, filterByPrefix } = counterSlice.actions
 
 export default counterSlice.reducer
