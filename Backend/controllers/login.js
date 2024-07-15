@@ -1,6 +1,7 @@
 const db = require("../db/config")
 
 const login = async (req, res) => {
+    // the username and password are sent in the request body
     const { username, password } = req.body;
     try {
         const [records] = await db.query("SELECT * FROM admin_info WHERE user_id=? AND admin_password=?", [username, password]);
