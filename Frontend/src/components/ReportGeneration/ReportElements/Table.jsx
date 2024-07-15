@@ -19,7 +19,7 @@ import {
     Tooltip,
     Input,
 } from "@material-tailwind/react";
-import { traverse, search } from "../../../redux/avltreeReducer";
+import { traverse, filterByPrefix } from "../../../redux/avltreeReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const TABS = [
@@ -42,7 +42,7 @@ const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
 
 function formatDate(dateString) {
     const months = [
-        "January", "February", "March", "April", "May", "June", 
+        "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
@@ -78,12 +78,24 @@ function convertTime(time) {
 
 
 export function Table() {
-    const [data, setData] = useState(null);
+    const dataTree = useSelector((state) => state.bst.value)
+    const [data, setData] = useState([]);
+    const [search, setSearch] = useState("");
     const dispatch = useDispatch();
     useEffect(() => {
-        const result = dispatch(traverse()).payload;
+        const result = dataTree.preorderTraversal();
         setData(result);
-    }, [])  
+    }, [dispatch])
+
+    useEffect(() => {
+        if (search) {
+            const result = dataTree.prefixTraversal(search);
+            setData(result);
+        } else {
+            const result = dataTree.preorderTraversal();
+            setData(result);
+        }
+    }, [search, dispatch]);
 
     return (
         <Card className="h-full w-full">
@@ -111,6 +123,10 @@ export function Table() {
                             <Input
                                 label="Search"
                                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                                value={search}
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                }}
                             />
                         </div>
                         <Button className="flex items-center gap-3" size="sm">
@@ -140,7 +156,7 @@ export function Table() {
                         </tr>
                     </thead>
                     <tbody>
-                        {data && data.map(
+                        {data.map(
                             (
                                 {
                                     id,
