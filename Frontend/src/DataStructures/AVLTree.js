@@ -3,7 +3,7 @@ class AVLTreeNode {
     this.data = data;
     this.left = null;
     this.right = null;
-    this.height = 1; 
+    this.height = 1;
   }
 }
 
@@ -53,10 +53,25 @@ class AVLTree {
     return y;
   }
 
+  preorderTraversal() {
+    const result = [];
+    this.preorderHelper(this.root, result);
+    return result;
+  }
+
+  preorderHelper(node, result) {
+    if (node !== null) {
+      result.push(node.data);
+      this.preorderHelper(node.left, result);
+      this.preorderHelper(node.right, result);
+    }
+  }
+
   // Insert a node
   insert(data) {
     this.root = this.insertNode(this.root, data);
   }
+
 
   insertNode(node, data) {
     if (node === null) return new AVLTreeNode(data);

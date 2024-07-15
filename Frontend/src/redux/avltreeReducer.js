@@ -15,9 +15,13 @@ export const counterSlice = createSlice({
       const result = state.value.search(parseInt(action.payload));
       action.payload = result;
     },
+    traverse: (state, action) => {
+      const result = state.value.preorderTraversal();
+      action.payload = result;
+    }
   },
 })
 
-export const { insert, search } = counterSlice.actions
+export const { insert, search, traverse } = counterSlice.actions
 
 export default counterSlice.reducer
