@@ -5,6 +5,11 @@ const cors = require("cors");
 const db = require('./db/config')
 const bodyParser = require("body-parser");
 const router = require("./routes/root")
+const home = require("./routes/home");
+const login = require("./routes/login");
+const dashboard = require("./routes/dashboard");
+const report = require("./routes/report");
+const userentry = require("./routes/userentry");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,10 +24,15 @@ app.use(cors({
 }));
 
 app.use("/api/v1/", router);
-
+app.use("/api/v1/home", home);
+app.use("/api/v1/login", login);
+app.use("/api/v1/dashboard", dashboard);
+app.use("/api/v1/report", report);
+app.use("/api/v1/userentry", userentry);
 app.use("/", (req, res) => {
     res.status(200).send("This is daniyal at server")
 })
+
 
 app.use("*", (req, res) => {
     res.status(404).send("Sorry the resource you want is not on the server");
