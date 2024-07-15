@@ -4,12 +4,7 @@ const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 const db = require('./db/config')
 const bodyParser = require("body-parser");
-const router = require("./routes/root")
-const home = require("./routes/home");
-const login = require("./routes/login");
-const dashboard = require("./routes/dashboard");
-const report = require("./routes/report");
-const userentry = require("./routes/userentry");
+const router = require("./routes/root");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,13 +19,16 @@ app.use(cors({
 }));
 
 app.use("/api/v1/", router);
-app.use("/api/v1/home", home);
-app.use("/api/v1/login", login);
-app.use("/api/v1/dashboard", dashboard);
-app.use("/api/v1/report", report);
-app.use("/api/v1/userentry", userentry);
-app.use("/", (req, res) => {
-    res.status(200).send("This is daniyal at server")
+
+
+app.use("/", async (req, res) => {
+    try {
+        const [records] = await db.query("SELECT * FROM employee");
+        res.json(records)
+    }
+    catch (err) {
+        console.log(err);
+    }
 })
 
 
@@ -40,15 +38,11 @@ app.use("*", (req, res) => {
 
 app.use(errorHandler);
 
-// db.query("SELECT 1")
-//     .then(data => {
-//         console.log("DB connection successful");
-//         app.listen(PORT, () => {
-//             console.log(`Server running on PORT: ${PORT}`);
-//         });
-//     })
-//     .catch(err => console.log("DB connection failed. \n" + err))
-
-app.listen(PORT, () => {
-    console.log(`Server running on PORT: ${PORT}`);
-})
+db.query("SELECT 1")
+    .then(data => {
+        console.log("DB connection successful");
+        app.listen(PORT, () => {
+            console.log(`Server running on PORT: ${PORT}`);
+        });
+    })
+    .catch(err => console.log("DB connection failed. \n" + err))

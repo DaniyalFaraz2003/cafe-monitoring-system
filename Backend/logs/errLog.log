@@ -1,0 +1,3 @@
+20240715	15:57:34	d1b17430-1361-4e27-b29d-4e396a3b5b74	TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))	GET	/	undefined
+20240715	15:57:58	a7e578d6-3530-4ad8-986b-b64f347d5d47	TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))	GET	/	undefined
+20240715	15:57:58	aaac9f13-cd21-41dd-b375-5e5627d4c86b	TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))	GET	/	undefined
