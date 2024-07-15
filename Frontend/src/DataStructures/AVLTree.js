@@ -3,7 +3,7 @@ class AVLTreeNode {
     this.data = data;
     this.left = null;
     this.right = null;
-    this.height = 1; 
+    this.height = 1;
   }
 }
 
@@ -53,10 +53,27 @@ class AVLTree {
     return y;
   }
 
+  preorderTraversal() {
+    const result = [];
+    this.preorderHelper(this.root, result);
+    return result;
+  }
+// the preorder function is used to traverse the tree in the following order: root, left, right
+//its purpose is to return the data of the nodes in the tree in the order of root, left, right
+  preorderHelper(node, result) {
+    // if the node is not null, push the data of the node to the result array
+    if (node !== null) {
+      result.push(node.data);
+      this.preorderHelper(node.left, result);
+      this.preorderHelper(node.right, result);
+    }
+  }
+
   // Insert a node
   insert(data) {
     this.root = this.insertNode(this.root, data);
   }
+
 
   insertNode(node, data) {
     if (node === null) return new AVLTreeNode(data);
@@ -88,7 +105,7 @@ class AVLTree {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
-
+//
     return node;
   }
 

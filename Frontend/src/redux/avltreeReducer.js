@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import AVLTree from "../DataStructures/AVLTree";
 
-export const avlTreeSlice = createSlice({
+export const counterSlice = createSlice({
   name: "avltree",
   initialState: {
     value: new AVLTree(),
@@ -17,16 +17,13 @@ export const avlTreeSlice = createSlice({
       console.log('Search result:', result);
       action.payload = result;
     },
-    searchRange: (state, action) => {
-      const { start, end } = action.payload;
-      const results = state.value.searchRange(parseInt(start), parseInt(end));
-      state.searchResult = results ? results : [];
-    },
-    updateSearchResultInvalid: (state, action) => {
-      state.error = action.payload;
-    },
+    traverse: (state, action) => {
+      const result = state.value.preorderTraversal();
+      action.payload = result;
+    }
   },
 });
 
-export const { insert, search, searchRange, updateSearchResultInvalid } = avlTreeSlice.actions;
-export default avlTreeSlice.reducer;
+export const { insert, search, traverse } = counterSlice.actions
+
+export default counterSlice.reducer

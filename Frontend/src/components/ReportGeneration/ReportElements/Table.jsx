@@ -1,4 +1,4 @@
-import { PencilIcon } from "@heroicons/react/24/solid";
+import { useState, useEffect } from "react";
 import {
     ArrowDownTrayIcon,
     MagnifyingGlassIcon,
@@ -19,6 +19,8 @@ import {
     Tooltip,
     Input,
 } from "@material-tailwind/react";
+import { traverse, search } from "../../../redux/avltreeReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const TABS = [
     {
@@ -37,104 +39,6 @@ const TABS = [
 
 const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
 
-const TABLE_ROWS = [
-    {
-        id: 1,
-        EmpName: "Ali",
-        meal_pref: "Normal",
-        meal_time: "12:30:00",
-        meal_date: "2024-01-01",
-        city: "Islamabad",
-    },
-    {
-        id: 2,
-        EmpName: "Ali",
-        meal_pref: "Normal",
-        meal_time: "13:00:00",
-        meal_date: "2024-01-02",
-        city: "Islamabad",
-    },
-    {
-        id: 3,
-        EmpName: "Umm e Kulsoom",
-        meal_pref: "Diet",
-        meal_time: "12:45:00",
-        meal_date: "2024-01-03",
-        city: "Islamabad",
-    },
-    {
-        id: 4,
-        EmpName: "Daniyal",
-        meal_pref: "Normal",
-        meal_time: "13:15:00",
-        meal_date: "2024-01-04",
-        city: "Islamabad",
-    },
-    {
-        id: 5,
-        EmpName: "Ali",
-        meal_pref: "Normal",
-        meal_time: "12:50:00",
-        meal_date: "2024-01-05",
-        city: "Islamabad",
-    },
-    {
-        id: 6,
-        EmpName: "Daniyal",
-        meal_pref: "Normal",
-        meal_time: "13:10:00",
-        meal_date: "2024-02-01",
-        city: "Islamabad",
-    },
-    {
-        id: 7,
-        EmpName: "Daniyal",
-        meal_pref: "Diet",
-        meal_time: "12:35:00",
-        meal_date: "2024-02-02",
-        city: "Islamabad",
-    },
-    {
-        id: 8,
-        EmpName: "Umm e Kulsoom",
-        meal_pref: "Normal",
-        meal_time: "13:25:00",
-        meal_date: "2024-02-03",
-        city: "Islamabad",
-    },
-    {
-        id: 24,
-        EmpName: "Daniyal",
-        meal_pref: "Diet",
-        meal_time: "13:25:00",
-        meal_date: "2024-05-04",
-        city: "Islamabad",
-    },
-    {
-        id: 25,
-        EmpName: "Ali",
-        meal_pref: "Normal",
-        meal_time: "12:40:00",
-        meal_date: "2024-05-05",
-        city: "Islamabad",
-    },
-    {
-        id: 26,
-        EmpName: "Umm e Kulsoom",
-        meal_pref: "Normal",
-        meal_time: "00:20:00",
-        meal_date: "2024-06-01",
-        city: "Islamabad",
-    },
-    {
-        id: 27,
-        EmpName: "Daniyal",
-        meal_pref: "Diet",
-        meal_time: "1:50:00",
-        meal_date: "2024-06-02",
-        city: "Islamabad",
-    }
-];
 
 function formatDate(dateString) {
     const months = [
@@ -174,6 +78,14 @@ function convertTime(time) {
 
 
 export function Table() {
+    const [data, setData] = useState(null);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const result = dispatch(traverse()).payload;
+        console.log("result:", result);
+        setData(result);
+    }, [])  
+
     return (
         <Card className="h-full w-full">
             <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -229,19 +141,19 @@ export function Table() {
                         </tr>
                     </thead>
                     <tbody>
-                        {TABLE_ROWS.map(
+                        {data && data.map(
                             (
                                 {
                                     id,
-                                    EmpName,
-                                    meal_pref,
-                                    meal_time,
-                                    meal_date,
+                                    name,
+                                    mealtype,
+                                    mealtime,
+                                    mealdate,
                                     city
                                 },
                                 index,
                             ) => {
-                                const isLast = index === TABLE_ROWS.length - 1;
+                                const isLast = index === data.length - 1;
                                 const classes = isLast
                                     ? "p-4"
                                     : "p-4 border-b border-blue-gray-50";
@@ -265,7 +177,7 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {EmpName}
+                                                {name}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
@@ -273,11 +185,11 @@ export function Table() {
                                                 <Chip
                                                     size="sm"
                                                     variant="ghost"
-                                                    value={meal_pref}
+                                                    value={mealtype}
                                                     color={
-                                                        meal_pref === "Diet"
+                                                        mealtype === "Diet"
                                                             ? "green"
-                                                            : meal_pref === "Normal"
+                                                            : mealtype === "Normal"
                                                                 ? "blue"
                                                                 : "red"
                                                     }
@@ -290,7 +202,7 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {convertTime(meal_time)}
+                                                {convertTime(mealtime)}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
@@ -299,7 +211,7 @@ export function Table() {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {formatDate(meal_date)}
+                                                {formatDate(mealdate)}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
