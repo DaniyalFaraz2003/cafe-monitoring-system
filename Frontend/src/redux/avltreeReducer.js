@@ -20,10 +20,14 @@ export const counterSlice = createSlice({
     traverse: (state, action) => {
       const result = state.value.preorderTraversal();
       action.payload = result;
+    },
+    filterByPrefix: (state, action) => {
+      const result = state.value.prefixTraversal(action.payload);
+      action.payload = result;
     }
   },
 });
 
-export const { insert, search, traverse } = counterSlice.actions
+export const { insert, search, traverse, filterByPrefix} = counterSlice.actions
 
 export default counterSlice.reducer

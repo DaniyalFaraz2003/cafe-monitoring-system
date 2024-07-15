@@ -53,6 +53,22 @@ class AVLTree {
     return y;
   }
 
+  prefixTraversal(prefix) {
+    const result = [];
+    this.prefixTraversalHelper(prefix, this.root, result);
+    return result;
+  }
+
+  prefixTraversalHelper(prefix, node, result) {
+    if (node !== null) {
+      if (String(node.data.id).startsWith(prefix)) {
+        result.push(node.data);
+      }
+      this.prefixTraversalHelper(prefix, node.left, result);
+      this.prefixTraversalHelper(prefix, node.right, result);
+    }
+  }
+
   preorderTraversal() {
     const result = [];
     this.preorderHelper(this.root, result);

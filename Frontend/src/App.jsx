@@ -16,7 +16,7 @@ function App() {
     data.forEach((item) => {
       dispatch(insert(item))
     })
-  }, [])
+  }, [dispatch])
 
 
   return (
