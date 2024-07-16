@@ -19,22 +19,6 @@ function UserEntryForm() {
   const [mealPref, setMealPref] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => { // here the request for backend to send data will be written
-    const populateTree = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/v1/treeData/${city}`)
-        const data = response.data;
-        data.forEach((item) => {
-          dispatch(insert(item))
-        })
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    if (loggedIn)
-      populateTree();
-
-  }, [dispatch])
 
   const handleValidation = () => {
     setError(false);
