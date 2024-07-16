@@ -2,7 +2,6 @@ const db = require("../db/config")
 
 const getTreeData = async (req, res) => {
     const city = req.params['city']
-    console.log(city);
     try {
         const [result] = await db.query(`
             SELECT m.Emp_ID as id, e.Emp_Name as name, e.Designation as designation, e.Dept as department, e.City as city, e.Age as age, m.meal_pref as mealtype, m.meal_time as mealtime, m.meal_date as mealdate

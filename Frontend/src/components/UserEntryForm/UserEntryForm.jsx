@@ -4,29 +4,40 @@ import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import { search } from "../../redux/avltreeReducer";
+import { search, insert } from "../../redux/avltreeReducer";
 import _404 from "../404/404";
+import axios from "axios"
 
 function UserEntryForm() {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
+  const [error, setError] = useState(false);
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState(null);
+  const [mealPref, setMealPref] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => { // here the request for backend to send data will be written
     const populateTree = async () => {
-      
+      try {
+        const response = await axios.get(`http://localhost:5000/api/v1/treeData/${city}`)
+        const data = response.data;
+        data.forEach((item) => {
+          dispatch(insert(item))
+        })
+      } catch (error) {
+        console.log(error);
+      }
     }
-    
-    // data.forEach((item) => {
-    //   dispatch(insert(item))
-    // })
+    if (loggedIn)
+      populateTree();
+
   }, [dispatch])
 
   const handleValidation = () => {
+    setError(false);
     setIsSubmitted(false);
     // dispatching the search action search takes the employee id as a parameter
     const result = dispatch(search(empId)).payload;
@@ -39,9 +50,20 @@ function UserEntryForm() {
       return false;
     }
   };
-
-  const handleSubmit = () => {
-    setIsSubmitted(true);
+  console.log(mealPref);
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {
+        Emp_ID: empId, meal_pref: mealPref, city: city
+      })
+      if (response.data.message === "ok") {
+        setIsSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
@@ -81,12 +103,14 @@ function UserEntryForm() {
                   data={data}
                   validation={handleValidation}
                   submit={handleSubmit}
+                  setData={setMealPref}
                 />
               </div>
             </div>
           </div>
-          {isValidId && isSubmitted && <ValidAlert />}
-          {isValidId === false && <InvalidAlert />}
+          {isValidId && isSubmitted && <ValidAlert message={"Entry Added Successfully"} />}
+          {isValidId === false && <InvalidAlert message={"ID Invalid"} />}
+          {error && <InvalidAlert message={"An Error Occurred"} />}
         </div>
       </> : <_404 />}
     </div>
