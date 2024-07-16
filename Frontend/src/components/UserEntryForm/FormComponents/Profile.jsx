@@ -22,7 +22,6 @@ const Profile = ({ data }) => {
         </div>
         <div className="ml-8">
           <h1 className="text-3xl font-medium text-gray-700">
-            {console.log("profiledata", data.name)}
             {data.name},{" "}
             <span className="font-light text-gray-500">{data.age}</span>
           </h1>

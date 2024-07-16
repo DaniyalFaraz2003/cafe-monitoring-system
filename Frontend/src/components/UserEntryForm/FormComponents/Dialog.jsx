@@ -11,8 +11,7 @@ import {
 import Profile from "./Profile";
 import CounterInput from "./Counter";
 
-export function DialogComponent({ validation, submit, data }) {
-    console.log(data)
+export function DialogComponent({ validation, submit, data, setData }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
 
@@ -39,8 +38,8 @@ export function DialogComponent({ validation, submit, data }) {
                                     Meal Type:
                                 </label>
                                 <div className="flex flex-row">
-                                    <Radio name="type" label="Normal" />
-                                    <Radio name="type" label="Diet" defaultChecked />
+                                    <Radio name="type" label="Normal" onClick={() => setData("Normal")} />
+                                    <Radio name="type" label="Diet" defaultChecked onClick={() => setData("Diet")} />
                                 </div>
                             </div>
                         </div>
