@@ -105,3 +105,4 @@
 20240715	23:27:47	c82f24c0-7cbe-4218-8f2d-ed925e5020ed	POST	/api/v1/UserEntryForm	undefined
 20240715	23:28:07	078ceda1-a3ee-4bdf-8c04-00a24c29d330	GET	/api/v1/UserEntryForm	undefined
 20240715	23:28:52	ea2f09dd-df6c-4a41-8341-d90834dd7265	POST	/api/v1/login	http://localhost:5173
+20240715	23:43:24	05e6c5a0-f849-402c-a9dd-ab08c013d5a7	POST	/api/v1/login	http://localhost:5173
