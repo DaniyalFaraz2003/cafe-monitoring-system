@@ -16,22 +16,29 @@ const queries = {
     
     userToday_1: "SELECT COUNT(DISTINCT Emp_ID) AS UniqueEmployeesServed FROM meal_record WHERE city = ? and meal_date = CURRENT_DATE() - 1;",
     userWeek_1: "SELECT COUNT(DISTINCT Emp_ID) AS UniqueEmployeesServed FROM meal_record WHERE city = ? and week(meal_date) = week(now()) - 1;",
-    userMonth_1: "SELECT COUNT(DISTINCT Emp_ID) AS UniqueEmployeesServed FROM meal_record WHERE city = ? and month(meal_date) = month(current_date()) - 1;"
+    userMonth_1: "SELECT COUNT(DISTINCT Emp_ID) AS UniqueEmployeesServed FROM meal_record WHERE city = ? and month(meal_date) = month(current_date()) - 1;",
+
+    barToday: "SELECT Emp_ID, meal_time FROM meal_record WHERE city = ? and meal_date = CURRENT_DATE();",
+    barWeek: "SELECT Emp_ID, meal_time FROM meal_record WHERE city = ? and WEEK(meal_date) = WEEK(NOW());",
+    barMonth: "SELECT Emp_ID, meal_time FROM meal_record WHERE city = ? and month(meal_date) = month(CURRENT_DATE());"
 }
 
 // pie_chart posting data correcting, similarly do for other graphs
 const pie_chart = async (req, res) => {
     const { city, time } = req.body;
-    let userTime;
+    let userTime, barTime;
     switch (time) {
         case "daily":
-            userTime = "userToday"
+            userTime = "userToday";
+            barTime = "barToday";
             break;
         case "weekly":
             userTime = "userWeek"
+            barTime = "barWeek"
             break;
         case "monthly":
             userTime = "userMonth"
+            barTime = "barMonth"
             break;
         default:
             break;
@@ -43,10 +50,12 @@ const pie_chart = async (req, res) => {
         const [diet_1] = await db.query(queries[`${time}_1`], ["Diet", city]);
         const [user] = await db.query(queries[`${userTime}`], [city])
         const [user_1] = await db.query(queries[`${userTime}_1`], [city])
+        const [bar] = await db.query(queries[`${barTime}`], [city]);
         return res.json({ 
             normal: normal[0]['COUNT(*)'], diet: diet[0]['COUNT(*)'],
             normal_1: normal_1[0]['COUNT(*)'], diet_1: diet_1[0]['COUNT(*)'],
-            user: user[0]['UniqueEmployeesServed'], user_1: user_1[0]['UniqueEmployeesServed']
+            user: user[0]['UniqueEmployeesServed'], user_1: user_1[0]['UniqueEmployeesServed'],
+            bar: bar
         });
         
     } catch (error) {
@@ -54,25 +63,7 @@ const pie_chart = async (req, res) => {
     }
 }
 
-// write your own respective query
-// const bar_graph = async (req, res) => {
-//     const { normal, diet } = req.body;
-//     try {
-//         const [record1] = await db.query('');
-//         const [record2] = await db.query('');
-        
-//         if () {
-//             res.json({  });
-//             console.log('Query executed successfully');
-//         } else {
-//             res.status(404).json({ "No records found" });
-//             console.log('No records found');
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ message: "Internal server error" });
-//     }
-// }
+
 
 module.exports = {
     pie_chart
