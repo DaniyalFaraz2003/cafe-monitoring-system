@@ -4,8 +4,9 @@ import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import { search } from "../../redux/avltreeReducer";
+import { search, insert } from "../../redux/avltreeReducer";
 import _404 from "../404/404";
+import axios from "axios"
 
 function UserEntryForm() {
   const city = useSelector((state) => state.avltree.city);
@@ -18,12 +19,19 @@ function UserEntryForm() {
 
   useEffect(() => { // here the request for backend to send data will be written
     const populateTree = async () => {
-      
+      try {
+        const response = await axios.get(`http://localhost:5000/api/v1/treeData/${city}`)
+        const data = response.data;
+        data.forEach((item) => {
+          dispatch(insert(item))
+        })
+      } catch (error) {
+        console.log(error);
+      }
     }
-    
-    // data.forEach((item) => {
-    //   dispatch(insert(item))
-    // })
+
+    populateTree();
+
   }, [dispatch])
 
   const handleValidation = () => {
