@@ -28,11 +28,13 @@ export const counterSlice = createSlice({
     },
     signin: (state, action) => {
       state.loggedIn = true;
+      // this 
       state.city = action.payload;
     },
     signout: (state, action) => {
       state.loggedIn = false;
       state.city = null;
+      state.value = new AVLTree();
     }
   },
 });

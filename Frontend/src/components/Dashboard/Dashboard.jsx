@@ -12,12 +12,33 @@ import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
+import axios from "axios"
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 import _404 from "../404/404";
 const Dashboard = () => {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
   const [timeFrame, setTimeFrame] = useState("daily");
+  const [data, setData] = useState({
+    totalDiet: 0,
+    totalNormal: 0,
+    total: 0,
+  });
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/api/v1/dashboard", {
+          city: city, time: timeFrame
+        })
+        const { normal, diet } = response.data;
+        setData({...data, totalNormal: normal, totalDiet: diet, total: normal + diet});
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    loadData();
+  }, [timeFrame]);
 
   return (
     <div className="w-full h-full p-10">
@@ -37,7 +58,7 @@ const Dashboard = () => {
           <div className="flex flex-col items-center justify-between">
             {/* Button group */}
             <div className="flex flex-row gap-3 mb-10 bg-transparent">
-              <TimeFrameSelector />
+              <TimeFrameSelector setTimeFrame={setTimeFrame} />
             </div>
             <div class="mb-7 grid gap-y-7 gap-x-7 md:grid-cols-2 xl:grid-cols-2 w-full">
               <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -49,8 +70,8 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div class="p-4 text-right">
-                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Today's Money</p>
-                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">$53k</h4>
+                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Diet Meals</p>
+                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{data.totalDiet}</h4>
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
@@ -65,8 +86,8 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div class="p-4 text-right">
-                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Today's Users</p>
-                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">2,300</h4>
+                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Normal Meals</p>
+                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{data.totalNormal}</h4>
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
@@ -81,8 +102,8 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div class="p-4 text-right">
-                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">New Clients</p>
-                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">3,462</h4>
+                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Meals</p>
+                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{data.total}</h4>
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
@@ -110,7 +131,7 @@ const Dashboard = () => {
             {/* Charts */}
             <div className="flex flex-row gap-7 w-full mb-7">
               <div className="basis-1/3 h-full rounded-xl p-5 bg-white flex justify-center items-center">
-                <PieChart />
+                <PieChart data={[{type: "Normal", amount: data.totalNormal}, {type: "Diet", amount: data.totalDiet}]} />
               </div>
               <div className="flex-grow min-w-0 basis-2/3 p-5 rounded-xl bg-white">
                 <div className="w-full h-full flex justify-center items-center">

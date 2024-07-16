@@ -20,7 +20,7 @@ function TimeFrameSelector({ setTimeFrame }) {
     <Tabs value="daily" className="w-full md:w-max">
       <TabsHeader>
         {TABS.map(({ label, value }) => (
-          <Tab key={value} value={value}>
+          <Tab onClick={() => setTimeFrame(value)} key={value} value={value}>
             &nbsp;&nbsp;{label}&nbsp;&nbsp;
           </Tab>
         ))}
