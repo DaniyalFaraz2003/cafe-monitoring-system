@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { signin } from "../../redux/avltreeReducer";
 import { useDispatch } from "react-redux";
+import { insert } from "../../redux/avltreeReducer";
 import "./Login.css";
 
 function Login() {
@@ -15,14 +16,20 @@ function Login() {
 
   const login = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/login", {
-        username,
-        password,
-      });
+      const response = await axios.post("http://localhost:5000/api/v1/login", { username, password })
       const { message, city } = response.data;
       if (message === "ok") {
         dispatch(signin(city));
-        navigate("/UserEntryForm");
+        try {
+          const response = await axios.get(`http://localhost:5000/api/v1/treeData/${city}`)
+          const data = response.data;
+          data.forEach((item) => {
+            dispatch(insert(item))
+          })
+        } catch (error) {
+          console.log(error);
+        }
+        navigate('/UserEntryForm')
       } else {
         setMessage("Incorrect Username Or Password");
       }

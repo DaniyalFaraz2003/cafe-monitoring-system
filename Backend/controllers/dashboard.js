@@ -1,19 +1,23 @@
 const db = require("../db/config");
 
+
+const queries = {
+    daily: "SELECT COUNT(*) FROM meal_record WHERE meal_pref = ? and city = ? and meal_date = CURRENT_DATE();",
+    weekly: "SELECT COUNT(*) FROM meal_record WHERE meal_pref = ? and city = ? and week(meal_date) = week(now());",
+    monthly: "SELECT COUNT(*) FROM meal_record WHERE meal_pref = ? and city = ? and month(meal_date) = month(current_date());",
+    userToday: "",
+    userWeek: "",
+    userMonth: ""
+}
+
 // pie_chart posting data correcting, similarly do for other graphs
 const pie_chart = async (req, res) => {
-    const { normal, diet } = req.body;
+    const { city, time } = req.body;
     try {
-        const [record1] = await db.query('SELECT COUNT(meal_pref) AS count FROM meal_record WHERE meal_pref = "Normal";');
-        const [record2] = await db.query('SELECT COUNT(meal_pref) AS count FROM meal_record WHERE meal_pref = "Diet";');
+        const [record1] = await db.query(queries[`${time}`], ["Normal", city]);
+        const [record2] = await db.query(queries[`${time}`], ["Diet", city]);
+        return res.json({ normal: record1[0]['COUNT(*)'], diet: record2[0]['COUNT(*)'] });
         
-        if (record1[0].count > 0 && record2[0].count > 0) {
-            res.json({ normal: record1[0].count, diet: record2[0].count });
-            console.log('Query executed successfully');
-        } else {
-            res.status(404).json({ message: "No records found" });
-            console.log('No records found');
-        }
     } catch (error) {
         console.log(error);
     }
