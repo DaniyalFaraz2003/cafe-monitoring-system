@@ -44,7 +44,7 @@ function useAutoDismissAlert(duration = 3000) {
 
   return [show, setShow];
 }
-export function ValidAlert() {
+export function ValidAlert({ message }) {
   const [open, setOpen] = useAutoDismissAlert();
   return (
 
@@ -57,13 +57,13 @@ export function ValidAlert() {
           unmount: { y: 100 },
         }}
         icon={<ValidIcon />} className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946] transition-all duration-700">
-        Preferences saved successfully!
+        {message}
       </Alert>
     </>
   );
 }
 
-export function InvalidAlert() {
+export function InvalidAlert({ message }) {
   const [open, setOpen] = useAutoDismissAlert();
   return (
 
@@ -76,7 +76,7 @@ export function InvalidAlert() {
           unmount: { y: 100 },
         }}
         icon={<InvalidIcon />} className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c] transition-all duration-700">
-        Employee ID is invalid.
+        {message}
       </Alert>
     </>
   );

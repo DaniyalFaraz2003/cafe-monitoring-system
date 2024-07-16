@@ -11,6 +11,7 @@ import axios from "axios"
 function UserEntryForm() {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
+  const [error, setError] = useState(false);
   const [empId, setEmpId] = useState("");
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -35,6 +36,7 @@ function UserEntryForm() {
   }, [dispatch])
 
   const handleValidation = () => {
+    setError(false);
     setIsSubmitted(false);
     // dispatching the search action search takes the employee id as a parameter
     const result = dispatch(search(empId)).payload;
@@ -49,6 +51,11 @@ function UserEntryForm() {
   };
 
   const handleSubmit = () => {
+    try {
+      
+    } catch (error) {
+      setError(true);
+    }
     setIsSubmitted(true);
   };
 
@@ -93,8 +100,9 @@ function UserEntryForm() {
               </div>
             </div>
           </div>
-          {isValidId && isSubmitted && <ValidAlert />}
-          {isValidId === false && <InvalidAlert />}
+          {isValidId && isSubmitted && <ValidAlert message={"Entry Added Successfully"} />}
+          {isValidId === false && <InvalidAlert message={"ID Invalid"} />}
+          {error && <InvalidAlert message={"An Error Occurred"} />}
         </div>
       </> : <_404 />}
     </div>
