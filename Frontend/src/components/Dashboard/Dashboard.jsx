@@ -19,6 +19,8 @@ const Dashboard = () => {
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
   const [timeFrame, setTimeFrame] = useState("daily");
 
+  console.log(timeFrame);
+
   return (
     <div className="w-full h-full p-10">
       {loggedIn ? <>
