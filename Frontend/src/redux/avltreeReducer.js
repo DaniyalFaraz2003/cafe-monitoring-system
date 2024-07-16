@@ -34,6 +34,7 @@ export const counterSlice = createSlice({
     signout: (state, action) => {
       state.loggedIn = false;
       state.city = null;
+      state.value = new AVLTree();
     }
   },
 });

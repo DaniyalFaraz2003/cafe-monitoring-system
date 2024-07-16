@@ -16,6 +16,7 @@ function UserEntryForm() {
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState(null);
+  const [mealPref, setMealPref] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => { // here the request for backend to send data will be written
@@ -30,8 +31,8 @@ function UserEntryForm() {
         console.log(error);
       }
     }
-
-    populateTree();
+    if (loggedIn)
+      populateTree();
 
   }, [dispatch])
 
@@ -49,14 +50,20 @@ function UserEntryForm() {
       return false;
     }
   };
-
-  const handleSubmit = () => {
+  console.log(mealPref);
+  const handleSubmit = async () => {
     try {
-      
+      const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {
+        Emp_ID: empId, meal_pref: mealPref, city: city
+      })
+      if (response.data.message === "ok") {
+        setIsSubmitted(true);
+      } else {
+        setError(true);
+      }
     } catch (error) {
       setError(true);
     }
-    setIsSubmitted(true);
   };
 
   return (
@@ -96,6 +103,7 @@ function UserEntryForm() {
                   data={data}
                   validation={handleValidation}
                   submit={handleSubmit}
+                  setData={setMealPref}
                 />
               </div>
             </div>

@@ -10,9 +10,7 @@ const UserEntryForm = async (req, res) => {
         const [records] = await db.query('INSERT INTO meal_record (Emp_ID, meal_pref, city) VALUES ( ?, ?, ?);', [Emp_ID, meal_pref, city])
 
         res.json({
-            message: "ok",
-            //this means that the values have been inserted successfully
-            Emp_ID: records[0].Emp_ID
+            message: "ok"
         });
 
     } catch (error) {
