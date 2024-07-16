@@ -28,6 +28,7 @@ export const counterSlice = createSlice({
     },
     signin: (state, action) => {
       state.loggedIn = true;
+      // this 
       state.city = action.payload;
     },
     signout: (state, action) => {

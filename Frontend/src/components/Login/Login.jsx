@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { signin } from "../../redux/avltreeReducer";
 import { useDispatch } from "react-redux";
 import { insert } from "../../redux/avltreeReducer";
 import "./Login.css";
-
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -16,7 +15,6 @@ function Login() {
   const dispatch = useDispatch();
 
   const login = async () => {
-
     try {
       const response = await axios.post("http://localhost:5000/api/v1/login", { username, password })
       const { message, city } = response.data;
@@ -38,7 +36,7 @@ function Login() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <div className="main_container">
       <div className="container">
