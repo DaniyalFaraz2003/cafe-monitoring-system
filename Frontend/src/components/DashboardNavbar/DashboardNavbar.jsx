@@ -5,7 +5,16 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import { IconButton } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { signout } from "../../redux/avltreeReducer";
+import { useDispatch } from "react-redux";
 function DashboardNavbar() {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(signout());
+    window.location = '/';
+  }
+
   return (
     <nav class="block w-full max-w-screen-xl px-6 py-3 mx-auto text-white bg-white border shadow-md rounded-xl border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200">
       <div class="flex items-center justify-between text-blue-gray-900">
@@ -45,6 +54,7 @@ function DashboardNavbar() {
               <Button
                 className="flex items-center gap-2 bg-[#0a5282]"
                 size="sm"
+                onClick={logout}
               >
                 LOGOUT
                 <IconButton aria-label="logout">
