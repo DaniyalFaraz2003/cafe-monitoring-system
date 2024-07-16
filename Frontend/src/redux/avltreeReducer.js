@@ -19,6 +19,7 @@ export const counterSlice = createSlice({
       action.payload = result;
     },
     traverse: (state, action) => {
+      // by this reducer, we can traverse the tree in preorder means root, left, right
       const result = state.value.preorderTraversal();
       state.result = result;
     },
