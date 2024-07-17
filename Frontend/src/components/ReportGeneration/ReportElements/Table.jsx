@@ -35,7 +35,7 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
+const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "Emp City"];
 
 function formatDate(dateString) {
   const months = [
@@ -213,7 +213,7 @@ export function Table() {
           </thead>
           <tbody>
             {data.map(
-              ({ id, name, mealtype, mealtime, mealdate }, index) => {
+              ({ id, name, mealtype, mealtime, mealdate, city }, index) => {
                 const isLast = index === data.length - 1;
                 const classes = isLast
                   ? "p-4"

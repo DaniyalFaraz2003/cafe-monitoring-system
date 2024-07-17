@@ -38,8 +38,8 @@ export function DialogComponent({ validation, submit, data, setData }) {
                                     Meal Type:
                                 </label>
                                 <div className="flex flex-row">
-                                    <Radio name="type" label="Normal" onClick={() => setData("Normal")} />
-                                    <Radio name="type" label="Diet" defaultChecked onClick={() => setData("Diet")} />
+                                    <Radio name="type" label="Normal" defaultChecked onClick={() => setData("Normal")} />
+                                    <Radio name="type" label="Diet" onClick={() => setData("Diet")} />
                                 </div>
                             </div>
                         </div>

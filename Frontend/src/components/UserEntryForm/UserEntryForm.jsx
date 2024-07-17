@@ -16,7 +16,7 @@ function UserEntryForm() {
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState(null);
-  const [mealPref, setMealPref] = useState(null);
+  const [mealPref, setMealPref] = useState("Normal");
   const dispatch = useDispatch();
 
 
@@ -34,13 +34,20 @@ function UserEntryForm() {
       return false;
     }
   };
-  console.log(mealPref);
   const handleSubmit = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {
         Emp_ID: empId, meal_pref: mealPref, city: city
       })
       if (response.data.message === "ok") {
+        const newRecord = { ...data };
+        let current = new Date();
+        let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
+        let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+        newRecord.mealtype = mealPref;
+        newRecord.mealtime = cTime;
+        newRecord.mealdate = cDate;
+        dispatch(insert(newRecord));
         setIsSubmitted(true);
       } else {
         setError(true);
@@ -49,7 +56,6 @@ function UserEntryForm() {
       setError(true);
     }
   };
-
   return (
     <div className="w-full h-full p-10">
       {loggedIn ? <>
