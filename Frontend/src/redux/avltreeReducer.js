@@ -27,6 +27,10 @@ export const counterSlice = createSlice({
       const result = state.value.prefixTraversal(action.payload);
       state.result = result;
     },
+    filterByTime: (state, action) => {
+      const result = state.value.timeTraversal(action.payload);
+      state.result = result;
+    },
     signin: (state, action) => {
       state.loggedIn = true;
       // this 
@@ -40,6 +44,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { insert, search, traverse, filterByPrefix, signin, signout } = counterSlice.actions
+export const { insert, search, traverse, filterByPrefix, signin, signout, filterByTime } = counterSlice.actions
 
 export default counterSlice.reducer
