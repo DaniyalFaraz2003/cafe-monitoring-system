@@ -8,7 +8,6 @@ const UserEntryForm = async (req, res) => {
     try {
         // query the database to insert the values entered by the user
         const [records] = await db.query('INSERT INTO meal_record (Emp_ID, meal_pref, city) VALUES ( ?, ?, ?);', [Emp_ID, meal_pref, city])
-
         res.json({
             message: "ok"
         });
