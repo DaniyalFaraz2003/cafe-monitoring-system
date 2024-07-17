@@ -32,7 +32,8 @@ const Dashboard = () => {
     totalDiet: 0, totalDiet_1: 0,
     totalNormal: 0, totalNormal_1: 0,
     total: 0, total_1: 0,
-    user: 0, user_1: 0
+    user: 0, user_1: 0,
+    bar: []
   });
 
   useEffect(() => {
@@ -41,12 +42,12 @@ const Dashboard = () => {
         const response = await axios.post("http://localhost:5000/api/v1/dashboard", {
           city: city, time: timeFrame
         })
-        const { normal, diet, normal_1, diet_1, user, user_1 } = response.data;
+        const { normal, diet, normal_1, diet_1, user, user_1, bar } = response.data;
         setData({
           ...data,
           totalNormal: normal, totalDiet: diet, total: normal + diet,
           totalNormal_1: normal_1, totalDiet_1: diet_1, total_1: normal_1 + diet_1,
-          user: user, user_1: user_1
+          user: user, user_1: user_1, bar: bar
         });
       } catch (error) {
         console.log(error);
@@ -163,7 +164,7 @@ const Dashboard = () => {
               </div>
               <div className="flex-grow min-w-0 basis-2/3 p-5 rounded-xl bg-white">
                 <div className="w-full h-full flex justify-center items-center">
-                  <BarChart />
+                  <BarChart data={data.bar} />
                 </div>
               </div>
             </div>
