@@ -51,8 +51,3 @@
 20240716	14:56:01	48db50a4-bd06-4edf-b251-ed262ac9b967	GET	/api/v1/treeData/Islamabad	http://localhost:5173
 20240716	14:56:06	cf1aae46-dfa1-43a2-862c-97c5078ad26c	GET	/api/v1/treeData/Islamabad	http://localhost:5173
 20240716	14:56:18	bf1fea6d-887b-4637-b024-2edae0d3ffec	GET	/api/v1/treeData/Islamabad	http://localhost:5173
-20240716	23:54:26	28300159-3a98-42a7-8b88-cf6e6132dc3c	POST	/api/v1/login	http://localhost:5173
-20240716	23:54:26	529808cc-3278-46da-8cd0-1034eb97eb86	GET	/api/v1/treeData/Karachi	http://localhost:5173
-20240717	16:20:27	64d614c9-34d5-48a1-a550-2a827d27273b	POST	/api/v1/login	http://localhost:5173
-20240717	16:20:27	8983f866-6765-4fad-97db-d8ac8ce6418d	GET	/api/v1/treeData/Karachi	http://localhost:5173
-20240717	16:20:34	b9005c42-86e3-4ff7-b147-f4309318ee0f	POST	/api/v1/UserEntryForm	http://localhost:5173

@@ -1,3 +1,46 @@
+const filterDate = (dateString, filterType) => {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  const currentDate = today.getDate();
+  const currentDay = today.getDay();
+
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(currentDate - currentDay);
+
+  const endOfWeek = new Date(today);
+  endOfWeek.setDate(currentDate + (6 - currentDay));
+
+  const date = new Date(dateString);
+  const dateYear = date.getFullYear();
+  const dateMonth = date.getMonth();
+  const dateDate = date.getDate();
+
+  switch (filterType) {
+    case 'daily':
+      return (
+        dateYear === currentYear &&
+        dateMonth === currentMonth &&
+        dateDate === currentDate
+      );
+
+    case 'weekly':
+      return date >= startOfWeek && date <= endOfWeek;
+
+    case 'monthly':
+      return (
+        dateYear === currentYear &&
+        dateMonth === currentMonth
+      );
+
+    default:
+      return false;
+  }
+};
+
+
+
+
 class AVLTreeNode {
   constructor(data) {
     this.data = data;
@@ -53,6 +96,24 @@ class AVLTree {
     return y;
   }
 
+  timeTraversal(time) {
+    const result = [];
+    this.timeTraversalHelper(time, this.root, result);
+    return result;
+  }
+
+  timeTraversalHelper(time, node, result) {
+    if (node !== null) {
+      if (filterDate(node.data.mealdate, time)) {
+        result.push(node.data);
+      }
+      this.timeTraversalHelper(time, node.left, result);
+      this.timeTraversalHelper(time, node.right, result);
+    }
+  }
+
+
+
   prefixTraversal(prefix) {
     const result = [];
     this.prefixTraversalHelper(prefix, this.root, result);
@@ -74,8 +135,8 @@ class AVLTree {
     this.preorderHelper(this.root, result);
     return result;
   }
-// the preorder function is used to traverse the tree in the following order: root, left, right
-//its purpose is to return the data of the nodes in the tree in the order of root, left, right
+  // the preorder function is used to traverse the tree in the following order: root, left, right
+  //its purpose is to return the data of the nodes in the tree in the order of root, left, right
   preorderHelper(node, result) {
     // if the node is not null, push the data of the node to the result array
     if (node !== null) {
@@ -121,7 +182,7 @@ class AVLTree {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
-//
+    //
     return node;
   }
 

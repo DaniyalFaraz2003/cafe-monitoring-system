@@ -14,12 +14,10 @@ import {
   CardBody,
   Chip,
   CardFooter,
-  Avatar,
   IconButton,
-  Tooltip,
   Input,
 } from "@material-tailwind/react";
-import { traverse, filterByPrefix } from "../../../redux/avltreeReducer";
+import { traverse, filterByPrefix, filterByTime } from "../../../redux/avltreeReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const TABS = [
@@ -39,17 +37,20 @@ const TABS = [
 
 const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
 
-function formatDate(date) {
-  const d = new Date(date);
-  let month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
+function formatDate(dateString) {
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
 
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
 
-  return [year, month, day].join("-");
+  return `${day} ${month} ${year}`;
 }
+
 
 function convertTime(time) {
   let newTime = null;
@@ -69,92 +70,63 @@ function convertTime(time) {
   return newTime;
 }
 
-function filterDaily(data) {
-  const currentDate = new Date().toLocaleDateString("en-CA");
-  const mealsToday = data.filter((item) => {
-    const mealDate = formatDate(item.mealdate);
-    return mealDate === currentDate;
-  });
-  return mealsToday;
-}
-
-
-const filterWeekly = (data) => {
-    console.log(data[0].mealdate);
-    console.log(formatDate(data[0].mealdate));
-    //first day of current week
-    const curr = new Date();
-    const first = curr.getDate() - curr.getDay();
-    const firstDay = new Date(curr.setDate(first)).toLocaleDateString("en-CA");
-    console.log(firstDay);
-
-    //last day of current week
-    const last = first + 6;
-    const lastDay = new Date(curr.setDate(last)).toLocaleDateString("en-CA");
-    console.log(lastDay);
-
-    const mealsThisWeek = data.filter((item) => {
-        const mealDate = formatDate(item.mealdate);
-        return mealDate >= firstDay && mealDate <= lastDay;
-    });
-    return mealsThisWeek;
-
-};
-
-const filterMonthly = (data) => {
-    console.log(data);
-    const currentDate = new Date().toLocaleDateString("en-CA");
-    // extract month from currentDate
-    const month = currentDate.split("-")[1];
-    console.log(month);
-
-    // geting every entry mealdate match its month with the month variable if they are same then store that array into mealsThisMonth 
-    const mealsThisMonth = data.filter((item) => {
-        const mealDate = formatDate(item.mealdate);
-        return mealDate.split("-")[1] === month;
-    });
-    return mealsThisMonth;
-
-    
-  
-};
 
 export function Table() {
   // avltree.result the result here is came from the avltreeReducer.js
+  const city = useSelector((state) => state.avltree.city);
   const data = useSelector((state) => state.avltree.result);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
 
   const dispatch = useDispatch();
-  
+
   const refresh = (e) => {
     e.preventDefault();
-    dispatch(traverse());
+    dispatch(filterByTime(filter));
   };
 
   useEffect(() => {
     if (search) {
       dispatch(filterByPrefix(search));
     } else {
-      dispatch(traverse());
+      dispatch(filterByTime(filter));
     }
   }, [search]);
-  const [filteredData, setFilteredData] = useState(data);
-  const changetable = (value) => {
-    setFilter(value);
-    let result = [];
-    if (value === "daily") {
-      console.log("daily");
-      result = filterDaily(data);
-    } else if (value === "weekly") {
-      console.log("weekly");
-      result=filterWeekly(data);
-    } else if (value === "monthly") {
-      console.log("monthly");
-      result=filterMonthly(data);
+
+  useEffect(() => {
+    dispatch(filterByTime(filter));
+  }, [filter])
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/download', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: data,
+          city: city,
+          time: filter.toUpperCase()
+        }),
+        mode: 'cors'
+      });
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Data.xlsx'; 
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        console.error('Failed to download file');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-    setFilteredData(result);
-  };
+  }
 
   return (
     <Card className="h-full w-full">
@@ -175,7 +147,7 @@ export function Table() {
                   <Tab
                     key={value}
                     value={value}
-                    onClick={() => changetable(value)}
+                    onClick={() => setFilter(value)}
                   >
                     &nbsp;&nbsp;{label}&nbsp;&nbsp;
                   </Tab>
@@ -213,7 +185,7 @@ export function Table() {
                 />
               </svg>
             </Button>
-            <Button className="flex items-center gap-3">
+            <Button className="flex items-center gap-3" onClick={handleDownload}>
               <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Download
             </Button>
           </div>
@@ -240,9 +212,9 @@ export function Table() {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map(
-              ({ id, name, mealtype, mealtime, mealdate, city }, index) => {
-                const isLast = index === filteredData.length - 1;
+            {data.map(
+              ({ id, name, mealtype, mealtime, mealdate }, index) => {
+                const isLast = index === data.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
@@ -278,8 +250,8 @@ export function Table() {
                             mealtype === "Diet"
                               ? "green"
                               : mealtype === "Normal"
-                              ? "blue"
-                              : "red"
+                                ? "blue"
+                                : "red"
                           }
                         />
                       </div>
