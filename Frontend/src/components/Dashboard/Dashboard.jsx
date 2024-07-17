@@ -15,14 +15,25 @@ import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import axios from "axios"
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 import _404 from "../404/404";
+
+function percentageIncrease(startVal, endVal) {
+  const diff = endVal - startVal;
+  if (startVal === 0) startVal = 1;
+  const fraction = diff / startVal;
+  const precent = fraction * 100;
+  return precent;
+}
+
 const Dashboard = () => {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
   const [timeFrame, setTimeFrame] = useState("daily");
   const [data, setData] = useState({
-    totalDiet: 0,
-    totalNormal: 0,
-    total: 0,
+    totalDiet: 0, totalDiet_1: 0,
+    totalNormal: 0, totalNormal_1: 0,
+    total: 0, total_1: 0,
+    user: 0, user_1: 0,
+    bar: []
   });
 
   useEffect(() => {
@@ -31,14 +42,24 @@ const Dashboard = () => {
         const response = await axios.post("http://localhost:5000/api/v1/dashboard", {
           city: city, time: timeFrame
         })
-        const { normal, diet } = response.data;
-        setData({...data, totalNormal: normal, totalDiet: diet, total: normal + diet});
+        const { normal, diet, normal_1, diet_1, user, user_1, bar } = response.data;
+        setData({
+          ...data,
+          totalNormal: normal, totalDiet: diet, total: normal + diet,
+          totalNormal_1: normal_1, totalDiet_1: diet_1, total_1: normal_1 + diet_1,
+          user: user, user_1: user_1, bar: bar
+        });
       } catch (error) {
         console.log(error);
       }
     }
     loadData();
   }, [timeFrame]);
+
+  const result1 = percentageIncrease(data.totalDiet_1, data.totalDiet);
+  const result2 = percentageIncrease(data.totalNormal_1, data.totalNormal);
+  const result3 = percentageIncrease(data.total_1, data.total);
+  const result4 = percentageIncrease(data.user_1, data.user);
 
   return (
     <div className="w-full h-full p-10">
@@ -75,7 +96,9 @@ const Dashboard = () => {
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class="text-green-500">+55%</strong>&nbsp;than last week
+                    <strong class={`${result1 > 0 ? "text-green-500" : "text-red-500"}`}>{result1 > 0 ? "+" + result1 + "%" : result1 + "%"}</strong>&nbsp;than {
+                      timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
+                    }
                   </p>
                 </div>
               </div>
@@ -91,7 +114,9 @@ const Dashboard = () => {
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class="text-green-500">+3%</strong>&nbsp;than last month
+                    <strong class={`${result2 > 0 ? "text-green-500" : "text-red-500"}`}>{result2 > 0 ? "+" + result2 + "%" : result2 + "%"}</strong>&nbsp;than {
+                      timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
+                    }
                   </p>
                 </div>
               </div>
@@ -107,7 +132,9 @@ const Dashboard = () => {
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class="text-red-500">-2%</strong>&nbsp;than yesterday
+                    <strong class={`${result3 > 0 ? "text-green-500" : "text-red-500"}`}>{result3 > 0 ? "+" + result3 + "%" : result3 + "%"}</strong>&nbsp;than {
+                      timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
+                    }
                   </p>
                 </div>
               </div>
@@ -118,12 +145,14 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div class="p-4 text-right">
-                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Sales</p>
-                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">$103,430</h4>
+                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Unique Employees Served</p>
+                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{data.user}</h4>
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class="text-green-500">+5%</strong>&nbsp;than yesterday
+                    <strong class={`${result4 > 0 ? "text-green-500" : "text-red-500"}`}>{result4 > 0 ? "+" + result4 + "%" : result4 + "%"}</strong>&nbsp;than {
+                      timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
+                    }
                   </p>
                 </div>
               </div>
@@ -131,11 +160,11 @@ const Dashboard = () => {
             {/* Charts */}
             <div className="flex flex-row gap-7 w-full mb-7">
               <div className="basis-1/3 h-full rounded-xl p-5 bg-white flex justify-center items-center">
-                <PieChart data={[{type: "Normal", amount: data.totalNormal}, {type: "Diet", amount: data.totalDiet}]} />
+                <PieChart data={[{ type: "Normal", amount: data.totalNormal }, { type: "Diet", amount: data.totalDiet }]} />
               </div>
               <div className="flex-grow min-w-0 basis-2/3 p-5 rounded-xl bg-white">
                 <div className="w-full h-full flex justify-center items-center">
-                  <BarChart />
+                  <BarChart data={data.bar} />
                 </div>
               </div>
             </div>

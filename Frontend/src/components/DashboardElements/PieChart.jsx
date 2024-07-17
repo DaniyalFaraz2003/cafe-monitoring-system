@@ -2,12 +2,8 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import { useState } from "react";
 
 Chart.register(CategoryScale);
-
-
-
 
 function Graph({ chartData }) {
     return (

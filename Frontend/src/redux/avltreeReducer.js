@@ -19,11 +19,16 @@ export const counterSlice = createSlice({
       action.payload = result;
     },
     traverse: (state, action) => {
+      // by this reducer, we can traverse the tree in preorder means root, left, right
       const result = state.value.preorderTraversal();
       state.result = result;
     },
     filterByPrefix: (state, action) => {
       const result = state.value.prefixTraversal(action.payload);
+      state.result = result;
+    },
+    filterByTime: (state, action) => {
+      const result = state.value.timeTraversal(action.payload);
       state.result = result;
     },
     signin: (state, action) => {
@@ -39,6 +44,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { insert, search, traverse, filterByPrefix, signin, signout } = counterSlice.actions
+export const { insert, search, traverse, filterByPrefix, signin, signout, filterByTime } = counterSlice.actions
 
 export default counterSlice.reducer

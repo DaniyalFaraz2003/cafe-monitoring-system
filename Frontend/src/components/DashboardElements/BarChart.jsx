@@ -49,7 +49,7 @@ const Graph = ({ chartData }) => {
                     plugins: {
                         title: {
                             display: true,
-                            text: "Users Gained between 2016-2020"
+                            text: "Number of Meals Taken At Particular Intervals"
                         },
                         legend: {
                             display: false
@@ -61,13 +61,35 @@ const Graph = ({ chartData }) => {
     );
 };
 
-export default function BarChart() {
-    const [chartData, setChartData] = useState({
-        labels: Data.map((data) => data.year),
+const transformData = (data) => {
+    const times = ['13:00:00', '13:30:00', '14:00:00', '14:30:00', '15:00:00', '15:30:00']
+    const result = times.map((time, index, arr) => {
+        const prevTime = new Date(`1970-01-01T${time}Z`);
+        const nextTime = new Date(`1970-01-01T${arr[index + 1]}Z`);
+        if (index != arr.length - 1) {
+            return {
+                timeframe: time + "-" + arr[index + 1],
+                amount: data.filter((item) => {
+                    let thisTime = new Date(`1970-01-01T${item.meal_time}Z`);
+                    return thisTime >= prevTime && thisTime < nextTime;
+                }).length
+            };
+        }
+    })
+    result.pop()
+    return result;
+}
+
+export default function BarChart({ data }) {
+    const transformed = transformData(data);
+    console.log(data);
+    console.log(transformed);
+    const chartData = {
+        labels: transformed.map((item) => item.timeframe),
         datasets: [
             {
-                label: "Users Gained ",
-                data: Data.map((data) => data.userGain),
+                label: "Amount",
+                data: transformed.map((item) => item.amount),
                 backgroundColor: [
                     "rgba(75,192,192,1)",
                     "&quot; #ecf0f1",
@@ -79,7 +101,7 @@ export default function BarChart() {
                 borderWidth: 2
             }
         ]
-    });
+    };
 
     return (
         <div className="App w-full h-full flex flex-row items-center justify-center">

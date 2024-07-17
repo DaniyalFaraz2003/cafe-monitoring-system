@@ -3,3 +3,7 @@
 20240715	15:57:58	aaac9f13-cd21-41dd-b375-5e5627d4c86b	TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))	GET	/	undefined
 20240716	02:19:17	6b895102-e6b2-4794-8bf8-a2feea58fc69	Error: Callback function is not available with promise clients.	GET	/api/v1/report	undefined
 20240716	02:28:21	a8b80d1a-90da-46f6-9559-f42145d547d7	Error: Callback function is not available with promise clients.	GET	/api/v1/report	undefined
+20240717	14:43:57	608e4496-553b-4ae1-b34e-2d07358a3a5b	ReferenceError: path is not defined	POST	/api/v1/download	http://localhost:5173
+20240717	15:13:49	e6c5a446-bb1d-4845-b976-d89eb84259c3	SyntaxError: Unexpected token o in JSON at position 1	POST	/api/v1/download	http://localhost:5173
+20240717	15:15:55	e0f9a48e-e7ea-47f4-af97-edee2781838f	SyntaxError: Unexpected token o in JSON at position 1	POST	/api/v1/download	http://localhost:5173
+20240717	15:18:46	283d2a27-a6f5-425d-8af3-009ccffd2d39	SyntaxError: Unexpected token o in JSON at position 1	POST	/api/v1/download	http://localhost:5173
