@@ -1,17 +1,33 @@
+// the following function is used to filter the date of the meal based on the filter type
+//dateString is the date of the meal came from the data
 const filterDate = (dateString, filterType) => {
   const today = new Date();
+  console.log("today,", today);
+  // the console will output the pattern of the date object as follows:
   const currentYear = today.getFullYear();
+  console.log("currentYear,", currentYear);
+  // the console will output the year of the date object as follows:
+  // currentYear, 2024
   const currentMonth = today.getMonth();
+  console.log("currentMonth,", currentMonth);
+  // the console will output the month of the date object as follows:
+  // currentMonth, 6
   const currentDate = today.getDate();
+  console.log("currentDate,", currentDate);
+  // the console will output the date of the date object as follows:
+  // currentDate, 17
   const currentDay = today.getDay();
+  console.log("currentDay,", currentDay);
+  // the console will output the day of the date object as follows:
+  // currentDay, 3
 
   const startOfWeek = new Date(today);
   startOfWeek.setDate(currentDate - currentDay);
 
   const endOfWeek = new Date(today);
   endOfWeek.setDate(currentDate + (6 - currentDay));
-
   const date = new Date(dateString);
+  console.log("datei,", date);
   const dateYear = date.getFullYear();
   const dateMonth = date.getMonth();
   const dateDate = date.getDate();
@@ -19,12 +35,18 @@ const filterDate = (dateString, filterType) => {
   switch (filterType) {
     case 'daily':
       return (
+        //if the date of the meal is the same as the current date
+        //and the month of the meal is the same as the current month
+        //and the year of the meal is the same as the current year
+        //then return true
         dateYear === currentYear &&
         dateMonth === currentMonth &&
         dateDate === currentDate
       );
 
     case 'weekly':
+      //if the date of the meal is greater than or equal to the start of the week\
+      //and the date of the meal is less than or equal to the end of the week
       return date >= startOfWeek && date <= endOfWeek;
 
     case 'monthly':
@@ -104,6 +126,7 @@ class AVLTree {
 
   timeTraversalHelper(time, node, result) {
     if (node !== null) {
+      //
       if (filterDate(node.data.mealdate, time)) {
         result.push(node.data);
       }
