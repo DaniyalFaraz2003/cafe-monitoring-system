@@ -16,7 +16,7 @@ function UserEntryForm() {
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState(null);
-  const [mealPref, setMealPref] = useState(null);
+  const [mealPref, setMealPref] = useState("Diet");
   const dispatch = useDispatch();
 
 
@@ -34,7 +34,6 @@ function UserEntryForm() {
       return false;
     }
   };
-  console.log(mealPref);
   const handleSubmit = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {

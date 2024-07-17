@@ -2,42 +2,8 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { useState } from "react";
 
 Chart.register(CategoryScale);
-
-const Data = [
-    {
-        id: 1,
-        year: 2016,
-        userGain: 80000,
-        userLost: 823
-    },
-    {
-        id: 2,
-        year: 2017,
-        userGain: 45677,
-        userLost: 345
-    },
-    {
-        id: 3,
-        year: 2018,
-        userGain: 78888,
-        userLost: 555
-    },
-    {
-        id: 4,
-        year: 2019,
-        userGain: 90000,
-        userLost: 4555
-    },
-    {
-        id: 5,
-        year: 2020,
-        userGain: 4300,
-        userLost: 234
-    }
-];
 
 
 const Graph = ({ chartData }) => {
@@ -82,8 +48,6 @@ const transformData = (data) => {
 
 export default function BarChart({ data }) {
     const transformed = transformData(data);
-    console.log(data);
-    console.log(transformed);
     const chartData = {
         labels: transformed.map((item) => item.timeframe),
         datasets: [

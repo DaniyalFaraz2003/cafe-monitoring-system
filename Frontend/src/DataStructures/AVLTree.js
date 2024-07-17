@@ -123,7 +123,9 @@ class AVLTree {
   prefixTraversalHelper(prefix, node, result) {
     if (node !== null) {
       if (String(node.data.id).startsWith(prefix)) {
-        result.push(node.data);
+        if (node.data.mealtype !== null) {
+          result.push(node.data);
+        }
       }
       this.prefixTraversalHelper(prefix, node.left, result);
       this.prefixTraversalHelper(prefix, node.right, result);
