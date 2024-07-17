@@ -213,7 +213,7 @@ export function Table() {
           </thead>
           <tbody>
             {data.map(
-              ({ id, name, mealtype, mealtime, mealdate, city }, index) => {
+              ({ id, name, mealtype, mealtime, mealdate }, index) => {
                 const isLast = index === data.length - 1;
                 const classes = isLast
                   ? "p-4"
