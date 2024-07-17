@@ -14,9 +14,7 @@ import {
   CardBody,
   Chip,
   CardFooter,
-  Avatar,
   IconButton,
-  Tooltip,
   Input,
 } from "@material-tailwind/react";
 import { traverse, filterByPrefix, filterByTime } from "../../../redux/avltreeReducer";
@@ -41,8 +39,8 @@ const TABLE_HEAD = ["Emp ID", "Name", "Meal Type", "Time", "Date", "City"];
 
 function formatDate(dateString) {
   const months = [
-      "January", "February", "March", "April", "May", "June", 
-      "July", "August", "September", "October", "November", "December"
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
   ];
 
   const date = new Date(dateString);
@@ -75,12 +73,13 @@ function convertTime(time) {
 
 export function Table() {
   // avltree.result the result here is came from the avltreeReducer.js
+  const city = useSelector((state) => state.avltree.city);
   const data = useSelector((state) => state.avltree.result);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
 
   const dispatch = useDispatch();
-  
+
   const refresh = (e) => {
     e.preventDefault();
     dispatch(filterByTime(filter));
@@ -97,6 +96,37 @@ export function Table() {
   useEffect(() => {
     dispatch(filterByTime(filter));
   }, [filter])
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/v1/download', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: data,
+          city: city,
+          time: filter.toUpperCase()
+        }),
+        mode: 'cors'
+      });
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Data.xlsx'; 
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        console.error('Failed to download file');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <Card className="h-full w-full">
@@ -155,7 +185,7 @@ export function Table() {
                 />
               </svg>
             </Button>
-            <Button className="flex items-center gap-3">
+            <Button className="flex items-center gap-3" onClick={handleDownload}>
               <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Download
             </Button>
           </div>
@@ -220,8 +250,8 @@ export function Table() {
                             mealtype === "Diet"
                               ? "green"
                               : mealtype === "Normal"
-                              ? "blue"
-                              : "red"
+                                ? "blue"
+                                : "red"
                           }
                         />
                       </div>
