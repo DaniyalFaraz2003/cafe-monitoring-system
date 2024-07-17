@@ -157,9 +157,9 @@ class AVLTree {
   insertNode(node, data) {
     if (node === null) return new AVLTreeNode(data);
 
-    if (data.id <= node.data.id) {
+    if (data.id < node.data.id) {
       node.left = this.insertNode(node.left, data);
-    } else if (data.id > node.data.id) {
+    } else {
       node.right = this.insertNode(node.right, data);
     }
 
@@ -180,7 +180,7 @@ class AVLTree {
     }
 
     // Right Left Case
-    if (balance < -1 && data.id <= node.right.data.id) {
+    if (balance < -1 && data.id < node.right.data.id) {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
