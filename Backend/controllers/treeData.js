@@ -10,7 +10,6 @@ const getTreeData = async (req, res) => {
             ON m.Emp_ID = e.Emp_ID
             AND m.city = ?;
         `, [city, ])
-        console.log(result);
         res.json(result);
     } catch (error) {
         console.log(error);

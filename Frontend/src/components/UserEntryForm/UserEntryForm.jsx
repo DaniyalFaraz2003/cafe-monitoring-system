@@ -16,7 +16,7 @@ function UserEntryForm() {
   const [isValidId, setIsValidId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState(null);
-  const [mealPref, setMealPref] = useState("Diet");
+  const [mealPref, setMealPref] = useState("Normal");
   const dispatch = useDispatch();
 
 
