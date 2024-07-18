@@ -76,7 +76,7 @@ export function InvalidAlert({ message }) {
           mount: { y: 0 },
           unmount: { y: 100 },
         }}
-        icon={<InvalidIcon />} className="rounded-none border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]"
+        icon={<InvalidIcon />} className="rounded-none border-[#f73636] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]"
         // border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]
         >
         {message}

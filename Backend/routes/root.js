@@ -13,7 +13,7 @@ router.route('/treeData').get(getTreeData);
 router.route('/dashboard').post(getDashboardData)
 router.route('/UserEntryForm').post(UserEntryForm)
 router.route('/download').post(download);
-router.route('/report').post(getReportData)
+router.route('/report/:city').post(getReportData)
 
 
 
