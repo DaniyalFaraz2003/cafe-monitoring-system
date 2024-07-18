@@ -28,6 +28,7 @@ export const counterSlice = createSlice({
       state.result = result;
     },
     filterByTime: (state, action) => {
+      // by this reducer, we can filter the tree by time
       const result = state.value.timeTraversal(action.payload);
       state.result = result;
     },
