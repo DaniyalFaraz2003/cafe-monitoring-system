@@ -50,7 +50,6 @@ class AVLTreeNode {
   }
 }
 
-
 class AVLTree {
   constructor() {
     this.root = null;
@@ -96,70 +95,17 @@ class AVLTree {
     return y;
   }
 
-  timeTraversal(time) {
-    const result = [];
-    this.timeTraversalHelper(time, this.root, result);
-    return result;
-  }
-
-  timeTraversalHelper(time, node, result) {
-    if (node !== null) {
-      if (filterDate(node.data.mealdate, time)) {
-        result.push(node.data);
-      }
-      this.timeTraversalHelper(time, node.left, result);
-      this.timeTraversalHelper(time, node.right, result);
-    }
-  }
-
-
-
-  prefixTraversal(prefix) {
-    const result = [];
-    this.prefixTraversalHelper(prefix, this.root, result);
-    return result;
-  }
-
-  prefixTraversalHelper(prefix, node, result) {
-    if (node !== null) {
-      if (String(node.data.id).startsWith(prefix)) {
-        if (node.data.mealtype !== null) {
-          result.push(node.data);
-        }
-      }
-      this.prefixTraversalHelper(prefix, node.left, result);
-      this.prefixTraversalHelper(prefix, node.right, result);
-    }
-  }
-
-  preorderTraversal() {
-    const result = [];
-    this.preorderHelper(this.root, result);
-    return result;
-  }
-  // the preorder function is used to traverse the tree in the following order: root, left, right
-  //its purpose is to return the data of the nodes in the tree in the order of root, left, right
-  preorderHelper(node, result) {
-    // if the node is not null, push the data of the node to the result array
-    if (node !== null) {
-      result.push(node.data);
-      this.preorderHelper(node.left, result);
-      this.preorderHelper(node.right, result);
-    }
-  }
-
   // Insert a node
   insert(data) {
     this.root = this.insertNode(this.root, data);
   }
 
-
   insertNode(node, data) {
     if (node === null) return new AVLTreeNode(data);
 
-    if (data.id <= node.data.id) {
+    if (data.id < node.data.id) {
       node.left = this.insertNode(node.left, data);
-    } else if (data.id > node.data.id) {
+    } else {
       node.right = this.insertNode(node.right, data);
     }
 
@@ -180,11 +126,11 @@ class AVLTree {
     }
 
     // Right Left Case
-    if (balance < -1 && data.id <= node.right.data.id) {
+    if (balance < -1 && data.id < node.right.data.id) {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
-    //
+
     return node;
   }
 
@@ -216,6 +162,56 @@ class AVLTree {
     if (minId <= node.data.id && maxId >= node.data.id) results.push(node.data);
 
     if (maxId > node.data.id) this.searchRangeNode(node.right, minId, maxId, results);
+  }
+
+  // Preorder traversal
+  preorderTraversal() {
+    const result = [];
+    this.preorderHelper(this.root, result);
+    return result;
+  }
+
+  preorderHelper(node, result) {
+    if (node !== null) {
+      result.push(node.data);
+      this.preorderHelper(node.left, result);
+      this.preorderHelper(node.right, result);
+    }
+  }
+
+  // Additional traversal methods
+  timeTraversal(time) {
+    const result = [];
+    this.timeTraversalHelper(time, this.root, result);
+    return result;
+  }
+
+  timeTraversalHelper(time, node, result) {
+    if (node !== null) {
+      if (filterDate(node.data.mealdate, time)) {
+        result.push(node.data);
+      }
+      this.timeTraversalHelper(time, node.left, result);
+      this.timeTraversalHelper(time, node.right, result);
+    }
+  }
+
+  prefixTraversal(prefix) {
+    const result = [];
+    this.prefixTraversalHelper(prefix, this.root, result);
+    return result;
+  }
+
+  prefixTraversalHelper(prefix, node, result) {
+    if (node !== null) {
+      if (String(node.data.id).startsWith(prefix)) {
+        if (node.data.mealtype !== null) {
+          result.push(node.data);
+        }
+      }
+      this.prefixTraversalHelper(prefix, node.left, result);
+      this.prefixTraversalHelper(prefix, node.right, result);
+    }
   }
 }
 
