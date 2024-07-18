@@ -97,10 +97,12 @@ const fetchDataDate = async (city, start, end, setData) => {
 export function Table() {
   // avltree.result the result here is came from the avltreeReducer.js
   const city = useSelector((state) => state.avltree.city);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
   const [field, setField] = useState("");
+
 
   const [value, setValue] = useState({
     startDate: null,
@@ -119,9 +121,19 @@ export function Table() {
 
   useEffect(() => {
     if (search) {
-
+      setSearchData(() => {
+        const fieldMap = {
+          "ID": "id",
+          "Name": "name",
+          "Meal Type": "mealtype",
+          "City": "city"
+        }
+        return data.filter((item) => {
+          return item[`${fieldMap[`${field}`]}`].toString().toLowerCase().startsWith(search.toLowerCase());
+        })
+      })
     } else {
-      fetchDataTime(filter, city, setData);
+      // fetchDataTime(filter, city, setData);
     }
   }, [search]);
 
@@ -260,7 +272,82 @@ export function Table() {
             </tr>
           </thead>
           <tbody>
-            {data.map(
+            {search && searchData.map(
+              ({ id, name, mealtype, mealtime, mealdate, city }, index) => {
+                const isLast = index === data.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
+                return (
+                  <tr key={id + " " + index}>
+                    <td className={classes}>
+                      <div className="flex items-center">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold"
+                        >
+                          {id}
+                        </Typography>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {name}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <div className="w-max">
+                        <Chip
+                          size="sm"
+                          variant="ghost"
+                          value={mealtype}
+                          color={
+                            mealtype === "Diet"
+                              ? "green"
+                              : mealtype === "Normal"
+                                ? "blue"
+                                : "red"
+                          }
+                        />
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {convertTime(mealtime)}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatDate(mealdate)}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {city}
+                      </Typography>
+                    </td>
+                  </tr>
+                );
+              }
+            )}
+            {!search && data.map(
               ({ id, name, mealtype, mealtime, mealdate, city }, index) => {
                 const isLast = index === data.length - 1;
                 const classes = isLast
