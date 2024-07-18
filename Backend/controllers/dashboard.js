@@ -24,7 +24,7 @@ const queries = {
 }
 
 // pie_chart posting data correcting, similarly do for other graphs
-const pie_chart = async (req, res) => {
+const getDashboardData = async (req, res) => {
     const { city, time } = req.body;
     let userTime, barTime;
     switch (time) {
@@ -66,5 +66,5 @@ const pie_chart = async (req, res) => {
 
 
 module.exports = {
-    pie_chart
+    getDashboardData
 };
