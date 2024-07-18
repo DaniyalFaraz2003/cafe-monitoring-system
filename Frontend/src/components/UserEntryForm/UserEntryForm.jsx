@@ -4,7 +4,7 @@ import { DialogComponent } from "./FormComponents/Dialog";
 import "./UserEntryForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
-import { search, insert } from "../../redux/avltreeReducer";
+import { search } from "../../redux/avltreeReducer";
 import _404 from "../404/404";
 import axios from "axios"
 
@@ -25,6 +25,7 @@ function UserEntryForm() {
     setIsSubmitted(false);
     // dispatching the search action search takes the employee id as a parameter
     const result = dispatch(search(empId)).payload;
+    console.log(result);
     if (result !== null) {
       setData(result);
       setIsValidId(true);
@@ -40,14 +41,6 @@ function UserEntryForm() {
         Emp_ID: empId, meal_pref: mealPref, city: city
       })
       if (response.data.message === "ok") {
-        const newRecord = { ...data };
-        let current = new Date();
-        let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
-        let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
-        newRecord.mealtype = mealPref;
-        newRecord.mealtime = cTime;
-        newRecord.mealdate = cDate;
-        dispatch(insert(newRecord));
         setIsSubmitted(true);
       } else {
         setError(true);

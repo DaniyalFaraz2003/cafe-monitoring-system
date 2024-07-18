@@ -24,7 +24,7 @@ const LandingPage = () => {
       if (message === "ok") {
         dispatch(signin(city));
         try {
-          const response = await axios.get(`http://localhost:5000/api/v1/treeData/${city}`)
+          const response = await axios.get(`http://localhost:5000/api/v1/treeData`)
           const data = response.data;
           data.forEach((item) => {
             dispatch(insert(item))
