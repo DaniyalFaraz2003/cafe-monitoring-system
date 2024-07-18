@@ -30,7 +30,7 @@ function CapacityForm() {
                 <input
                   id="dietMealAmount"
                   className="w-3/4 h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 focus:border-2 focus:border-gray-900 focus:border-t-transparent"
-                  placeholder="Enter diet meal amount"
+                  
                 />
                 <label
                   htmlFor="extraDietPackets"
@@ -41,7 +41,7 @@ function CapacityForm() {
                 <input
                   id="extraDietPackets"
                   className="w-3/4 h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 focus:border-2 focus:border-gray-900 focus:border-t-transparent"
-                  placeholder="Enter extra diet packets"
+                  
                 />
               </div>
               <div className="flex gap-4 items-center">
@@ -54,7 +54,7 @@ function CapacityForm() {
                 <input
                   id="normalMealAmount"
                   className="w-3/4 h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 focus:border-2 focus:border-gray-900 focus:border-t-transparent"
-                  placeholder="Enter normal meal amount"
+                  
                 />
               
                 <label
@@ -66,7 +66,7 @@ function CapacityForm() {
                 <input
                   id="extraNormalPackets"
                   className="w-3/4 h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 border-t-transparent text-blue-gray-700 outline outline-0 focus:border-2 focus:border-gray-900 focus:border-t-transparent"
-                  placeholder="Enter extra normal packets"
+                  
                 />
               </div>
             </div>
