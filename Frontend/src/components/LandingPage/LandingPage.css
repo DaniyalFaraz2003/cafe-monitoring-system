@@ -1,88 +1,9 @@
-/* .bluecontainer {
-  background-color: white;
-  border: 4px solid white;
-  width: 100vw;
-}
-
-.landing-container {
-  background-color: #eeeef8;
-  width: 93%;
-  height: 83%;
-  margin: 170px auto;
-  font-family: "Bona Nova SC", serif;
-  align-items: right;
-  border: 2px solid #394b7d;
-  border-radius: 10px;
-  padding: 40px;
-}
-
-.logoname {
-  position: absolute;
-  width: 300px;
-  top: 10px;
-  left: 10px;
-  color: #394b7d;
-  font-family: "Bona Nova SC", serif;
-  font-weight: 600;
-  font-size: 60px;
-
-}
-
-
-
-@media (max-width:600px) {
-  .bluecontainer {
-    background-color: white;
-    border: 4px solid white;
-    min-height: 100vh;
-    width: 100%;
-  }
-  
-}
-@media (min-width:601px) {
-  .bluecontainer {
-    background-color: white;
-    border: 4px solid white;
-    min-height: 100vh;
-    width: 100%;
-  }
-  
-}
-
-@media (min-width:768px) {
-  .bluecontainer {
-    background-color: white;
-  border: 4px solid white;
-    min-height: 100vh;
-    width: 100%;
-  }
-  
-}
-@media (min-width:991px) {
-  .bluecontainer {
-    background-color: white;
-    border: 4px solid white;
-    min-height: 100vh;
-    width: 100%;
-  }
-  
-}
-@media (min-width:1200px) {
-  .bluecontainer {
-    background-color: white;
-  border: 4px solid white;
-    min-height: 100vh;
-    width: 100%;
-  }
-  
-} */
-
 .content {
   border: 2px solid black;
-  position: relative;
-  top: -100px;
-  left: -350px;
-  width: 600px;
+  margin-top: -250px;
+  margin-left: -200px;
+  width: 1350px;
+  height: 250px;
   background-color: #003366;
   color: white;
   border-radius: 20px;
@@ -94,12 +15,11 @@
 }
 
 .mydiv {
-  position: absolute;
-  right: 150px;
-  bottom: 160px;
-  top: 330px;
-  right: 100px;
-  height: 350px;
-  z-index: 1;
+  width: 2250px;
+  padding: 12px;
+  /* margin: 16px auto; */
+  margin-top: 60px;
   background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

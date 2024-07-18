@@ -1,4 +1,3 @@
-// src/components/LandingPage.jsx
 import React from "react";
 import img1 from "../../assets/logo.png";
 import { signin } from "../../redux/avltreeReducer";
@@ -8,6 +7,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
+
 const LandingPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -44,13 +44,11 @@ const LandingPage = () => {
       console.log(error);
     }
   };
+
   return (
-    <div class="flex justify-center items-center w-screen h-screen bg-[#eeeef8]">
-      <div class="container mx-auto my-4 px-4 lg:px-20">
-        <div
-          
-          class="mydiv w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl"
-        >
+    <div className="flex justify-center items-center w-screen h-screen bg-[#eeeef8]">
+      <div className="container mx-auto my-4 px-4 lg:px-20">
+        <div className="mydiv">
           <div style={{ width: "200px" }}>
             <img src={img1} alt="" />
           </div>
@@ -62,11 +60,11 @@ const LandingPage = () => {
               paddingTop: "30px",
             }}
           >
-            <h1 class="text-5xl font-bold text-blue-900">Sign In</h1>
+            <h1 className="text-5xl font-bold text-blue-900">Sign In</h1>
           </div>
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
             <input
-              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="User name / Email"
               value={username}
@@ -74,7 +72,7 @@ const LandingPage = () => {
               required
             />
             <input
-              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -83,10 +81,10 @@ const LandingPage = () => {
           </div>
           {message}
 
-          <div class="my-2 w-1/2 lg:w-1/4">
+          <div className="my-2 w-1/2 lg:w-1/4">
             <button
               onClick={() => login()}
-              class="uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full 
+              className="uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full 
                       focus:outline-none focus:shadow-outline"
             >
               Sign In
@@ -95,7 +93,7 @@ const LandingPage = () => {
         </div>
 
         <div className="content">
-          <h1>Weclcome to the Cafe Monitoring System</h1>
+          <h1>Welcome to the Cafe Monitoring System</h1>
           <p>
             This is a simple application that allows you to monitor your cafe
             activities.

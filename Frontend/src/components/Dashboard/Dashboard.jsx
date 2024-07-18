@@ -65,8 +65,6 @@ const Dashboard = () => {
     <div className="w-full h-full p-10">
       {loggedIn ? <>
         <DashboardNavbar />
-        <nav className="w-full flex flex-row items-center justify-center">
-          {/* <img src={logo} alt="" className="h-[15%] w-[15%] basis-1/5" /> */}
           <div className="w-full basis-3/5 flex flex-col">
             <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
               Cafe Admin Dashboard
@@ -74,7 +72,6 @@ const Dashboard = () => {
             <p className="text-xl font-bold text-center"> {city}</p>
           </div>
 
-        </nav>
         <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-10">
           <div className="flex flex-col items-center justify-between">
             {/* Button group */}
