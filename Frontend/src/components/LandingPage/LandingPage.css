@@ -77,25 +77,29 @@
   
 } */
 
-
-
-
-
-.content{
-border: 2px solid black;
-position:absolute;
-right:150px;
-bottom:160px;
-width: 600px;
-background-color: #003366;
-color: white;
-border-radius: 20px;
-padding: 40px;
-
-
+.content {
+  border: 2px solid black;
+  position: relative;
+  top: -100px;
+  left: -350px;
+  width: 600px;
+  background-color: #003366;
+  color: white;
+  border-radius: 20px;
+  padding: 40px;
 }
-.content h1{
+.content h1 {
   font-size: 40px;
   font-weight: 200;
+}
 
+.mydiv {
+  position: absolute;
+  right: 150px;
+  bottom: 160px;
+  top: 330px;
+  right: 100px;
+  height: 350px;
+  z-index: 1;
+  background-color: white;
 }

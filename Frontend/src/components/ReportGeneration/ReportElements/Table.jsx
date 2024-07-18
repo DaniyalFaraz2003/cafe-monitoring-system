@@ -74,7 +74,7 @@ function convertTime(time) {
 export function Table() {
   // avltree.result the result here is came from the avltreeReducer.js
   const city = useSelector((state) => state.avltree.city);
-  const data = useSelector((state) => state.avltree.result);
+  const [data, setData] = useState([])
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
 

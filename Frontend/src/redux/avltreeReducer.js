@@ -15,7 +15,6 @@ export const counterSlice = createSlice({
     },
     search: (state, action) => {
       const result = state.value.search(parseInt(action.payload));
-      console.log('Search result:', result);
       action.payload = result;
     },
     traverse: (state, action) => {
