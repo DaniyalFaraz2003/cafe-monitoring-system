@@ -1,0 +1,19 @@
+.form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .inner-container {
+    width: 100%;
+    max-width: 800px; /* Adjust the max-width as needed */
+  }
+  
+  label {
+    text-align: right;
+  }
+  
+  input {
+    flex: 1;
+  }
+  

@@ -27,6 +27,7 @@ function DashboardNavbar() {
         <div class="hidden lg:block">
           <ul class="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row items-center lg:gap-6">
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+              
               <Link
                 to="/UserEntryForm"
                 class="flex items-center transition-colors hover:text-blue-500"
@@ -40,6 +41,14 @@ function DashboardNavbar() {
                 class="flex items-center transition-colors hover:text-blue-500"
               >
                 Dashboard
+              </Link>
+            </li>
+            <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+              <Link
+                to="/capacityform"
+                class="flex items-center transition-colors hover:text-blue-500"
+              >
+                Meal Amount
               </Link>
             </li>
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
