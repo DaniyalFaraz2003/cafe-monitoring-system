@@ -15,7 +15,7 @@ import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
 import axios from "axios"
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 import _404 from "../404/404";
-
+//funcions to calculate percentage increase whcih is used in the dashboard 
 function percentageIncrease(startVal, endVal) {
   const diff = endVal - startVal;
   if (startVal === 0) startVal = 1;

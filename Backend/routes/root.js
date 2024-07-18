@@ -7,10 +7,8 @@ const { download } = require("../controllers/download")
 
 const router = express.Router()
 
-
 router.route('/login').post(login);
 router.route('/treeData/:city').get(getTreeData);
-
 router.route('/dashboard').post(pie_chart)
 router.route('/UserEntryForm').post(UserEntryForm)
 router.route('/download').post(download)
