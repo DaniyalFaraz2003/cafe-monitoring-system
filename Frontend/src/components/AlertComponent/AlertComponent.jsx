@@ -56,7 +56,8 @@ export function ValidAlert({ message }) {
           mount: { y: 0 },
           unmount: { y: 100 },
         }}
-        icon={<ValidIcon />} className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946] transition-all duration-700">
+        icon={<ValidIcon />} 
+        className="rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946]">
         {message}
       </Alert>
     </>
@@ -75,7 +76,9 @@ export function InvalidAlert({ message }) {
           mount: { y: 0 },
           unmount: { y: 100 },
         }}
-        icon={<InvalidIcon />} className="fixed top-0 right-0 mt-5 mr-5 w-72 rounded-none border-l-4 border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c] transition-all duration-700">
+        icon={<InvalidIcon />} className="rounded-none border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]"
+        // border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]
+        >
         {message}
       </Alert>
     </>

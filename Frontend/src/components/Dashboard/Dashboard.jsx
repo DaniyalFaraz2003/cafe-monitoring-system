@@ -71,7 +71,7 @@ const Dashboard = () => {
             <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
               Cafe Admin Dashboard
             </h2>
-            <p className="text-xl font-bold text-center">City: {city}</p>
+            <p className="text-xl font-bold text-center"> {city}</p>
           </div>
 
         </nav>
