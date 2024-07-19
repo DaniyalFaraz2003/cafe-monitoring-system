@@ -35,26 +35,92 @@ const Dashboard = () => {
     user: 0, user_1: 0,
     bar: []
   });
-
+  
   useEffect(() => {
     const loadData = async () => {
       try {
         const response = await axios.post("http://localhost:5000/api/v1/dashboard", {
           city: city, time: timeFrame
         })
+
+        console.log("response.data: ", response.data);
+
         const { normal, diet, normal_1, diet_1, user, user_1, bar } = response.data;
+
+        // Process bar data to separate normal and diet meals
+        const barData = bar.reduce((acc, record) => {
+          const timeInterval = record.meal_time;
+          acc[timeInterval] = acc[timeInterval] || { Normal: 0, Diet: 0 };
+          if (record.meal_pref === 'Normal') {
+            acc[timeInterval].Normal += 1;
+          } else if (record.meal_pref === 'Diet') {
+            acc[timeInterval].Diet += 1;
+          }
+          return acc;
+        }, {});
+        
+
+        console.log('BarData: ', barData);
+        console.log("Bar data from API:", response.data.bar);
+        
+        // Convert the bar data to the format expected by BarChart
+        const formattedBarData = Object.entries(barData).map(([timeframe, { Normal, Diet }]) => ({
+          timeframe,
+          Normal,
+          Diet
+        }));
+
+
+        console.log("Formatted BarData:", formattedBarData);
+
+
         setData({
           ...data,
-          totalNormal: normal, totalDiet: diet, total: normal + diet,
-          totalNormal_1: normal_1, totalDiet_1: diet_1, total_1: normal_1 + diet_1,
-          user: user, user_1: user_1, bar: bar
+          totalNormal: normal,
+          totalDiet: diet,
+          total: normal + diet,
+          totalNormal_1: normal_1,
+          totalDiet_1: diet_1,
+          total_1: normal_1 + diet_1,
+          user: user,
+          user_1: user_1,
+          bar: Object.entries(barData).map(([timeframe, { Normal, Diet }]) => ({ timeframe, Normal, Diet }))
         });
+
+        console.log("Calculated barData:", barData);
+        console.log("Data set in state:", {
+          totalNormal: normal,
+          totalDiet: diet,
+          total: normal + diet,
+          totalNormal_1: normal_1,
+          totalDiet_1: diet_1,
+          total_1: normal_1 + diet_1,
+          user: user,
+          user_1: user_1,
+          bar: Object.entries(barData).map(([timeframe, { Normal, Diet }]) => ({ timeframe, Normal, Diet }))
+        });
+
+        
       } catch (error) {
         console.log(error);
       }
     }
     loadData();
   }, [timeFrame]);
+
+  const [modifiedBarData, setModifiedBarData] = useState([]);
+
+useEffect(() => {
+  // Assuming `data.bar` needs to be transformed
+  const transformedBarData = data.bar.map(item => ({
+    timeframe: item.timeframe,
+    Normal: item.Normal,
+    Diet: item.Diet
+  }));
+
+  setModifiedBarData(transformedBarData);
+}, [data.bar]);
+
 
   const result1 = percentageIncrease(data.totalDiet_1, data.totalDiet);
   const result2 = percentageIncrease(data.totalNormal_1, data.totalNormal);
@@ -161,7 +227,7 @@ const Dashboard = () => {
               </div>
               <div className="flex-grow min-w-0 basis-2/3 p-5 rounded-xl bg-white">
                 <div className="w-full h-full flex justify-center items-center">
-                  <BarChart data={data.bar} />
+                  <BarChart data={modifiedBarData} />
                 </div>
               </div>
             </div>
