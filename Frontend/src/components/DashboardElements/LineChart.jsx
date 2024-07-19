@@ -6,40 +6,6 @@ import { useState } from "react";
 
 Chart.register(CategoryScale);
 
-const Data = [
-    {
-        id: 1,
-        year: 2016,
-        userGain: 80000,
-        userLost: 823
-    },
-    {
-        id: 2,
-        year: 2017,
-        userGain: 45677,
-        userLost: 345
-    },
-    {
-        id: 3,
-        year: 2018,
-        userGain: 78888,
-        userLost: 555
-    },
-    {
-        id: 4,
-        year: 2019,
-        userGain: 90000,
-        userLost: 4555
-    },
-    {
-        id: 5,
-        year: 2020,
-        userGain: 4300,
-        userLost: 234
-    }
-];
-
-
 const Graph = ({ chartData }) => {
     return (
         <div className="chart-container w-[70%] h-full">
@@ -49,7 +15,7 @@ const Graph = ({ chartData }) => {
                     plugins: {
                         title: {
                             display: true,
-                            text: "Users Gained between 2016-2020"
+                            text: "Normal And Diet Meal Trends Of This Month"
                         },
                         legend: {
                             display: false
@@ -61,25 +27,67 @@ const Graph = ({ chartData }) => {
     );
 };
 
-export default function LineChart() {
-    const [chartData, setChartData] = useState({
-        labels: Data.map((data) => data.year),
+function getDatesForCurrentMonth() {
+    const dates = [];
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth(); // 0-indexed month
+
+
+    // Generate an array of dates for the current month
+    for (let day = 1; day <= now.getDate(); day++) {
+        const date = new Date(year, month, day);
+        dates.push(date.toISOString().split('T')[0]); // Format as yyyy-mm-dd
+    }
+
+    return dates;
+}
+
+const transformData = (data) => {
+    const dates = getDatesForCurrentMonth();
+    const result = dates.map((date, index, arr) => {
+        if (index != arr.length - 1) {
+            const currentDate = new Date(date);
+            return {
+                date: currentDate.toLocaleString('en-US', {month: "long", day: "numeric"}),
+                amountNormal: data.filter((item) => {
+                    let thisDate = new Date(item.meal_date);
+                    return thisDate.getDate() === currentDate.getDate() && item.meal_pref === "Normal";
+                }).length,
+                amountDiet: data.filter((item) => {
+                    let thisDate = new Date(item.meal_date);
+                    return thisDate.getDate() === currentDate.getDate() && item.meal_pref === "Diet";
+                }).length,
+            };
+        }
+    })
+    result.pop();
+    return result;
+}
+
+export default function LineChart({ data }) {
+    const transformed = transformData(data);
+    console.log(transformed);
+    const chartData = {
+        labels: transformed.map((item) => item.date),
         datasets: [
             {
-                label: "Users Gained ",
-                data: Data.map((data) => data.userGain),
-                backgroundColor: [
-                    "rgba(75,192,192,1)",
-                    "&quot; #ecf0f1",
-                    "#50AF95",
-                    "#f3ba2f",
-                    "#2a71d0"
-                ],
-                borderColor: "blue",
+                label: "Normal",
+                data: transformed.map((item) => item.amountNormal),
+                backgroundColor: "#2a71d0",
+                borderColor: "#2a71d0",
+                borderWidth: 2
+            },
+            {
+                label: "Diet",
+                data: transformed.map((item) => item.amountDiet),
+                backgroundColor: "#50AF95",
+                borderColor: "#50AF95",
                 borderWidth: 2
             }
         ]
-    });
+    };
+    
 
     return (
         <div className="App w-full h-full flex flex-row items-center justify-center">

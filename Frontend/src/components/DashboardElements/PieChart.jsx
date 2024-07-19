@@ -35,10 +35,8 @@ export default function PieChart({ data }) {
                 label: "Amount",
                 data: data.map((item) => item.amount),
                 backgroundColor: [
-                    "rgba(75,192,192,1)",
-                    "&quot; #ecf0f1",
+                    "#2a71d0",
                     "#50AF95",
-                    "#f3ba2f",
                 ],
                 borderColor: "white",
                 borderWidth: 2

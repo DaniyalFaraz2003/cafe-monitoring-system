@@ -33,7 +33,7 @@ const Dashboard = () => {
     totalNormal: 0, totalNormal_1: 0,
     total: 0, total_1: 0,
     user: 0, user_1: 0,
-    bar: []
+    bar: [], line: []
   });
 
   useEffect(() => {
@@ -42,12 +42,12 @@ const Dashboard = () => {
         const response = await axios.post("http://localhost:5000/api/v1/dashboard", {
           city: city, time: timeFrame
         })
-        const { normal, diet, normal_1, diet_1, user, user_1, bar } = response.data;
+        const { normal, diet, normal_1, diet_1, user, user_1, bar, line } = response.data;
         setData({
           ...data,
           totalNormal: normal, totalDiet: diet, total: normal + diet,
           totalNormal_1: normal_1, totalDiet_1: diet_1, total_1: normal_1 + diet_1,
-          user: user, user_1: user_1, bar: bar
+          user: user, user_1: user_1, bar: bar, line: line
         });
       } catch (error) {
         console.log(error);
@@ -65,12 +65,12 @@ const Dashboard = () => {
     <div className="w-full h-full p-10">
       {loggedIn ? <>
         <DashboardNavbar />
-          <div className="w-full basis-3/5 flex flex-col">
-            <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
-              Cafe Admin Dashboard
-            </h2>
-            <p className="text-xl font-bold text-center"> {city}</p>
-          </div>
+        <div className="w-full basis-3/5 flex flex-col">
+          <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
+            Cafe Admin Dashboard
+          </h2>
+          <p className="text-xl font-bold text-center"> {city}</p>
+        </div>
 
         <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-10">
           <div className="flex flex-col items-center justify-between">
@@ -166,7 +166,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex flex-row w-full bg-white rounded-xl p-5 items-center justify-center">
-              <LineChart />
+              <LineChart data={data.line} />
             </div>
           </div>
         </div>
