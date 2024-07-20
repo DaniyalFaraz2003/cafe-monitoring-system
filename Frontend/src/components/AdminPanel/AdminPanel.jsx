@@ -4,12 +4,15 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import _404 from "../404/404";
 
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
+    const loggedIn = useSelector((state) => state.avltree.loggedIn);
     return (
-        <div className="w-full h-full p-10">
+        <>
+        {loggedIn ? <div className="w-full h-full p-10">
             <DashboardNavbar />
             <div className="w-full basis-3/5 flex flex-col">
                 <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
@@ -113,7 +116,8 @@ const AdminPanel = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> : <_404 />}
+        </>
     );
 }
 

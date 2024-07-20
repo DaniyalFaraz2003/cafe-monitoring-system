@@ -16,7 +16,9 @@ function UserEntryForm() {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
   const [empId, setEmpId] = useState("");
-  const [mealPref, setMealPref] = useState("Default");
+  const [mealPref, setMealPref] = useState("");
+
+  const [defaultPref, setDefaultPref] = useState("")
 
   useEffect(() => {
     if (showAlert) {
@@ -43,6 +45,7 @@ function UserEntryForm() {
     try {
       const response = await axios.get(`http://localhost:5000/api/v1/validate/${empId}`);
       if (response.data.message === "ok") {
+        setDefaultPref(response.data.pref);
         setAlertMessage("User ID Valid!");
         setAlertType("success");
       } else {
@@ -106,8 +109,16 @@ function UserEntryForm() {
                   <h1 className="inline text-2xl font-semibold leading-none">Meal Type</h1>
                 </div>
               </div>
-              <div className="flex flex-row ml-3 gap-10">
-                <Radio name="type" label="Default" defaultChecked onClick={() => setMealPref("Default")} />
+              <div className="flex flex-row ml-5 gap-5 items-center justify-center">
+                <label htmlFor="default" className="text-md font-bold">Use Default: </label>
+                <input
+                  name="default"
+                  disabled
+                  value={defaultPref}
+                  className="text-black placeholder-gray-600 px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                />
+                <p className="text-xl font-bold text-gray-800 mx-10">OR</p>
+                <label className="text-md font-bold">Select: </label>
                 <Radio name="type" label="Normal" onClick={() => setMealPref("Normal")} />
                 <Radio name="type" label="Diet" onClick={() => setMealPref("Diet")} />
               </div>

@@ -7,6 +7,8 @@ import {
   Card,
   CardHeader,
   Typography,
+  Select,
+  Option,
   Tab,
   Button,
   Tabs,
@@ -102,6 +104,7 @@ export function Table() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
   const [field, setField] = useState("");
+  const [sortBy, setSortBy] = useState("")
 
 
   const [value, setValue] = useState({
@@ -198,7 +201,36 @@ export function Table() {
                 />
               </div>
             </div>
-            <div className="flex flex-row ml-auto gap-5">
+            <div className="flex flex-col gap-2 mr-auto h-full items-center justify-center">
+              <p className="font-bold text-center">Advanced Options</p>
+              <div className="flex flex-row gap-5">
+                <Select
+                  name="mealTypeInput"
+                  defaultValue="ID"
+                  label="Sort By"
+                  className="bg-white font-bold"
+                  onChange={(e) => setSortBy(e)}
+                >
+                  <Option value="ID">ID</Option>
+                  <Option value="Name">Name</Option>
+                  <Option value="Meal Type">Time</Option>
+                  <Option value="City">Date</Option>
+                </Select>
+                <Select
+                  name="mealTypeInput"
+                  defaultValue="5"
+                  label="Items Per Page"
+                  className="bg-white font-bold"
+                  onChange={(e) => setSortBy(e)}
+                >
+                  <Option value="ID">5</Option>
+                  <Option value="Name">10</Option>
+                  <Option value="Meal Type">15</Option>
+                  <Option value="City">20</Option>
+                </Select>
+              </div>
+            </div>
+            <div className="flex flex-row ml-auto gap-5 mt-5">
               <Button
                 variant="outlined"
                 className="flex items-center gap-3 bg-white"
