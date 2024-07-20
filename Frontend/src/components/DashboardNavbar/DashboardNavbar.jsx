@@ -48,10 +48,10 @@ function DashboardNavbar() {
                 </li>
             <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
               <Link
-                to="/capacityform"
+                to="/adminpanel"
                 class="flex items-center transition-colors hover:text-blue-500"
               >
-                Meal Amount
+                Admin Panel
               </Link>
             </li>
 

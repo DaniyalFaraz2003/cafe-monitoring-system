@@ -18,9 +18,11 @@ const queries = {
     userWeek_1: "SELECT COUNT(DISTINCT Emp_ID) AS UniqueEmployeesServed FROM meal_record WHERE city = ? and week(meal_date) = week(now()) - 1;",
     userMonth_1: "SELECT COUNT(DISTINCT Emp_ID) AS UniqueEmployeesServed FROM meal_record WHERE city = ? and month(meal_date) = month(current_date()) - 1;",
 
-    barToday: "SELECT Emp_ID, meal_time FROM meal_record WHERE city = ? and meal_date = CURRENT_DATE();",
-    barWeek: "SELECT Emp_ID, meal_time FROM meal_record WHERE city = ? and WEEK(meal_date) = WEEK(NOW());",
-    barMonth: "SELECT Emp_ID, meal_time FROM meal_record WHERE city = ? and month(meal_date) = month(CURRENT_DATE());"
+    barToday: "SELECT Emp_ID, meal_time, meal_pref FROM meal_record WHERE city = ? and meal_date = CURRENT_DATE();",
+    barWeek: "SELECT Emp_ID, meal_time, meal_pref FROM meal_record WHERE city = ? and WEEK(meal_date) = WEEK(NOW());",
+    barMonth: "SELECT Emp_ID, meal_time, meal_pref FROM meal_record WHERE city = ? and month(meal_date) = month(CURRENT_DATE());",
+
+    line: "SELECT Emp_ID, meal_date, meal_pref FROM meal_record WHERE city = ? and month(meal_date) = month(CURRENT_DATE());"
 }
 
 // pie_chart posting data correcting, similarly do for other graphs
@@ -51,11 +53,12 @@ const getDashboardData = async (req, res) => {
         const [user] = await db.query(queries[`${userTime}`], [city])
         const [user_1] = await db.query(queries[`${userTime}_1`], [city])
         const [bar] = await db.query(queries[`${barTime}`], [city]);
+        const [line] = await db.query(queries['line'], [city]);
         return res.json({ 
             normal: normal[0]['COUNT(*)'], diet: diet[0]['COUNT(*)'],
             normal_1: normal_1[0]['COUNT(*)'], diet_1: diet_1[0]['COUNT(*)'],
             user: user[0]['UniqueEmployeesServed'], user_1: user_1[0]['UniqueEmployeesServed'],
-            bar: bar
+            bar: bar, line: line
         });
         
     } catch (error) {
