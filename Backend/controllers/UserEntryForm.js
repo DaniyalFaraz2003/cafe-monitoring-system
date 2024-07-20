@@ -15,7 +15,7 @@ const validate = async (req, res) => {
         }
 
         // If no meal registered for today, proceed to insert the new meal record
-        const [records] = await db.query('INSERT INTO meal_record (Emp_ID, meal_pref, city, meal_date) VALUES (?, ?, ?, CURRENT_DATE());', [Emp_ID, meal_pref, city]);
+        const [records] = await db.query('INSERT INTO meal_record (Emp_ID, meal_pref, city, meal_date) VALUES (?, ?, ?, CURRENT_DATE());', [empId, meal_pref, city]);
         res.json({
             message: "ok"
         });

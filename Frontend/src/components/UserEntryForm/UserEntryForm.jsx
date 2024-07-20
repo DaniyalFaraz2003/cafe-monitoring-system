@@ -63,12 +63,32 @@ function UserEntryForm() {
       const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {
         Emp_ID: empId, meal_pref: mealPref, city: city
       })
-      if (response.data.message === "ok") {
+      if (response.data.message === "meal_already-registered") {
+        console.log("Meal Already Registered!");
+        setAlertMessage("Meal Already Registered!");
+        setAlertType("error");
+        setShowAlert(true);
 
-      } else {
+      } else if (response.data.message === "ok") {
+        console.log("meal registered succsfully")
+        setAlertMessage("Meal Registered Successfully!");
+        setAlertType("success");
+        setShowAlert(true);
+
+
+      }
+      else{
+        console.log("failed to register meal!");
+        setAlertMessage("failed to register meal!");
+        setAlertType("error");
+        setShowAlert(true);
 
       }
     } catch (error) {
+      console.log("An Error Occurred!");
+      setAlertMessage("An Error Occurred!");
+      setAlertType("error");
+      setShowAlert(true);
 
     }
   };
