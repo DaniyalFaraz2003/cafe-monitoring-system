@@ -10,7 +10,8 @@ const validate = async (req, res) => {
         if (records.length > 0) {
             // send the city of the user as a response
             res.json({
-                message: "ok"
+                message: "ok",
+                pref: records[0].preference
             });
         }
         else {
