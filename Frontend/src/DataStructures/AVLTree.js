@@ -72,7 +72,6 @@ class AVLTreeNode {
   }
 }
 
-
 class AVLTree {
   constructor() {
     this.root = null;
@@ -176,7 +175,6 @@ class AVLTree {
     this.root = this.insertNode(this.root, data);
   }
 
-
   insertNode(node, data) {
     if (node === null) return new AVLTreeNode(data);
 
@@ -207,7 +205,7 @@ class AVLTree {
       node.right = this.rightRotate(node.right);
       return this.leftRotate(node);
     }
-    //
+
     return node;
   }
 
@@ -239,6 +237,56 @@ class AVLTree {
     if (minId <= node.data.id && maxId >= node.data.id) results.push(node.data);
 
     if (maxId > node.data.id) this.searchRangeNode(node.right, minId, maxId, results);
+  }
+
+  // Preorder traversal
+  preorderTraversal() {
+    const result = [];
+    this.preorderHelper(this.root, result);
+    return result;
+  }
+
+  preorderHelper(node, result) {
+    if (node !== null) {
+      result.push(node.data);
+      this.preorderHelper(node.left, result);
+      this.preorderHelper(node.right, result);
+    }
+  }
+
+  // Additional traversal methods
+  timeTraversal(time) {
+    const result = [];
+    this.timeTraversalHelper(time, this.root, result);
+    return result;
+  }
+
+  timeTraversalHelper(time, node, result) {
+    if (node !== null) {
+      if (filterDate(node.data.mealdate, time)) {
+        result.push(node.data);
+      }
+      this.timeTraversalHelper(time, node.left, result);
+      this.timeTraversalHelper(time, node.right, result);
+    }
+  }
+
+  prefixTraversal(prefix) {
+    const result = [];
+    this.prefixTraversalHelper(prefix, this.root, result);
+    return result;
+  }
+
+  prefixTraversalHelper(prefix, node, result) {
+    if (node !== null) {
+      if (String(node.data.id).startsWith(prefix)) {
+        if (node.data.mealtype !== null) {
+          result.push(node.data);
+        }
+      }
+      this.prefixTraversalHelper(prefix, node.left, result);
+      this.prefixTraversalHelper(prefix, node.right, result);
+    }
   }
 }
 

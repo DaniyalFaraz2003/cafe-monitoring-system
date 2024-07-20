@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { signin } from "../../redux/avltreeReducer";
-import { useDispatch } from "react-redux";
-import { insert } from "../../redux/avltreeReducer";
 import "./Login.css";
 
 function Login() {
@@ -12,7 +10,6 @@ function Login() {
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const login = async () => {
     try {
@@ -20,15 +17,6 @@ function Login() {
       const { message, city } = response.data;
       if (message === "ok") {
         dispatch(signin(city));
-        try {
-          const response = await axios.get(`http://localhost:5000/api/v1/treeData/${city}`)
-          const data = response.data;
-          data.forEach((item) => {
-            dispatch(insert(item))
-          })
-        } catch (error) {
-          console.log(error);
-        }
         navigate('/UserEntryForm')
       } else {
         setMessage("Incorrect Username Or Password");

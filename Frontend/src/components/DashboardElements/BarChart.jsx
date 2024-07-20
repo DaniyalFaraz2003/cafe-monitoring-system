@@ -33,9 +33,13 @@ const transformData = (data) => {
         if (index != arr.length - 1) {
             return {
                 timeframe: time + "-" + arr[index + 1],
-                amount: data.filter((item) => {
+                amountNormal: data.filter((item) => {
                     let thisTime = new Date(`1970-01-01T${item.meal_time}Z`);
-                    return thisTime >= prevTime && thisTime < nextTime;
+                    return thisTime >= prevTime && thisTime < nextTime && item.meal_pref === "Normal";
+                }).length,
+                amountDiet: data.filter((item) => {
+                    let thisTime = new Date(`1970-01-01T${item.meal_time}Z`);
+                    return thisTime >= prevTime && thisTime < nextTime && item.meal_pref === "Diet";
                 }).length
             };
         }
@@ -46,25 +50,27 @@ const transformData = (data) => {
 
 export default function BarChart({ data }) {
     const transformed = transformData(data);
+
     const chartData = {
         labels: transformed.map((item) => item.timeframe),
         datasets: [
             {
-                label: "Amount",
-                data: transformed.map((item) => item.amount),
-                backgroundColor: [
-                    "rgba(75,192,192,1)",
-                    "&quot; #ecf0f1",
-                    "#50AF95",
-                    "#f3ba2f",
-                    "#2a71d0"
-                ],
+                label: "Normal",
+                data: transformed.map((item) => item.amountNormal),
+                backgroundColor: "#2a71d0",
+                borderColor: "white",
+                borderWidth: 2
+            },
+            {
+                label: "Diet",
+                data: transformed.map((item) => item.amountDiet),
+                backgroundColor: "#50AF95",
                 borderColor: "white",
                 borderWidth: 2
             }
         ]
     };
-
+    
     return (
         <div className="App w-full h-full flex flex-row items-center justify-center">
             <Graph chartData={chartData} />

@@ -1,86 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, Button } from "@material-tailwind/react";
-
-function ValidIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-6 w-6"
-    >
-      <path
-        fillRule="evenodd"
-        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
+const getAlert = (type, message) => {
+  switch (type) {
+    case "error":
+      return (
+        <div className="fixed z-10 flex top-4 right-4 w-96 shadow-lg rounded-lg">
+          <div className="bg-red-600 py-4 px-6 rounded-l-lg flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" className="fill-current text-white" width="20" height="20">
+              <path fillRule="evenodd" d="M4.47.22A.75.75 0 015 0h6a.75.75 0 01.53.22l4.25 4.25c.141.14.22.331.22.53v6a.75.75 0 01-.22.53l-4.25 4.25A.75.75 0 0111 16H5a.75.75 0 01-.53-.22L.22 11.53A.75.75 0 010 11V5a.75.75 0 01.22-.53L4.47.22zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5H5.31zM8 4a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 018 4zm0 8a1 1 0 100-2 1 1 0 000 2z"></path>
+            </svg>
+          </div>
+          <div className="px-4 py-6 bg-white rounded-r-lg flex justify-between items-center w-full border border-l-transparent border-gray-200">
+            <div>{message}</div>
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" className="fill-current text-gray-700" viewBox="0 0 16 16" width="20" height="20">
+                <path fillRule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )
+    case "success":
+      return (
+        <div className="fixed z-10 flex top-4 right-4 w-96 shadow-lg rounded-lg">
+          <div className="bg-green-600 py-4 px-6 rounded-l-lg flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="text-white fill-current" viewBox="0 0 16 16" width="20" height="20"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>
+          </div>
+          <div className="px-4 py-6 bg-white rounded-r-lg flex justify-between items-center w-full border border-l-transparent border-gray-200">
+            <div>{message}</div>
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" className="fill-current text-gray-700" viewBox="0 0 16 16" width="20" height="20"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path></svg>
+            </button>
+          </div>
+        </div>
+      )
+  }
 }
 
-function InvalidIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-6 w-6"
-    >
-      <path
-        fillRule="evenodd"
-        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm6.22-3.22a.75.75 0 011.06 0L12 10.94l2.47-2.47a.75.75 0 111.06 1.06L13.06 12l2.47 2.47a.75.75 0 11-1.06 1.06L12 13.06l-2.47 2.47a.75.75 0 01-1.06-1.06L10.94 12l-2.47-2.47a.75.75 0 010-1.06z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-function useAutoDismissAlert(duration = 3000) {
-  const [show, setShow] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShow(false), duration);
-    return () => clearTimeout(timer);
-  }, [duration]);
-
-  return [show, setShow];
-}
-export function ValidAlert({ message }) {
-  const [open, setOpen] = useAutoDismissAlert();
-  return (
-
-    <>
-      <Alert
-        open={open}
-        onClose={() => setOpen(false)}
-        animate={{
-          mount: { y: 0 },
-          unmount: { y: 100 },
-        }}
-        icon={<ValidIcon />} 
-        className="rounded-none border-l-4 border-[#2ec946] bg-[#2ec946]/10 font-medium text-[#2ec946]">
-        {message}
-      </Alert>
-    </>
-  );
-}
-
-export function InvalidAlert({ message }) {
-  const [open, setOpen] = useAutoDismissAlert();
-  return (
-
-    <>
-      <Alert
-        open={open}
-        onClose={() => setOpen(false)}
-        animate={{
-          mount: { y: 0 },
-          unmount: { y: 100 },
-        }}
-        icon={<InvalidIcon />} className="rounded-none border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]"
-        // border-[#ff4c4c] bg-[#ff4c4c]/10 font-medium text-[#ff4c4c]
-        >
-        {message}
-      </Alert>
-    </>
-  );
+export function Alert({ type, message }) {
+  return getAlert(type, message)
 }

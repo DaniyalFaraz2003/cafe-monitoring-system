@@ -2,9 +2,9 @@ const express = require("express")
 const { login } = require("../controllers/login")
 const { getTreeData } = require("../controllers/treeData")
 const { getDashboardData } = require("../controllers/dashboard")
-const { UserEntryForm } = require("../controllers/UserEntryForm")
+const { UserEntryForm, validate } = require("../controllers/UserEntryForm")
 const { download } = require("../controllers/download")
-const { getReportData } = require("../controllers/report")
+const { getReportDataTime, getReportDataDate } = require("../controllers/report")
 
 const router = express.Router()
 
@@ -13,7 +13,10 @@ router.route('/treeData').get(getTreeData);
 router.route('/dashboard').post(getDashboardData)
 router.route('/UserEntryForm').post(UserEntryForm)
 router.route('/download').post(download);
-router.route('/report').post(getReportData)
+router.route('/validate/:id').get(validate)
+
+router.route('/report/:city').post(getReportDataTime);
+router.route('/report/:start/:end').post(getReportDataDate);
 
 
 
