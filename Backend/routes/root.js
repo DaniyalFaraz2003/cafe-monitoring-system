@@ -6,7 +6,7 @@ const { UserEntryForm, validate } = require("../controllers/UserEntryForm")
 const { download } = require("../controllers/download")
 const { getReportDataTime, getReportDataDate } = require("../controllers/report")
 
-const { AdminPanel } = require("../controllers/adminpanel")
+const { Feedback } = require("../controllers/adminpanel")
 
 const router = express.Router()
 
@@ -18,7 +18,7 @@ router.route('/download').post(download);
 router.route('/validate/:id').get(validate)
 
 
-router.route('/AdminPanel').post(AdminPanel)
+router.route('/Feedback').post(AdminPanel)
 
 router.route('/report/:city').post(getReportDataTime);
 router.route('/report/:start/:end').post(getReportDataDate);

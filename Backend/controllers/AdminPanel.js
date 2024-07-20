@@ -1,6 +1,6 @@
 const db = require("../db/config");
 
-const AdminPanel = async (req, res) => {
+const Feedback = async (req, res) => {
     const { Emp_ID, description, rating } = req.body
 
     try {
@@ -19,5 +19,5 @@ const AdminPanel = async (req, res) => {
 }
 
 module.exports = {
-    AdminPanel
+    Feedback
 }
