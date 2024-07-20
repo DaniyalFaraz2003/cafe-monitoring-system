@@ -108,7 +108,6 @@ export function Table() {
     startDate: null,
     endDate: null
   });
-  console.log(value);
 
   const handleValueChange = newValue => {
     setValue(newValue);
@@ -177,7 +176,6 @@ export function Table() {
       console.error('Error:', error);
     }
   }
-  console.log(field);
 
   return (
     <Card className="h-full w-full">

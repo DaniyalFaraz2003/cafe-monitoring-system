@@ -67,7 +67,6 @@ const transformData = (data) => {
 
 export default function LineChart({ data }) {
     const transformed = transformData(data);
-    console.log(transformed);
     const chartData = {
         labels: transformed.map((item) => item.date),
         datasets: [
