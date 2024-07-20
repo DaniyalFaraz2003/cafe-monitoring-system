@@ -3,13 +3,20 @@ import {
     ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import _404 from "../404/404";
 
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
     const loggedIn = useSelector((state) => state.avltree.loggedIn);
+
+    const [rating, setRating] = useState(0); // State to store the selected rating
+
+    const handleRating = (value) => {
+        setRating(value);
+    };
+
     return (
         <>
         {loggedIn ? <div className="w-full h-full p-10">
@@ -67,6 +74,7 @@ const AdminPanel = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="basis-1/2">
                     <div
                         type="div"
@@ -116,6 +124,62 @@ const AdminPanel = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="mt-10 w-full flex justify-center bg-gray-100 p-10 ">
+    <div className="w-1/2">
+        <div className="relative w-full flex justify-center items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-[#0a5282] rounded-md">
+            <span className="pl-2 mx-1">Employee Feedback</span>
+        </div>
+        <div className="mt-5 bg-white rounded-lg shadow">
+            <div className="flex">
+                <div className="flex-1 py-5 pl-5 overflow-hidden">
+                    <h1 className="inline text-2xl font-semibold leading-none">Feedback Form</h1>
+                </div>
+            </div>
+            <div className="px-5 pb-5">
+                <input
+                    placeholder="Employee ID"
+                    className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                />
+                <textarea
+                    placeholder="Feedback Description"
+                    className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
+                ></textarea>
+
+                <div className="mt-4">
+                    <label className="text-gray-600">Rating:</label>
+                    <div className="flex space-x-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <svg
+                                key={star}
+                                className={`w-6 h-6 cursor-pointer ${star <= rating ? 'text-yellow-500' : 'text-gray-400'} hover:text-yellow-500`}
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                                onClick={() => handleRating(star)}
+                            >
+                                <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.874 1.417 8.275L12 18.896l-7.353 3.86 1.417-8.275L0 9.306l8.332-1.151z" />
+                            </svg>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+
+            <hr className="mt-4" />
+            <div className="flex flex-row-reverse p-3">
+                <div className="flex-initial">
+                    <Button className="flex items-center bg-green-600">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 18">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L7 12.172 4.707 9.879a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l9-9z" clipRule="evenodd"></path>
+                        </svg>
+                        <span className="pl-2">Submit</span>
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
         </div> : <_404 />}
         </>
     );
