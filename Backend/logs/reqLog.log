@@ -139,3 +139,6 @@
 20240720	12:33:41	914cbe7b-1aa2-4c93-a2a0-ba78aa7d82e9	POST	/api/v1/dashboard	http://localhost:5173
 20240720	12:33:43	6c357740-30b7-48f4-aea5-e3c40b9b4c62	POST	/api/v1/dashboard	http://localhost:5173
 20240720	12:41:07	25251aa1-475f-43c1-ab08-8de111fee7e5	POST	/api/v1/dashboard	http://localhost:5173
+20240720	13:04:35	dc0db597-377f-46db-b4fe-890ee277ae57	POST	/api/v1/dashboard	http://localhost:5173
+20240720	13:04:40	f1fa56f2-7214-46df-bca9-5ae466949065	POST	/api/v1/report/Islamabad	http://localhost:5173
+20240720	13:04:43	3576d3a7-ed33-4ff8-ad7b-93cc6066f137	POST	/api/v1/dashboard	http://localhost:5173
