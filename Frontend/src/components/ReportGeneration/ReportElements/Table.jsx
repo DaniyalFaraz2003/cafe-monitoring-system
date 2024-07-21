@@ -123,6 +123,61 @@ export function Table() {
   };
 
   useEffect(() => {
+    if (!sortBy) return;
+    if (search) {
+      setSearchData(() => {
+        const array = [...searchData]
+        const fieldMap = {
+          "ID": "id",
+          "Name": "name",
+          "Time": "mealtime",
+          "Date": "mealdate"
+        }
+        array.sort((left, right) => {
+          let a = left[`${fieldMap[`${sortBy}`]}`];
+          let b = right[`${fieldMap[`${sortBy}`]}`];
+          if (fieldMap[`${sortBy}`] === "mealdate") {
+            a = new Date(a);
+            b = new Date(b);
+          }
+          else if (fieldMap[`${sortBy}`] === "mealtime") {
+            a = new Date(`1970-01-01T${a}Z`)
+            b = new Date(`1970-01-01T${b}Z`)
+          }
+          return (a > b) - (a < b)
+        })
+        return array;
+      })
+    }
+    else {
+      setData(() => {
+        const array = [...data]
+        const fieldMap = {
+          "ID": "id",
+          "Name": "name",
+          "Time": "mealtime",
+          "Date": "mealdate"
+        }
+        array.sort((left, right) => {
+          let a = left[`${fieldMap[`${sortBy}`]}`];
+          let b = right[`${fieldMap[`${sortBy}`]}`];
+          console.log(sortBy);
+          if (fieldMap[`${sortBy}`] === "mealdate") {
+            a = new Date(a);
+            b = new Date(b);
+          }
+          else if (fieldMap[`${sortBy}`] === "mealtime") {
+            a = new Date(`1970-01-01T${a}Z`)
+            b = new Date(`1970-01-01T${b}Z`)
+          }
+          return (a > b) - (a < b)
+        })
+        return array;
+      })
+    }
+  }, [sortBy]) 
+
+  useEffect(() => {
     if (search) {
       setSearchData(() => {
         const fieldMap = {
@@ -158,7 +213,7 @@ export function Table() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          data: data,
+          data: search ? searchData : data,
           city: city,
           time: filter.toUpperCase()
         }),
@@ -214,8 +269,8 @@ export function Table() {
                 >
                   <Option value="ID">ID</Option>
                   <Option value="Name">Name</Option>
-                  <Option value="Meal Type">Time</Option>
-                  <Option value="City">Date</Option>
+                  <Option value="Time">Time</Option>
+                  <Option value="Date">Date</Option>
                 </Select>
                 <Select
                   name="items"

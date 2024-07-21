@@ -135,17 +135,6 @@ function UserEntryForm() {
 
               <hr className="mt-4" />
               <div className="flex flex-row-reverse p-3 w-full justify-center">
-                {/* <div className="flex-initial pl-3">
-                                <button 
-                                    type="button" 
-                                    className="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-black rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-900 transition duration-300 transform active:scale-95 ease-in-out"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="48" fill="currentColor" className="w-5 h-5 mr-1">
-                                        <path d="m261 873 25-25-117-118h709v-36H169l117-118-25-25-170 170 170 170ZM600 532h59V269h-59v263Zm-162 0h58V269h-58v263Zm-162 0h59V269h-59v263ZM480 536Z"></path>
-                                    </svg>
-                                    <span className="pl-2 mx-1">Reset</span>
-                                </button>
-                            </div> */}
                 <div className="flex w-full items-center justify-center">
                   <Button className="flex items-center justify-center bg-green-600 w-[20%]" onClick={handleSubmit}>
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 18">
