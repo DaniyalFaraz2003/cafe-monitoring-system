@@ -104,7 +104,8 @@ export function Table() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
   const [field, setField] = useState("");
-  const [sortBy, setSortBy] = useState("")
+  const [sortBy, setSortBy] = useState("");
+  const [itemsPage, setItemsPage] = useState(5);
 
 
   const [value, setValue] = useState({
@@ -205,7 +206,7 @@ export function Table() {
               <p className="font-bold text-center">Advanced Options</p>
               <div className="flex flex-row gap-5">
                 <Select
-                  name="mealTypeInput"
+                  name="sort"
                   defaultValue="ID"
                   label="Sort By"
                   className="bg-white font-bold"
@@ -217,11 +218,11 @@ export function Table() {
                   <Option value="City">Date</Option>
                 </Select>
                 <Select
-                  name="mealTypeInput"
+                  name="items"
                   defaultValue="5"
                   label="Items Per Page"
                   className="bg-white font-bold"
-                  onChange={(e) => setSortBy(e)}
+                  onChange={(e) => setItemsPage(e)}
                 >
                   <Option value="ID">5</Option>
                   <Option value="Name">10</Option>

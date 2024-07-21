@@ -10,7 +10,7 @@ function FilterCategorySelectForm({ setSearchField }) {
   return (
     <div className="flex flex-row items-center justify-center">
       <Select
-        name="mealTypeInput"
+        name="filter"
         defaultValue="ID"
         label="Select Field To Filter By"
         className="bg-white font-bold"
