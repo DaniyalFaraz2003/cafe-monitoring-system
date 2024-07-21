@@ -49,6 +49,7 @@ function UserEntryForm() {
         setAlertMessage("User ID Valid!");
         setAlertType("success");
       } else {
+        setDefaultPref("");
         setAlertMessage("User ID Invalid!");
         setAlertType("error");
       }
@@ -60,17 +61,26 @@ function UserEntryForm() {
   };
   const handleSubmit = async () => {
     try {
+      const preference = mealPref ? mealPref : defaultPref;
       const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {
-        Emp_ID: empId, meal_pref: mealPref, city: city
+        Emp_ID: empId, meal_pref: preference, city: city
       })
-      if (response.data.message === "ok") {
-
-      } else {
-
+      if (response.data.message === "meal_already_registered") {
+        setAlertMessage("Meal Already Registered!");
+        setAlertType("error");
+      } else if (response.data.message === "ok") {
+        setAlertMessage("Meal Registered Successfully!");
+        setAlertType("success");
+      }
+      else{
+        setAlertMessage("Failed to register meal!");
+        setAlertType("error");
       }
     } catch (error) {
-
+      setAlertMessage("An Error Occurred!");
+      setAlertType("error");
     }
+    setShowAlert(true);
   };
   return (
     <div className="w-full h-full p-10">
@@ -137,7 +147,7 @@ function UserEntryForm() {
                                 </button>
                             </div> */}
                 <div className="flex w-full items-center justify-center">
-                  <Button className="flex items-center justify-center bg-green-600 w-[20%]">
+                  <Button className="flex items-center justify-center bg-green-600 w-[20%]" onClick={handleSubmit}>
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 18">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L7 12.172 4.707 9.879a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l9-9z" clipRule="evenodd"></path>
                     </svg>
