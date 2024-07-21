@@ -3,7 +3,7 @@ const db = require("../db/config");
 // SQL QUERY ERROR : Handle getting values from frontend/UserEntryForm.js, entered by user and then apply INSERT INTO query accordingly
 
 const validate = async (req, res) => {
-    const empId = req.params.id;
+    const {Emp_ID} = req.params.id;
     try {
         // Check if the user has already registered a meal for today
         const [existingRecords] = await db.query('SELECT * FROM meal_record WHERE Emp_ID = ? AND meal_date = CURRENT_DATE();', [Emp_ID]);
@@ -15,7 +15,7 @@ const validate = async (req, res) => {
         }
 
         // If no meal registered for today, proceed to insert the new meal record
-        const [records] = await db.query('INSERT INTO meal_record (Emp_ID, meal_pref, city, meal_date) VALUES (?, ?, ?, CURRENT_DATE());', [empId, meal_pref, city]);
+        const [records] = await db.query('INSERT INTO meal_record (Emp_ID, meal_pref, city, meal_date) VALUES (?, ?, ?, CURRENT_DATE());', [Emp_ID, meal_pref, city]);
         res.json({
             message: "ok"
         });
