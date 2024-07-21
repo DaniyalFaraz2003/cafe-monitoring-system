@@ -274,15 +274,15 @@ export function Table() {
                 </Select>
                 <Select
                   name="items"
-                  defaultValue="5"
+                  defaultValue={'5'}
                   label="Items Per Page"
                   className="bg-white font-bold"
                   onChange={(e) => setItemsPage(e)}
                 >
-                  <Option value="ID">5</Option>
-                  <Option value="Name">10</Option>
-                  <Option value="Meal Type">15</Option>
-                  <Option value="City">20</Option>
+                  <Option value="5">5</Option>
+                  <Option value="10">10</Option>
+                  <Option value="15">15</Option>
+                  <Option value="20">20</Option>
                 </Select>
               </div>
             </div>
