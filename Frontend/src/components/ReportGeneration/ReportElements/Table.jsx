@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import FilterCategorySelectForm from "../../FilterCategorySelectForm/FilterCategorySelectForm";
 import axios from "axios";
 import Datepicker from "react-tailwindcss-datepicker";
+import { cloneDeep } from "lodash";
 
 const TABS = [
   {
@@ -161,26 +162,28 @@ export function Table() {
     }
     else {
       setData(() => {
-        const array = [...data]
+        const array = cloneDeep(data);
         const fieldMap = {
           "ID": "id",
           "Name": "name",
           "Time": "mealtime",
           "Date": "mealdate"
         }
-        array.sort((left, right) => {
-          let a = left[`${fieldMap[`${sortBy}`]}`];
-          let b = right[`${fieldMap[`${sortBy}`]}`];
-          console.log(sortBy);
-          if (fieldMap[`${sortBy}`] === "mealdate") {
-            a = new Date(a);
-            b = new Date(b);
-          }
-          else if (fieldMap[`${sortBy}`] === "mealtime") {
-            a = new Date(`1970-01-01T${a}Z`)
-            b = new Date(`1970-01-01T${b}Z`)
-          }
-          return (a > b) - (a < b)
+        array.forEach((item) => {
+          item.sort((left, right) => {
+            let a = left[`${fieldMap[`${sortBy}`]}`];
+            let b = right[`${fieldMap[`${sortBy}`]}`];
+            console.log(sortBy);
+            if (fieldMap[`${sortBy}`] === "mealdate") {
+              a = new Date(a);
+              b = new Date(b);
+            }
+            else if (fieldMap[`${sortBy}`] === "mealtime") {
+              a = new Date(`1970-01-01T${a}Z`)
+              b = new Date(`1970-01-01T${b}Z`)
+            }
+            return (a > b) - (a < b)
+          })
         })
         return array;
       })
