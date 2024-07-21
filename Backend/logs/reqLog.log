@@ -364,11 +364,3 @@
 20240721	01:06:48	792af845-7c46-4bfe-9260-317ecfbdc01c	POST	/api/v1/login	http://localhost:5173
 20240721	01:06:48	ef8ab3b8-3a4a-48be-b4aa-06a5f881bc68	GET	/api/v1/treeData	http://localhost:5173
 20240721	01:06:48	1d6b430f-e192-42c8-8d84-48d9ccf2a099	POST	/api/v1/dashboard	http://localhost:5173
-20240721	11:42:22	2a4dc825-358c-4a39-bd62-4068198431be	POST	/api/v1/login	http://localhost:5173
-20240721	11:42:22	d0de5d63-ee19-495f-b814-6d98af2e21d1	GET	/api/v1/treeData	http://localhost:5173
-20240721	11:42:23	4776747c-0993-4774-bba8-b5c229885a3b	POST	/api/v1/dashboard	http://localhost:5173
-20240721	11:43:56	22095e2d-f065-463b-b1d8-bd69fce360fc	GET	/api/v1/validate/https://git-scm.com/downloads	http://localhost:5173
-20240721	11:44:06	003a5830-ec26-411c-abf1-67b3244c7539	GET	/api/v1/validate/16254	http://localhost:5173
-20240721	11:44:14	ea701380-78c8-4d09-bf9e-d660c0209df9	GET	/api/v1/validate/28615	http://localhost:5173
-20240721	11:44:23	c3f00698-7c9c-40c6-9c34-165881f901c8	GET	/api/v1/validate/74528	http://localhost:5173
-20240721	11:44:33	a14d2b93-68af-4ba1-afbd-2b9287c9018a	GET	/api/v1/validate/16254	http://localhost:5173

@@ -16,6 +16,7 @@ router.route('/download').post(download);
 router.route('/validate/:id').get(validate)
 
 
+router.route('/Feedback').post(Feedback)
 
 router.route('/report/:city').post(getReportDataTime);
 router.route('/report/:start/:end').post(getReportDataDate);

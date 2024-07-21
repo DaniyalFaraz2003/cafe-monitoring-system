@@ -3,6 +3,8 @@ import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import chunk from 'lodash/chunk';
+import flatten from 'lodash/flatten';
 import {
   Card,
   CardHeader,
@@ -23,6 +25,7 @@ import { useSelector } from "react-redux";
 import FilterCategorySelectForm from "../../FilterCategorySelectForm/FilterCategorySelectForm";
 import axios from "axios";
 import Datepicker from "react-tailwindcss-datepicker";
+import { cloneDeep } from "lodash";
 
 const TABS = [
   {
@@ -74,23 +77,23 @@ function convertTime(time) {
   return newTime;
 }
 
-const fetchDataTime = async (time, city, setData) => {
+const fetchDataTime = async (time, city, setData, pageSize) => {
   try {
     const response = await axios.post(`http://localhost:5000/api/v1/report/${city}`, {
       timeFrame: time
     })
-    setData(response.data);
+    setData(chunk(response.data, pageSize));
   } catch (error) {
     console.log("Error: ", error);
   }
 }
 
-const fetchDataDate = async (city, start, end, setData) => {
+const fetchDataDate = async (city, start, end, setData, pageSize) => {
   try {
     const response = await axios.post(`http://localhost:5000/api/v1/report/${start}/${end}`, {
       city: city
     })
-    setData(response.data);
+    setData(chunk(response.data, pageSize));
   } catch (error) {
     console.log("Error: ", error);
   }
@@ -99,12 +102,14 @@ const fetchDataDate = async (city, start, end, setData) => {
 export function Table() {
   // avltree.result the result here is came from the avltreeReducer.js
   const city = useSelector((state) => state.avltree.city);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([[]]);
   const [searchData, setSearchData] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("daily");
   const [field, setField] = useState("");
-  const [sortBy, setSortBy] = useState("")
+  const [sortBy, setSortBy] = useState("");
+  const [itemsPage, setItemsPage] = useState(5);
+  const [pageIndex, setPageIndex] = useState(0);
 
 
   const [value, setValue] = useState({
@@ -116,10 +121,74 @@ export function Table() {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    setData(() => {
+      const flattened = flatten(data);
+      return chunk(flattened, itemsPage);
+    })
+  }, [itemsPage])
+
   const refresh = (e) => {
     e.preventDefault();
-    fetchDataTime(filter, city, setData);
+    fetchDataTime(filter, city, setData, itemsPage);
   };
+
+  useEffect(() => {
+    if (!sortBy) return;
+    if (search) {
+      setSearchData(() => {
+        const array = [...searchData]
+        const fieldMap = {
+          "ID": "id",
+          "Name": "name",
+          "Time": "mealtime",
+          "Date": "mealdate"
+        }
+        array.sort((left, right) => {
+          let a = left[`${fieldMap[`${sortBy}`]}`];
+          let b = right[`${fieldMap[`${sortBy}`]}`];
+          if (fieldMap[`${sortBy}`] === "mealdate") {
+            a = new Date(a);
+            b = new Date(b);
+          }
+          else if (fieldMap[`${sortBy}`] === "mealtime") {
+            a = new Date(`1970-01-01T${a}Z`)
+            b = new Date(`1970-01-01T${b}Z`)
+          }
+          return (a > b) - (a < b)
+        })
+        return array;
+      })
+    }
+    else {
+      setData(() => {
+        const array = cloneDeep(data);
+        const fieldMap = {
+          "ID": "id",
+          "Name": "name",
+          "Time": "mealtime",
+          "Date": "mealdate"
+        }
+        array.forEach((item) => {
+          item.sort((left, right) => {
+            let a = left[`${fieldMap[`${sortBy}`]}`];
+            let b = right[`${fieldMap[`${sortBy}`]}`];
+            console.log(sortBy);
+            if (fieldMap[`${sortBy}`] === "mealdate") {
+              a = new Date(a);
+              b = new Date(b);
+            }
+            else if (fieldMap[`${sortBy}`] === "mealtime") {
+              a = new Date(`1970-01-01T${a}Z`)
+              b = new Date(`1970-01-01T${b}Z`)
+            }
+            return (a > b) - (a < b)
+          })
+        })
+        return array;
+      })
+    }
+  }, [sortBy])
 
   useEffect(() => {
     if (search) {
@@ -130,23 +199,23 @@ export function Table() {
           "Meal Type": "mealtype",
           "City": "city"
         }
-        return data.filter((item) => {
+        return data[pageIndex].filter((item) => {
           return item[`${fieldMap[`${field}`]}`].toString().toLowerCase().startsWith(search.toLowerCase());
         })
       })
     } else {
-      // fetchDataTime(filter, city, setData);
+      // fetchDataTime(filter, city, setData, itemsPage);
     }
   }, [search]);
 
   useEffect(() => {
     if (value.startDate && value.endDate) {
-      fetchDataDate(city, value.startDate, value.endDate, setData)
+      fetchDataDate(city, value.startDate, value.endDate, setData, itemsPage)
     }
   }, [value])
 
   useEffect(() => {
-    fetchDataTime(filter, city, setData);
+    fetchDataTime(filter, city, setData, itemsPage);
   }, [filter])
 
   const handleDownload = async () => {
@@ -157,7 +226,7 @@ export function Table() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          data: data,
+          data: search ? searchData : data[pageIndex],
           city: city,
           time: filter.toUpperCase()
         }),
@@ -205,7 +274,7 @@ export function Table() {
               <p className="font-bold text-center">Advanced Options</p>
               <div className="flex flex-row gap-5">
                 <Select
-                  name="mealTypeInput"
+                  name="sort"
                   defaultValue="ID"
                   label="Sort By"
                   className="bg-white font-bold"
@@ -213,20 +282,20 @@ export function Table() {
                 >
                   <Option value="ID">ID</Option>
                   <Option value="Name">Name</Option>
-                  <Option value="Meal Type">Time</Option>
-                  <Option value="City">Date</Option>
+                  <Option value="Time">Time</Option>
+                  <Option value="Date">Date</Option>
                 </Select>
                 <Select
-                  name="mealTypeInput"
-                  defaultValue="5"
+                  name="items"
+                  defaultValue={'5'}
                   label="Items Per Page"
                   className="bg-white font-bold"
-                  onChange={(e) => setSortBy(e)}
+                  onChange={(e) => setItemsPage(e)}
                 >
-                  <Option value="ID">5</Option>
-                  <Option value="Name">10</Option>
-                  <Option value="Meal Type">15</Option>
-                  <Option value="City">20</Option>
+                  <Option value="5">5</Option>
+                  <Option value="10">10</Option>
+                  <Option value="15">15</Option>
+                  <Option value="20">20</Option>
                 </Select>
               </div>
             </div>
@@ -377,7 +446,7 @@ export function Table() {
                 );
               }
             )}
-            {!search && data.map(
+            {!search && data[pageIndex] && data[pageIndex].map(
               ({ id, name, mealtype, mealtime, mealdate, city }, index) => {
                 const isLast = index === data.length - 1;
                 const classes = isLast
@@ -456,33 +525,25 @@ export function Table() {
         </table>
       </div>
       <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Button variant="outlined" size="sm">
+        <Button variant="outlined" size="sm" onClick={() => setPageIndex(() => {
+          if (pageIndex > 0) return pageIndex - 1;
+          return pageIndex;
+        })}>
           Previous
         </Button>
         <div className="flex items-center gap-2">
-          <IconButton variant="outlined" size="sm">
-            1
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            9
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            10
-          </IconButton>
+          {data.map((_, index) => {
+            return (
+              <IconButton onClick={() => setPageIndex(index)} variant={(index) === pageIndex ? "outlined" : "text"} size="sm">
+                {index + 1}
+              </IconButton>
+            )
+          })}
         </div>
-        <Button variant="outlined" size="sm">
+        <Button variant="outlined" size="sm" onClick={() => setPageIndex(() => {
+          if (pageIndex < (data.length - 1)) return pageIndex + 1;
+          return pageIndex;
+        })}>
           Next
         </Button>
       </CardFooter>
