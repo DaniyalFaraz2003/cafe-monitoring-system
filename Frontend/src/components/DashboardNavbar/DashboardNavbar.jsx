@@ -43,17 +43,9 @@ function DashboardNavbar() {
                     to="/UserEntryForm"
                     className="flex items-center transition-colors hover:text-blue-500"
                   >
-                    User Entry
+                    Meal Entry
                   </Link>
                 </li>
-            <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-              <Link
-                to="/adminpanel"
-                class="flex items-center transition-colors hover:text-blue-500"
-              >
-                Admin Panel
-              </Link>
-            </li>
 
                 <li className="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                   <Link
@@ -62,6 +54,14 @@ function DashboardNavbar() {
                   >
                     Report
                   </Link>
+                </li>
+                <li class="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                <Link
+                  to="/adminpanel"
+                  class="flex items-center transition-colors hover:text-blue-500"
+                >
+                  Admin Panel
+                </Link>
                 </li>
                 <li className="item block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                   <Button

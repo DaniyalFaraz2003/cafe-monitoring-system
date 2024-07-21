@@ -6,6 +6,8 @@ const { UserEntryForm, validate } = require("../controllers/UserEntryForm")
 const { download } = require("../controllers/download")
 const { getReportDataTime, getReportDataDate } = require("../controllers/report")
 
+const { Feedback } = require("../controllers/adminpanel")
+
 const router = express.Router()
 
 router.route('/login').post(login);

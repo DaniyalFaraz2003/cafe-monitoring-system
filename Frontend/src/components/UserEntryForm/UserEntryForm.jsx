@@ -20,6 +20,16 @@ function UserEntryForm() {
 
   const [defaultPref, setDefaultPref] = useState("")
 
+  const [currentDate, setCurrentDate] = useState('');
+  const [currentDay, setCurrentDay] = useState('');
+
+  useEffect(() => {
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    setCurrentDate(date.toLocaleDateString(undefined, options));
+    setCurrentDay(date.toLocaleDateString(undefined, { weekday: 'long' }));
+  }, []);
+
   useEffect(() => {
     if (showAlert) {
       const timer = setTimeout(() => {
@@ -91,6 +101,8 @@ function UserEntryForm() {
           <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
             Daily Employee Check In For Meal
           </h2>
+          <p className="text-lg text-center"> {currentDate}</p>
+          <br />
           <p className="text-xl font-bold text-center"> {city}</p>
         </div>
         <div className="form-container p-10 px-32">

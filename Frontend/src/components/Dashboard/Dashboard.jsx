@@ -4,9 +4,9 @@ import logo from "../../assets/logo.png";
 import PieChart from "../DashboardElements/PieChart";
 import BarChart from "../DashboardElements/BarChart";
 import LineChart from "../DashboardElements/LineChart";
-import diet from "../../assets/portion.png";
-import normal from "../../assets/fried-chicken.png";
-import all from "../../assets/all.png";
+import diet from "../../assets/diet.png";
+import normal from "../../assets/normal.png";
+import all from "../../assets/total.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar";
@@ -33,6 +33,16 @@ const Dashboard = () => {
     user: 0, user_1: 0,
     bar: [], line: []
   });
+
+  const [currentDate, setCurrentDate] = useState('');
+  const [currentDay, setCurrentDay] = useState('');
+
+  useEffect(() => {
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    setCurrentDate(date.toLocaleDateString(undefined, options));
+    setCurrentDay(date.toLocaleDateString(undefined, { weekday: 'long' }));
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -67,7 +77,10 @@ const Dashboard = () => {
           <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
             Cafe Admin Dashboard
           </h2>
+          <p className="text-lg text-center"> {currentDate}</p>
+          <br />
           <p className="text-xl font-bold text-center"> {city}</p>
+          
         </div>
 
         <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-10">
@@ -79,7 +92,7 @@ const Dashboard = () => {
             <div class="mb-7 grid gap-y-7 gap-x-7 grid-cols-3 w-full">
               <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                  <img src={diet} alt="" className="w-10 h-10" />
+                  <img src={diet} alt="" className="w-12 h-12" />
                 </div>
                 <div class="p-4 text-right">
                   <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Diet Meals</p>
@@ -95,7 +108,7 @@ const Dashboard = () => {
               </div>
               <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                  <img src={normal} alt="" className="w-10 h-10" />
+                  <img src={normal} alt="" className="w-12 h-12" />
                 </div>
                 <div class="p-4 text-right">
                   <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Normal Meals</p>
@@ -111,7 +124,7 @@ const Dashboard = () => {
               </div>
               <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                  <img src={all} alt="" className="w-10 h-10" />
+                  <img src={all} alt="" className="w-16 h-16" />
                 </div>
                 <div class="p-4 text-right">
                   <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Meals</p>

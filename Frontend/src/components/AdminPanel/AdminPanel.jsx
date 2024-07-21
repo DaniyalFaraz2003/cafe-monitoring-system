@@ -3,7 +3,7 @@ import {
     ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { Rating } from "@material-tailwind/react";
 import _404 from "../404/404";
@@ -14,8 +14,21 @@ const AdminPanel = () => {
 
     const [rating, setRating] = useState(1); // State to store the selected rating
 
+    
+    const [currentDate, setCurrentDate] = useState('');
+    const [currentDay, setCurrentDay] = useState('');
+    
+    useEffect(() => {
+        const date = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        setCurrentDate(date.toLocaleDateString(undefined, options));
+        setCurrentDay(date.toLocaleDateString(undefined, { weekday: 'long' }));
+    }, []);
+    
     const handleRating = (value) => {
         setRating(value);
+
+
     };
 
     return (
@@ -26,6 +39,8 @@ const AdminPanel = () => {
                     <h2 className="text-3xl font-bold text-center text-gray-500 my-5">
                         Cafe Admin Panel
                     </h2>
+                    <p className="text-lg text-center"> {currentDate}</p>
+                    <br />
                     <p className="text-xl font-bold text-center"> {city}</p>
                 </div>
                 <div className="mt-5 flex flex-row gap-10 bg-gray-100 p-10">
