@@ -78,7 +78,7 @@ const Dashboard = () => {
             <div className="flex flex-row gap-3 mb-10 bg-transparent">
               <TimeFrameSelector setTimeFrame={setTimeFrame} />
             </div>
-            <div class="mb-7 grid gap-y-7 gap-x-7 md:grid-cols-2 xl:grid-cols-2 w-full">
+            <div class="mb-7 grid gap-y-7 gap-x-7 grid-cols-3 w-full">
               <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-white">
@@ -130,24 +130,6 @@ const Dashboard = () => {
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                     <strong class={`${result3 > 0 ? "text-green-500" : "text-red-500"}`}>{result3 > 0 ? "+" + result3 + "%" : result3 + "%"}</strong>&nbsp;than {
-                      timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
-                    }
-                  </p>
-                </div>
-              </div>
-              <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-                <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-white">
-                    <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
-                  </svg>
-                </div>
-                <div class="p-4 text-right">
-                  <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Unique Employees Served</p>
-                  <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{data.user}</h4>
-                </div>
-                <div class="border-t border-blue-gray-50 p-4">
-                  <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result4 > 0 ? "text-green-500" : "text-red-500"}`}>{result4 > 0 ? "+" + result4 + "%" : result4 + "%"}</strong>&nbsp;than {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
                     }
                   </p>
