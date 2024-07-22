@@ -14,17 +14,19 @@ import axios from "axios"
 import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 import _404 from "../404/404";
 //funcions to calculate percentage increase whcih is used in the dashboard 
+//first parameter is thr capacity and second is consumed
 function percentageIncrease(startVal, endVal) {
-  const diff = endVal - startVal;
-  if (startVal === 0) startVal = 1;
-  const fraction = diff / startVal;
-  const precent = fraction * 100;
-  return precent;
+
+  const percentage = (startVal / endVal) ;
+  return percentage.toFixed(2);
 }
 
 const Dashboard = () => {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
+  const capacity=useSelector((state)=>state.avltree.capacity)
+  console.log("dietcapacity,",capacity[0])
+  console.log("normalcapacity",capacity[1])
   const [timeFrame, setTimeFrame] = useState("daily");
   const [data, setData] = useState({
     totalDiet: 0, totalDiet_1: 0,
@@ -64,9 +66,10 @@ const Dashboard = () => {
     loadData();
   }, [timeFrame]);
 
-  const result1 = percentageIncrease(data.totalDiet_1, data.totalDiet);
-  const result2 = percentageIncrease(data.totalNormal_1, data.totalNormal);
-  const result3 = percentageIncrease(data.total_1, data.total);
+  const result1 = percentageIncrease(capacity[0], data.totalDiet);
+  console.log(data.totalNormal_1, data.totalNormal)
+  const result2 = percentageIncrease(capacity[1], data.totalNormal);
+  const result3 = percentageIncrease(capacity[0]+capacity[1], data.total);
   const result4 = percentageIncrease(data.user_1, data.user);
 
   return (

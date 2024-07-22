@@ -3,8 +3,7 @@ import { Alert } from "../AlertComponent/AlertComponent";
 import "./UserEntryForm.css";
 import { useSelector } from "react-redux";
 import DashboardNavbar from "../DashboardNavbar/DashboardNavbar"
-import { Button, Radio } from "@material-tailwind/react";;
-import { search } from "../../redux/avltreeReducer";
+import { Button, Radio } from "@material-tailwind/react";
 import _404 from "../404/404";
 import axios from "axios"
 

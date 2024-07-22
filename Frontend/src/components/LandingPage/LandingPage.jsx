@@ -2,7 +2,6 @@ import React from "react";
 import img1 from "../../assets/logo.png";
 import { signin } from "../../redux/avltreeReducer";
 import { useDispatch } from "react-redux";
-import { insert } from "../../redux/avltreeReducer";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,17 +24,6 @@ const LandingPage = () => {
       const { message, city } = response.data;
       if (message === "ok") {
         dispatch(signin(city));
-        try {
-          const response = await axios.get(
-            `http://localhost:5000/api/v1/treeData`
-          );
-          const data = response.data;
-          data.forEach((item) => {
-            dispatch(insert(item));
-          });
-        } catch (error) {
-          console.log(error);
-        }
         navigate("/Dashboard");
       } else {
         setMessage("Incorrect Username Or Password");

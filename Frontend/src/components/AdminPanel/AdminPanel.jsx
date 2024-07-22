@@ -9,6 +9,8 @@ import { Rating } from "@material-tailwind/react";
 import _404 from "../404/404";
 import axios from "axios";
 import { Alert } from "../AlertComponent/AlertComponent";
+import { useDispatch } from "react-redux";
+import { setCapacity } from "../../redux/avltreeReducer";
 
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
@@ -23,6 +25,28 @@ const AdminPanel = () => {
 
     const [currentDate, setCurrentDate] = useState('');
     const [currentDay, setCurrentDay] = useState('');
+
+    const dispatch = useDispatch();
+
+    const [quantityDiet, setQuantityDiet] = useState("");
+    const [quantityNormal, setQuantityNormal] = useState("");
+
+    const handleQuantityForm = () => {
+        try {
+            if (isNaN(parseInt(quantityDiet)) || isNaN(parseInt(quantityNormal))) {
+                setAlertMessage("Invalid Quantity Value");
+                setAlertType("error");
+            } else {
+                dispatch(setCapacity([parseInt(quantityDiet), parseInt(quantityNormal)]));
+                setAlertMessage("Quantity Updated Successfully");
+                setAlertType("success");
+            }
+        } catch (error) {
+            setAlertMessage("Quantity Updation Failed");
+            setAlertType("error");
+        }
+        setShowAlert(true);
+    }
 
     useEffect(() => {
         const date = new Date();
@@ -130,10 +154,12 @@ const AdminPanel = () => {
                             </div>
                             <div className="px-5 pb-5">
                                 <input
+                                    onChange={(e) => setQuantityNormal(e.target.value)}
                                     placeholder="Normal Meal Quantity"
                                     className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                 />
                                 <input
+                                    onChange={(e) => setQuantityDiet(e.target.value)}
                                     placeholder="Diet Meal Quantity"
                                     className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                 />
@@ -142,7 +168,7 @@ const AdminPanel = () => {
                             <hr className="mt-4" />
                             <div className="flex flex-row-reverse p-3">
                                 <div className="flex-initial">
-                                    <Button className="flex items-center bg-green-600">
+                                    <Button className="flex items-center bg-green-600" onClick={handleQuantityForm}>
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 18 18">
                                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414-1.414L7 12.172 4.707 9.879a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l9-9z" clipRule="evenodd"></path>
                                         </svg>
