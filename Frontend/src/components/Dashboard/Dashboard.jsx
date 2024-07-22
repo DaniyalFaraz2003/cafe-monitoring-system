@@ -15,9 +15,10 @@ import TimeFrameSelector from "../TimeFrameSelector/TimeFrameSelector";
 import _404 from "../404/404";
 //funcions to calculate percentage increase whcih is used in the dashboard 
 //first parameter is thr capacity and second is consumed
-function percentageIncrease(startVal, endVal) {
-
-  const percentage = (startVal / endVal) ;
+function percentageIncrease(capacity, consumed) {
+console.log("capacity",capacity)
+console.log("consumed",consumed)
+  const percentage = (consumed / capacity) * 100;
   return percentage.toFixed(2);
 }
 
@@ -65,10 +66,11 @@ const Dashboard = () => {
     }
     loadData();
   }, [timeFrame]);
-
+console.log("diet info")
   const result1 = percentageIncrease(capacity[0], data.totalDiet);
-  console.log(data.totalNormal_1, data.totalNormal)
+  console.log("normal info")
   const result2 = percentageIncrease(capacity[1], data.totalNormal);
+  console.log("total info")
   const result3 = percentageIncrease(capacity[0]+capacity[1], data.total);
   const result4 = percentageIncrease(data.user_1, data.user);
 
