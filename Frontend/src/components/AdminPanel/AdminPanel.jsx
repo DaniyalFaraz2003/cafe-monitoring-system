@@ -11,6 +11,7 @@ import axios from "axios";
 import { Alert } from "../AlertComponent/AlertComponent";
 import { useDispatch } from "react-redux";
 import { setCapacity } from "../../redux/avltreeReducer";
+import excel from "../../assets/excel.png"
 
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
@@ -26,10 +27,41 @@ const AdminPanel = () => {
     const [currentDate, setCurrentDate] = useState('');
     const [currentDay, setCurrentDay] = useState('');
 
-    const dispatch = useDispatch();
-
     const [quantityDiet, setQuantityDiet] = useState("");
     const [quantityNormal, setQuantityNormal] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const dispatch = useDispatch();
+
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file && (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type === 'application/vnd.ms-excel')) {
+            setSelectedFile(file);
+        } else {
+            setAlertMessage("Please Upload Only Excel Files");
+            setAlertType("error");
+            setShowAlert(true);
+        }
+    };
+
+    const handleFileUpload = async () => {
+        if (!selectedFile) return;
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/v1/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log('File uploaded successfully', response.data);
+        } catch (error) {
+            console.error('Error uploading file', error);
+        }
+    };
 
     const handleQuantityForm = () => {
         try {
@@ -54,10 +86,6 @@ const AdminPanel = () => {
         setCurrentDate(date.toLocaleDateString(undefined, options));
         setCurrentDay(date.toLocaleDateString(undefined, { weekday: 'long' }));
     }, []);
-
-    const handleRating = (value) => {
-        setRating(value);
-    };
 
     const handleSubmit = async () => {
         try {
@@ -118,12 +146,18 @@ const AdminPanel = () => {
                             </div>
                             <div className="px-5 pb-5 w-full h-28 mt-2 flex items-center justify-center">
                                 <form action="#" className="relative w-full h-full bg-gray-100 rounded-lg shadow-inner">
-                                    <input type="file" id="file-upload" className="hidden" />
+                                    <input type="file" id="file-upload" className="hidden" onChange={handleFileChange} accept=".xlsx, .xls" />
                                     <label htmlFor="file-upload" className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer">
                                         <p className="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
                                         <svg className="z-10 w-8 h-8 text-indigo-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
                                         </svg>
+                                        {selectedFile && (
+                                        <div className="p-4 items-center mt-2 justify-center flex flex-row border-gray-300 rounded w-full max-w-sm">
+                                            <img src={excel} alt="" className="h-20 w-20" />
+                                            <p className="text-gray-700 font-bold">File: {selectedFile.name}</p>
+                                        </div>
+                                    )}
                                     </label>
                                 </form>
                             </div>
@@ -131,7 +165,8 @@ const AdminPanel = () => {
                             <hr className="mt-4" />
                             <div className="flex flex-row-reverse p-3">
                                 <div className="flex-initial">
-                                    <Button className="flex items-center gap-3 bg-green-600">
+                                    <Button onClick={handleFileUpload}
+                                        disabled={!selectedFile} className={`flex items-center gap-3 bg-green-600 ${!selectedFile && 'opacity-50 cursor-not-allowed'}`}>
                                         <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Import
                                     </Button>
                                 </div>
