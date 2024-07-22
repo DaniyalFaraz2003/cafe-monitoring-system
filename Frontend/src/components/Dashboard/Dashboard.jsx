@@ -16,8 +16,6 @@ import _404 from "../404/404";
 //funcions to calculate percentage increase whcih is used in the dashboard 
 //first parameter is thr capacity and second is consumed
 function percentageIncrease(capacity, consumed) {
-console.log("capacity",capacity)
-console.log("consumed",consumed)
   const percentage = (consumed / capacity) * 100;
   return percentage.toFixed(2);
 }
@@ -25,14 +23,12 @@ console.log("consumed",consumed)
 const Dashboard = () => {
   const city = useSelector((state) => state.avltree.city);
   const loggedIn = useSelector((state) => state.avltree.loggedIn);
-  const capacity=useSelector((state)=>state.avltree.capacity)
-  console.log("dietcapacity,",capacity[0])
-  console.log("normalcapacity",capacity[1])
+  const capacity = useSelector((state) => state.avltree.capacity)
   const [timeFrame, setTimeFrame] = useState("daily");
   const [data, setData] = useState({
-    totalDiet: 0, totalDiet_1: 0,
-    totalNormal: 0, totalNormal_1: 0,
-    total: 0, total_1: 0,
+    totalDiet: 0, pieNormal: 0,
+    totalNormal: 0, pieDiet: 0,
+    total: 0,
     user: 0, user_1: 0,
     bar: [], line: []
   });
@@ -53,12 +49,11 @@ const Dashboard = () => {
         const response = await axios.post("http://localhost:5000/api/v1/dashboard", {
           city: city, time: timeFrame
         })
-        const { normal, diet, normal_1, diet_1, user, user_1, bar, line } = response.data;
+        const { normal, diet, bar, line, pieDiet, pieNormal } = response.data;
         setData({
           ...data,
-          totalNormal: normal, totalDiet: diet, total: normal + diet,
-          totalNormal_1: normal_1, totalDiet_1: diet_1, total_1: normal_1 + diet_1,
-          user: user, user_1: user_1, bar: bar, line: line
+          totalNormal: normal, totalDiet: diet, total: normal + diet, bar: bar, line: line,
+          pieNormal: pieNormal, pieDiet: pieDiet
         });
       } catch (error) {
         console.log(error);
@@ -66,13 +61,9 @@ const Dashboard = () => {
     }
     loadData();
   }, [timeFrame]);
-console.log("diet info")
   const result1 = percentageIncrease(capacity[0], data.totalDiet);
-  console.log("normal info")
   const result2 = percentageIncrease(capacity[1], data.totalNormal);
-  console.log("total info")
-  const result3 = percentageIncrease(capacity[0]+capacity[1], data.total);
-  const result4 = percentageIncrease(data.user_1, data.user);
+  const result3 = percentageIncrease(capacity[0] + capacity[1], data.total);
 
   return (
     <div className="w-full h-full p-10">
@@ -85,7 +76,7 @@ console.log("diet info")
           <p className="text-lg text-center"> {currentDate}</p>
           <br />
           <p className="text-xl font-bold text-center"> {city}</p>
-          
+
         </div>
 
         <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-10">
@@ -105,8 +96,8 @@ console.log("diet info")
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result1 > 0 ? "text-green-500" : "text-red-500"}`}>{result1 > 0 ? "+" + result1 + "%" : result1 + "%"}</strong>&nbsp;consumed 
-                     {/* {
+                    {isNaN(result1) ? <strong className="text-gray-700 font-bold">Please Enter Todays Quantity To See Results</strong> : <div><strong class={`${result1 < 100 ? "text-green-500" : "text-red-500"}`}>{result1 + "%"}</strong>&nbsp;Consumed</div>}
+                    {/* {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
                     } */}
                   </p>
@@ -122,8 +113,8 @@ console.log("diet info")
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result2 > 0 ? "text-green-500" : "text-red-500"}`}>{result2 > 0 ? "+" + result2 + "%" : result2 + "%"}</strong>&nbsp;consumed
-                     {/* {
+                    {isNaN(result2) ? <strong className="text-gray-700 font-bold">Please Enter Todays Quantity To See Results</strong> : <div><strong class={`${result2 < 100 ? "text-green-500" : "text-red-500"}`}>{result2 + "%"}</strong>&nbsp;Consumed</div>}
+                    {/* {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
                     } */}
                   </p>
@@ -139,8 +130,8 @@ console.log("diet info")
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result3 > 0 ? "text-green-500" : "text-red-500"}`}>{result3 > 0 ? "+" + result3 + "%" : result3 + "%"}</strong>&nbsp;consumed
-                     {/* {
+                    {isNaN(result3) ? <strong className="text-gray-700 font-bold">Please Enter Todays Quantity To See Results</strong> : <div><strong class={`${result3 < 100 ? "text-green-500" : "text-red-500"}`}>{result3 + "%"}</strong>&nbsp;Consumed</div>}
+                    {/* {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
                     } */}
                   </p>
@@ -150,7 +141,7 @@ console.log("diet info")
             {/* Charts */}
             <div className="flex flex-row gap-7 w-full mb-7">
               <div className="basis-1/3 h-full rounded-xl p-5 bg-white flex justify-center items-center">
-                <PieChart data={[{ type: "Normal", amount: data.totalNormal }, { type: "Diet", amount: data.totalDiet }]} />
+                <PieChart data={[{ type: "Normal", amount: data.pieNormal }, { type: "Diet", amount: data.pieDiet }]} />
               </div>
               <div className="flex-grow min-w-0 basis-2/3 p-5 rounded-xl bg-white">
                 <div className="w-full h-full flex justify-center items-center">

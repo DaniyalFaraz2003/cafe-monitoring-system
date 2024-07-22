@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Alert } from "../AlertComponent/AlertComponent";
 import "./UserEntryForm.css";
 import { useSelector } from "react-redux";
@@ -8,6 +8,10 @@ import _404 from "../404/404";
 import axios from "axios"
 
 function UserEntryForm() {
+  const idInput = useRef(null);
+  const defaultInput = useRef(null);
+
+
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
@@ -33,7 +37,7 @@ function UserEntryForm() {
     if (showAlert) {
       const timer = setTimeout(() => {
         setShowAlert(false);
-      }, 3000); // Adjust the time (in milliseconds) as needed
+      }, 1000); // Adjust the time (in milliseconds) as needed
 
       // Cleanup the timer if the component unmounts or if showAlert changes
       return () => clearTimeout(timer);
@@ -55,10 +59,12 @@ function UserEntryForm() {
       const response = await axios.get(`http://localhost:5000/api/v1/validate/${empId}`);
       if (response.data.message === "ok") {
         setDefaultPref(response.data.pref);
+        setMealPref(response.data.pref);
         setAlertMessage("User ID Valid!");
         setAlertType("success");
       } else {
         setDefaultPref("");
+        setMealPref("");
         setAlertMessage("User ID Invalid!");
         setAlertType("error");
       }
@@ -70,7 +76,7 @@ function UserEntryForm() {
   };
   const handleSubmit = async () => {
     try {
-      const preference = mealPref ? mealPref : defaultPref;
+      const preference = mealPref;
       const response = await axios.post("http://localhost:5000/api/v1/UserEntryForm", {
         Emp_ID: empId, meal_pref: preference, city: city
       })
@@ -89,11 +95,13 @@ function UserEntryForm() {
       setAlertMessage("An Error Occurred!");
       setAlertType("error");
     }
+    idInput.current.value = '';
     setShowAlert(true);
+
   };
   return (
     <div className="w-full h-full p-10">
-      {showAlert && <Alert type={alertType} message={alertMessage} />}
+      
       {loggedIn ? <>
         <DashboardNavbar />
         <div className="w-full basis-3/5 flex flex-col">
@@ -105,6 +113,7 @@ function UserEntryForm() {
           <p className="text-xl font-bold text-center"> {city}</p>
         </div>
         <div className="form-container p-10 px-32">
+        {showAlert && <Alert type={alertType} message={alertMessage} />}
           <div className="basis-1/2">
             <div
               type="div"
@@ -120,6 +129,7 @@ function UserEntryForm() {
               </div>
               <div className="px-5 pb-5">
                 <input
+                  ref={idInput}
                   onChange={(e) => setEmpId(e.target.value)}
                   placeholder="Enter Emp ID"
                   className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
@@ -134,14 +144,15 @@ function UserEntryForm() {
                 <label htmlFor="default" className="text-md font-bold">Use Default: </label>
                 <input
                   name="default"
+                  ref={defaultInput}
                   disabled
                   value={defaultPref}
                   className="text-black placeholder-gray-600 px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                 />
                 <p className="text-xl font-bold text-gray-800 mx-10">OR</p>
                 <label className="text-md font-bold">Select: </label>
-                <Radio name="type" label="Normal" onClick={() => setMealPref("Normal")} />
-                <Radio name="type" label="Diet" onClick={() => setMealPref("Diet")} />
+                {mealPref === "Normal" ? <Radio name="type" label="Normal" defaultChecked onClick={() => setMealPref("Normal")} /> : <Radio name="type" label="Normal" onClick={() => setMealPref("Normal")} />}
+                {mealPref === "Diet" ? <Radio name="type" label="Diet" defaultChecked onClick={() => setMealPref("Diet")} /> : <Radio name="type" label="Diet" onClick={() => setMealPref("Diet")} />}
               </div>
 
               <hr className="mt-4" />
