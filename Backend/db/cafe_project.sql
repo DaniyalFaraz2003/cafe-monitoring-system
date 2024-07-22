@@ -207,39 +207,33 @@ INSERT INTO meal_record (Emp_ID, meal_pref, meal_time, meal_date, city) VALUES
 
 
 CREATE TABLE feedback (
+	id INT AUTO_INCREMENT PRIMARY KEY,
     Emp_ID int,
 	rating int,
     description varchar (300),
+    feedback_date DATE,
     FOREIGN KEY (Emp_ID) REFERENCES Employee(Emp_ID)
 );
 
-INSERT INTO feedback (Emp_ID, rating, description) VALUES
-(76341, 4, 'Great performance and team player.'),
-(28615, 5, 'Outstanding problem-solving skills.'),
-(90432, 3, 'Good work but needs improvement in punctuality.'),
-(18790, 4, 'Excellent understanding of DevOps practices.'),
-(31489, 5, 'Exceptional leadership and management skills.'),
-(64173, 2, 'Needs to improve technical skills.'),
-(52837, 4, 'Consistent and reliable in QA tasks.'),
-(90376, 3, 'Good performance but could enhance communication skills.'),
-(16254, 5, 'Very effective HR management.'),
-(78901, 4, 'Strong development skills and teamwork.');
+DELIMITER //
+CREATE TRIGGER date_for_feedback
+BEFORE INSERT
+ON feedback FOR EACH ROW
+BEGIN
+    SET NEW.feedback_date = CURRENT_DATE();
+END //
+DELIMITER ;
 
+INSERT INTO feedback (Emp_ID, rating, description, feedback_date) VALUES
+(76341, 4, 'Great performance and team player.', '2024-07-18'),
+(28615, 5, 'Outstanding problem-solving skills.', '2024-07-18'),
+(90432, 3, 'Good work but needs improvement in punctuality.', '2024-07-18'),
+(18790, 4, 'Excellent understanding of DevOps practices.', '2024-07-19'),
+(31489, 5, 'Exceptional leadership and management skills.', '2024-07-19'),
+(64173, 2, 'Needs to improve technical skills.', '2024-07-20'),
+(52837, 4, 'Consistent and reliable in QA tasks.', '2024-07-21'),
+(90376, 3, 'Good performance but could enhance communication skills.', '2024-07-22'),
+(16254, 5, 'Very effective HR management.', '2024-07-22'),
+(78901, 4, 'Strong development skills and teamwork.', '2024-07-22');
 
-SELECT * FROM meal_record
-WHERE meal_date = '2024-07-18';
-
-
-
-SELECT e.Emp_ID as id, e.Emp_Name as name, e.Designation as designation, e.Dept as department, e.City as city, e.Age as age, m.meal_pref as mealtype, m.meal_time as mealtime, m.meal_date as mealdate
-FROM meal_record m
-INNER JOIN Employee e
-ON m.Emp_ID = e.Emp_ID
-AND m.city = 'Islamabad'
-and meal_date = current_date();
-
-
-
-
--- DROP TABLE meal_record;
- -- *********************************************
+SELECT * FROM feedback;
