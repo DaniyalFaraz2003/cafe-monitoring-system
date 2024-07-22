@@ -100,9 +100,10 @@ const Dashboard = () => {
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result1 > 0 ? "text-green-500" : "text-red-500"}`}>{result1 > 0 ? "+" + result1 + "%" : result1 + "%"}</strong>&nbsp;than {
+                    <strong class={`${result1 > 0 ? "text-green-500" : "text-red-500"}`}>{result1 > 0 ? "+" + result1 + "%" : result1 + "%"}</strong>&nbsp;consumed 
+                     {/* {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
-                    }
+                    } */}
                   </p>
                 </div>
               </div>
@@ -116,9 +117,10 @@ const Dashboard = () => {
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result2 > 0 ? "text-green-500" : "text-red-500"}`}>{result2 > 0 ? "+" + result2 + "%" : result2 + "%"}</strong>&nbsp;than {
+                    <strong class={`${result2 > 0 ? "text-green-500" : "text-red-500"}`}>{result2 > 0 ? "+" + result2 + "%" : result2 + "%"}</strong>&nbsp;consumed
+                     {/* {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
-                    }
+                    } */}
                   </p>
                 </div>
               </div>
@@ -132,9 +134,10 @@ const Dashboard = () => {
                 </div>
                 <div class="border-t border-blue-gray-50 p-4">
                   <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                    <strong class={`${result3 > 0 ? "text-green-500" : "text-red-500"}`}>{result3 > 0 ? "+" + result3 + "%" : result3 + "%"}</strong>&nbsp;than {
+                    <strong class={`${result3 > 0 ? "text-green-500" : "text-red-500"}`}>{result3 > 0 ? "+" + result3 + "%" : result3 + "%"}</strong>&nbsp;consumed
+                     {/* {
                       timeFrame === "daily" ? "yesterday" : timeFrame === "weekly" ? "last week" : timeFrame === "monthly" ? "last month" : ""
-                    }
+                    } */}
                   </p>
                 </div>
               </div>
