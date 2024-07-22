@@ -11,6 +11,7 @@ import axios from "axios";
 import { Alert } from "../AlertComponent/AlertComponent";
 import { useDispatch } from "react-redux";
 import { setCapacity } from "../../redux/avltreeReducer";
+import excel from "../../assets/excel.png"
 
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
@@ -51,7 +52,7 @@ const AdminPanel = () => {
         formData.append('file', selectedFile);
 
         try {
-            const response = await axios.post('YOUR_BACKEND_URL/upload', formData, {
+            const response = await axios.post('http://localhost:5000/api/v1/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -85,10 +86,6 @@ const AdminPanel = () => {
         setCurrentDate(date.toLocaleDateString(undefined, options));
         setCurrentDay(date.toLocaleDateString(undefined, { weekday: 'long' }));
     }, []);
-
-    const handleRating = (value) => {
-        setRating(value);
-    };
 
     const handleSubmit = async () => {
         try {
@@ -156,8 +153,9 @@ const AdminPanel = () => {
                                             <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
                                         </svg>
                                         {selectedFile && (
-                                        <div className="mb-4 p-4 border border-gray-300 rounded w-full max-w-sm">
-                                            <p className="text-gray-700">Selected File: {selectedFile.name}</p>
+                                        <div className="p-4 items-center mt-2 justify-center flex flex-row border-gray-300 rounded w-full max-w-sm">
+                                            <img src={excel} alt="" className="h-20 w-20" />
+                                            <p className="text-gray-700 font-bold">File: {selectedFile.name}</p>
                                         </div>
                                     )}
                                     </label>
