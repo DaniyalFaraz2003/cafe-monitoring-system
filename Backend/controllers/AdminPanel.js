@@ -1,18 +1,35 @@
 const db = require("../db/config");
 const path = require('path');
-const fs = require('fs');
+const xlsx = require('xlsx');
+
 
 // 
 
 const Upload = async (req, res) => {
     try {
-        const filePath = path.join(__dirname, '..', 'downloads', req.file.filename);
+        const filePath = path.join(__dirname, '..', 'downloads', 'empData.xlsx');
         console.log(`File saved at ${filePath}`);
 
         // Here you can process the file as needed
+        const workbook = xlsx.readFile(filePath);
+        const sheetNames = workbook.SheetNames;
+
+        const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheetNames[0]]);
+        try {
+            data.forEach(async (object) => {
+                if (object.Emp_ID && object.Emp_Name && object.Designation && object.Department && object.Age && object.City && object.Preference && object.Company) {
+                    const [record] = await db.query("INSERT INTO Employee (Emp_ID, Emp_Name, Designation, Dept, Age, City, Preference, Company) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [object.Emp_ID, object.Emp_Name, object.Designation, object.Department, object.Age, object.City, object.Preference, object.Company])
+                }
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: "fail"
+            })
+            console.log(error);
+        }
 
         res.status(200).json({
-            message: 'File uploaded successfully'
+            message: 'ok'
         });
     } catch (error) {
         console.error('Error uploading file', error);

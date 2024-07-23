@@ -57,10 +57,16 @@ const AdminPanel = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log('File uploaded successfully', response.data);
+            if (response.data.message === "ok") {
+                setAlertMessage("File Contents Uploaded To Database")
+                setAlertType("success");
+            }
         } catch (error) {
+            setAlertMessage("Error In Uploading File");
+            setAlertType("error");
             console.error('Error uploading file', error);
         }
+        setShowAlert(true);
     };
 
     const handleQuantityForm = () => {
