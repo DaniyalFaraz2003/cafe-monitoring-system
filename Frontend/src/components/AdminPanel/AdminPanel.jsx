@@ -12,11 +12,32 @@ import { Alert } from "../AlertComponent/AlertComponent";
 import { useDispatch } from "react-redux";
 import { setCapacity } from "../../redux/avltreeReducer";
 import excel from "../../assets/excel.png"
+import ReviewCard from "./ReviewCard";
+import DatePicker from "./DatePicker";
+
+const testimonials = [
+    {
+        title:
+            "The team went above and beyond to ensure my issue was resolved quickly and efficiently. Truly outstanding!",
+        client: "Jessica Devis",
+        clientInfo: "Full Stack Developer @Netflix",
+        rating: 3
+    },
+    {
+        title:
+            "It have broadened my horizons and helped me advance my career. The community is incredibly supportive.",
+        client: "Marcell Glock",
+        clientInfo: "Graphic Designer, @Coinbase",
+        rating: 4
+    },
+];
+
 
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
     const loggedIn = useSelector((state) => state.avltree.loggedIn);
 
+    const [date, setDate] = React.useState(new Date());
     const [rating, setRating] = useState(1);
     const [empId, setEmpId] = useState("");
     const [description, setDescription] = useState("");
@@ -159,11 +180,11 @@ const AdminPanel = () => {
                                             <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
                                         </svg>
                                         {selectedFile && (
-                                        <div className="p-4 items-center mt-2 justify-center flex flex-row border-gray-300 rounded w-full max-w-sm">
-                                            <img src={excel} alt="" className="h-20 w-20" />
-                                            <p className="text-gray-700 font-bold">File: {selectedFile.name}</p>
-                                        </div>
-                                    )}
+                                            <div className="p-4 items-center mt-2 justify-center flex flex-row border-gray-300 rounded w-full max-w-sm">
+                                                <img src={excel} alt="" className="h-20 w-20" />
+                                                <p className="text-gray-700 font-bold">File: {selectedFile.name}</p>
+                                            </div>
+                                        )}
                                     </label>
                                 </form>
                             </div>
@@ -267,6 +288,18 @@ const AdminPanel = () => {
                     </div>
                 </div>
 
+                <div className="mt-10 w-full flex-col flex justify-center bg-gray-100 p-10 ">
+
+                    <div className="flex flex-row items-center justify-center p-10 gap-5">
+                    <p className="text-gray-600 font-bold text-lg">Showing Feedbacks Of: </p>
+                    <DatePicker date={date} setDate={setDate} />
+                    </div>
+                    <div className="flex flex-col gap-8">
+                        {testimonials.map((props, key) => (
+                            <ReviewCard key={key} {...props} />
+                        ))}
+                    </div>
+                </div>
             </div> : <_404 />}
         </>
     );
