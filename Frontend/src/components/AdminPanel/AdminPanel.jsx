@@ -15,22 +15,12 @@ import excel from "../../assets/excel.png"
 import ReviewCard from "./ReviewCard";
 import DatePicker from "./DatePicker";
 
-const testimonials = [
-    {
-        title:
-            "The team went above and beyond to ensure my issue was resolved quickly and efficiently. Truly outstanding!",
-        client: "Jessica Devis",
-        clientInfo: "Full Stack Developer @Netflix",
-        rating: 3
-    },
-    {
-        title:
-            "It have broadened my horizons and helped me advance my career. The community is incredibly supportive.",
-        client: "Marcell Glock",
-        clientInfo: "Graphic Designer, @Coinbase",
-        rating: 4
-    },
-];
+function formatDate(date) {
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 
 
 const AdminPanel = () => {
@@ -38,6 +28,7 @@ const AdminPanel = () => {
     const loggedIn = useSelector((state) => state.avltree.loggedIn);
 
     const [date, setDate] = React.useState(new Date());
+    const [testimonials, setTestimonials] = useState([]);
     const [rating, setRating] = useState(1);
     const [empId, setEmpId] = useState("");
     const [description, setDescription] = useState("");
@@ -114,6 +105,24 @@ const AdminPanel = () => {
         setCurrentDay(date.toLocaleDateString(undefined, { weekday: 'long' }));
     }, []);
 
+    const loadTestimonials = async () => {
+        try {
+            const response = await axios.post("http://localhost:5000/api/v1/feedbacks", {
+                date: formatDate(date)
+            });
+            if (response.data.message === "ok") {
+                setTestimonials(response.data.result);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        loadTestimonials();
+        console.log(date);
+    }, [date]);
+
     const handleSubmit = async () => {
         try {
             const response = await axios.post("http://localhost:5000/api/v1/feedback", {
@@ -125,6 +134,7 @@ const AdminPanel = () => {
             if (response.data.message === "ok") {
                 setAlertMessage("Feedback Submitted Successfully!");
                 setAlertType("success");
+                loadTestimonials();
             } else {
                 setAlertMessage("Failed to Submit Feedback!");
                 setAlertType("error");
@@ -291,8 +301,8 @@ const AdminPanel = () => {
                 <div className="mt-10 w-full flex-col flex justify-center bg-gray-100 p-10 ">
 
                     <div className="flex flex-row items-center justify-center p-10 gap-5">
-                    <p className="text-gray-600 font-bold text-lg">Showing Feedbacks Of: </p>
-                    <DatePicker date={date} setDate={setDate} />
+                        <p className="text-gray-600 font-bold text-lg">Showing Feedbacks Of: </p>
+                        <DatePicker date={date} setDate={setDate} />
                     </div>
                     <div className="flex flex-col gap-8">
                         {testimonials.map((props, key) => (

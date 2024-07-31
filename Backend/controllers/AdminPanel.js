@@ -58,6 +58,29 @@ const Feedback = async (req, res) => {
     }
 }
 
+const getFeedback = async (req, res) => {
+    const { date } = req.body;
+
+    try {
+        const [records] = await db.query(`
+            select Emp_Name, employee.Emp_Id, designation, company, rating, description from employee
+            inner join feedback on feedback.emp_id = employee.emp_id
+            where feedback_date = ?;
+        `, [date]);
+        res.status(200).json({
+            message: "ok",
+            result: records
+        })
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "fail",
+            result: []
+        })
+    }
+}
+
 module.exports = {
-    Feedback, Upload
+    Feedback, Upload, getFeedback
 }
