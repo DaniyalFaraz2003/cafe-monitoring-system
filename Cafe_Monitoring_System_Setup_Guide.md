@@ -9,9 +9,9 @@
 2. Open the folder in Visual Studio Code (VS Code).
 3. Open the VS Code terminal and run the following command to clone the repository:
 
-\`\`\`bash
+```bash
 git clone https://github.com/DaniyalFaraz2003/cafe-monitoring-system.git
-\`\`\`
+```
 
 ### 1.2. Open Terminals
 
@@ -19,41 +19,41 @@ git clone https://github.com/DaniyalFaraz2003/cafe-monitoring-system.git
 
 ### 1.3. Navigate to Frontend Directory
 
-1. In the first terminal, navigate to the \`Frontend\` directory:
+1. In the first terminal, navigate to the `Frontend` directory:
 
-\`\`\`bash
+```bash
 cd Frontend
-\`\`\`
+```
 
 ### 1.4. Navigate to Backend Directory
 
-1. In the second terminal, navigate to the \`Backend\` directory:
+1. In the second terminal, navigate to the `Backend` directory:
 
-\`\`\`bash
+```bash
 cd Backend
-\`\`\`
+```
 
 ## Step 2: Setting up the Frontend
 
 ### 2.1. Install Dependencies
 
-1. In the terminal where you navigated to the \`Frontend\` folder, run the following commands to install dependencies and start the development server:
+1. In the terminal where you navigated to the `Frontend` folder, run the following commands to install dependencies and start the development server:
 
-\`\`\`bash
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
 ## Step 3: Setting up the Backend
 
 ### 3.1. Install Dependencies
 
-1. In the terminal where you navigated to the \`Backend\` folder, run the following commands to install dependencies and start the backend server:
+1. In the terminal where you navigated to the `Backend` folder, run the following commands to install dependencies and start the backend server:
 
-\`\`\`bash
+```bash
 npm install
 npm start
-\`\`\`
+```
 
 ## Step 4: Setting up the Database
 
@@ -69,33 +69,33 @@ npm start
 
 ### 4.3. Import Database Schema
 
-1. Open the \`cafe_project.sql\` file located in the \`/Backend/db/\` directory.
+1. Open the `cafe_project.sql` file located in the `Backend/db` directory.
 2. Copy the contents of the file.
 3. Paste the copied contents into the SQL query editor of your new schema in MySQL Workbench.
 4. Run all the queries to set up the database.
 
 ### 4.4. Configure Database Connection
 
-1. Open the \`config.js\` file located in the \`/Backend/db/\` directory.
-2. Enter your local host password for MySQL Workbench in the \`password\` property of the connection function.
+1. Open the `config.js` file located in the `/Backend/db/` directory.
+2. Enter your local host password for MySQL Workbench in the `password` property of the connection function.
 
-\`\`\`javascript
+```javascript
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'your_username',
   password: 'your_password',
   database: 'your_database_name'
 });
-\`\`\`
+```
 
 ### 4.5. Restart Backend Server
 
-1. In the terminal where you navigated to the \`Backend\` folder, run the following commands to ensure all dependencies are installed and start the backend server:
+1. In the terminal where you navigated to the `Backend` folder, run the following commands to ensure all dependencies are installed and start the backend server:
 
-\`\`\`bash
+```bash
 npm install
 npm start
-\`\`\`
+```
 
 ## Step 5: Accessing the Application
 
