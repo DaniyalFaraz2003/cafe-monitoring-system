@@ -82,18 +82,6 @@ PRIMARY KEY(Emp_ID, meal_time, meal_date)
 
 -- DROP TABLE meal_record;
 
-DELIMITER //
-CREATE TRIGGER date_time
-BEFORE INSERT
-ON meal_record FOR EACH ROW
-BEGIN
-	SET NEW.meal_time = CURRENT_TIME();
-    SET NEW.meal_date = CURRENT_DATE();
-END //
-DELIMITER ;
-
--- DROP TRIGGER date_time;
-
 -- Meal Records
 INSERT INTO meal_record (Emp_ID, meal_pref, meal_time, meal_date, city) VALUES
 -- Records for July 1
@@ -215,14 +203,7 @@ CREATE TABLE feedback (
     FOREIGN KEY (Emp_ID) REFERENCES Employee(Emp_ID)
 );
 
-DELIMITER //
-CREATE TRIGGER date_for_feedback
-BEFORE INSERT
-ON feedback FOR EACH ROW
-BEGIN
-    SET NEW.feedback_date = CURRENT_DATE();
-END //
-DELIMITER ;
+
 
 INSERT INTO feedback (Emp_ID, rating, description, feedback_date) VALUES
 (76341, 4, 'Great performance and team player.', '2024-07-18'),
@@ -237,3 +218,26 @@ INSERT INTO feedback (Emp_ID, rating, description, feedback_date) VALUES
 (78901, 4, 'Strong development skills and teamwork.', '2024-07-22');
 
 SELECT * FROM feedback;
+
+
+
+DELIMITER //
+CREATE TRIGGER date_time
+BEFORE INSERT
+ON meal_record FOR EACH ROW
+BEGIN
+	SET NEW.meal_time = CURRENT_TIME();
+    SET NEW.meal_date = CURRENT_DATE();
+END //
+DELIMITER ;
+
+-- DROP TRIGGER date_time;
+
+DELIMITER //
+CREATE TRIGGER date_for_feedback
+BEFORE INSERT
+ON feedback FOR EACH ROW
+BEGIN
+    SET NEW.feedback_date = CURRENT_DATE();
+END //
+DELIMITER ;
