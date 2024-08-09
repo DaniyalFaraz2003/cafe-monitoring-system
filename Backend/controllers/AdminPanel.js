@@ -2,9 +2,6 @@ const db = require("../db/config");
 const path = require('path');
 const xlsx = require('xlsx');
 
-
-// 
-
 const Upload = async (req, res) => {
     try {
         const filePath = path.join(__dirname, '..', 'downloads', 'empData.xlsx');

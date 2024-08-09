@@ -4,7 +4,7 @@ const { login } = require("../controllers/login")
 const { getTreeData } = require("../controllers/treeData")
 const { getDashboardData } = require("../controllers/dashboard")
 const { UserEntryForm, validate } = require("../controllers/UserEntryForm")
-const { download } = require("../controllers/download")
+const { download, downloadFeedback } = require("../controllers/download")
 const { getReportDataTime, getReportDataDate } = require("../controllers/report")
 
 const { Feedback, Upload, getFeedback } = require("../controllers/AdminPanel")
@@ -27,7 +27,8 @@ router.route('/treeData').get(getTreeData);
 router.route('/dashboard').post(getDashboardData)
 router.route('/UserEntryForm').post(UserEntryForm)
 router.route('/download').post(download);
-router.route('/validate/:id').get(validate)
+router.route('/downloadfeedback').post(downloadFeedback);
+router.route('/validate/:id').get(validate);
 
 router.route("/upload").post(upload.single('file'), Upload);
 router.route('/Feedback').post(Feedback);

@@ -3,7 +3,7 @@ import {
     ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
 import { Rating } from "@material-tailwind/react";
 import _404 from "../404/404";
@@ -26,6 +26,8 @@ function formatDate(date) {
 const AdminPanel = () => {
     const city = useSelector((state) => state.avltree.city);
     const loggedIn = useSelector((state) => state.avltree.loggedIn);
+    const idref = useRef(null);
+    const descref = useRef(null);
 
     const [date, setDate] = React.useState(new Date());
     const [testimonials, setTestimonials] = useState([]);
@@ -144,6 +146,8 @@ const AdminPanel = () => {
             setAlertType("error");
         }
         setShowAlert(true);
+        idref.current.value = "";
+        descref.current.value = "";
     };
 
     useEffect(() => {
@@ -154,6 +158,37 @@ const AdminPanel = () => {
             return () => clearTimeout(timer);
         }
     }, [showAlert]);
+
+    const onDownloadClick = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/v1/downloadfeedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    data: testimonials,
+                    city: city,
+                    time: date
+                }),
+                mode: 'cors'
+            });
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${city.toUpperCase()} FEEDBACK REPORT - GENERATED ON: ${date.toUTCString()}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } else {
+                console.error('Failed to download file');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     return (
         <>
@@ -266,11 +301,13 @@ const AdminPanel = () => {
                             </div>
                             <div className="px-5 pb-5">
                                 <input
+                                    ref={idref}
                                     onChange={(e) => setEmpId(e.target.value)}
                                     placeholder="Employee ID"
                                     className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
                                 />
                                 <textarea
+                                    ref={descref}
                                     onChange={(e) => setDescription(e.target.value)}
                                     placeholder="Feedback Description"
                                     className="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"
@@ -303,6 +340,7 @@ const AdminPanel = () => {
                     <div className="flex flex-row items-center justify-center p-10 gap-5">
                         <p className="text-gray-600 font-bold text-lg">Showing Feedbacks Of: </p>
                         <DatePicker date={date} setDate={setDate} />
+                        <Button variant="fill" color="gray" onClick={onDownloadClick}>Download Feedback Report</Button>
                     </div>
                     <div className="flex flex-col gap-8">
                         {testimonials.map((props, key) => (
