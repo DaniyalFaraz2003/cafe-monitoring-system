@@ -78,9 +78,6 @@ const Dashboard = () => {
           <p className="text-xl font-bold text-center"> {city}</p>
 
         </div>
-        <button className="mt-5 px-4 py-2 w-full bg-[#0a5282] text-white rounded-lg hover:bg-blue-600 transition-colors duration-150">
-          Generate Report
-        </button>
         <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-5">
           <div className="flex flex-col items-center justify-between">
             {/* Button group */}
