@@ -30,38 +30,35 @@ const Graph = ({ chartData }) => {
 function getDatesForCurrentMonth() {
     const dates = [];
     const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth(); // 0-indexed month
 
-
-    // Generate an array of dates for the current month
-    for (let day = 1; day <= now.getDate(); day++) {
-        const date = new Date(year, month, day);
+    // Loop to generate dates for the last 30 days including today
+    for (let i = 0; i < 30; i++) {
+        const date = new Date(now);
+        date.setDate(now.getDate() - i);
         dates.push(date.toISOString().split('T')[0]); // Format as yyyy-mm-dd
     }
-
+    dates.reverse();
     return dates;
 }
 
 const transformData = (data) => {
     const dates = getDatesForCurrentMonth();
-    const result = dates.map((date, index, arr) => {
-        if (index != arr.length - 1) {
-            const currentDate = new Date(date);
-            return {
-                date: currentDate.toLocaleString('en-US', {month: "long", day: "numeric"}),
-                amountNormal: data.filter((item) => {
-                    let thisDate = new Date(item.meal_date);
-                    return thisDate.getDate() === currentDate.getDate() && item.meal_pref === "Normal";
-                }).length,
-                amountDiet: data.filter((item) => {
-                    let thisDate = new Date(item.meal_date);
-                    return thisDate.getDate() === currentDate.getDate() && item.meal_pref === "Diet";
-                }).length,
-            };
-        }
+    const result = dates.map((date) => {
+        const currentDate = new Date(date);
+        return {
+            date: currentDate.toLocaleString('en-US', { month: "long", day: "numeric" }),
+            amountNormal: data.filter((item) => {
+                let thisDate = new Date(item.meal_date);
+                return thisDate.getDate() === currentDate.getDate() && item.meal_pref === "Normal";
+            }).length,
+            amountDiet: data.filter((item) => {
+                let thisDate = new Date(item.meal_date);
+                return thisDate.getDate() === currentDate.getDate() && item.meal_pref === "Diet";
+            }).length,
+        };
     })
-    result.pop();
+
+    // result.pop();
     return result;
 }
 
@@ -86,7 +83,7 @@ export default function LineChart({ data }) {
             }
         ]
     };
-    
+
 
     return (
         <div className="App w-full h-full flex flex-row items-center justify-center">

@@ -78,8 +78,10 @@ const Dashboard = () => {
           <p className="text-xl font-bold text-center"> {city}</p>
 
         </div>
-
-        <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-10">
+        <button className="mt-5 px-4 py-2 w-full bg-[#0a5282] text-white rounded-lg hover:bg-blue-600 transition-colors duration-150">
+          Generate Report
+        </button>
+        <div className="w-full flex flex-col p-7 gap-5 bg-[#0a5282] rounded-lg mt-5">
           <div className="flex flex-col items-center justify-between">
             {/* Button group */}
             <div className="flex flex-row gap-3 mb-10 bg-transparent">
@@ -154,11 +156,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <Link to="/report" className="item">
-          <button className="mt-5 px-4 py-2 bg-[#0a5282] text-white rounded-lg hover:bg-blue-600 transition-colors duration-150">
-            Generate Report
-          </button>
-        </Link>
       </> : <_404 />}
     </div>
   );

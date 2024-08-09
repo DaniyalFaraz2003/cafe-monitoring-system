@@ -38,6 +38,7 @@ function convertTime(time) {
 
 const download = async (req, res) => {
     const { data, city, time } = req.body;
+    
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet(`${time} MEAL DATA`);
     const headerFont = { name: 'Calibri', family: 4, size: 12, bold: true };
@@ -47,12 +48,13 @@ const download = async (req, res) => {
         { header: 'Meal Type', key: 'type', width: 30 },
         { header: 'Time', key: 'time', width: 30 },
         { header: 'Date', key: 'date', width: 30 },
-        { header: 'City', key: 'city', width: 30 },
+        { header: 'Employee City', key: 'emp_city', width: 30 },
+        { header: 'Reporting City', key: 'city', width: 30 },
     ];
     data.forEach(element => {
         worksheet.addRow({
             id: element.id, name: element.name, type: element.mealtype,
-            time: convertTime(element.mealtime), date: formatDate(element.mealdate), city: city
+            time: convertTime(element.mealtime), date: formatDate(element.mealdate), emp_city: element.city, city: city
         });
     });
     worksheet.getRow(1).font = headerFont;
